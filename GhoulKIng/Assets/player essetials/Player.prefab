@@ -95,13 +95,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a44fa03f295e05c44bc35ef002e064c6, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ca7af837ad14fc48a0288f9be9ddce0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensHori: 600
-  sensVert: 600
-  lockVertMin: -45
-  lockVertMax: 45
+  sensHori: 0
+  sensVert: 0
+  lockVertMax: 0
+  lockVertMin: 0
   invertY: 0
 --- !u!1 &1118965853
 GameObject:
@@ -407,20 +407,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 7812847776632625774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f8113278020f7144a6861b6790b81f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 58c739766e672904ba1109108f33404a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 7812847776632625768}
-  HP: 5
-  playerSpeed: 5
-  sprintMult: 2
-  jumps: 2
-  jumpHeight: 8
-  gravityValue: 20
-  shootRate: 0.2
-  weaponDamage: 1
-  hitEffectSpark: {fileID: 2729588995395258262, guid: 24f105c06d9af0843bc4e6355b9c6da8, type: 3}
-  muzzleFlash: {fileID: 1589149908793338289}
+  controller: {fileID: 0}
+  HP: 0
+  playerSpeed: 0
+  sprintMulti: 0
+  jumpHeight: 0
+  gravityValue: 0
+  jumps: 0
+  shootRate: 0
+  weaponDamage: 0
+  hitEffectSpark: {fileID: 0}
+  muzzleFlash: {fileID: 0}
 --- !u!33 &7812847776632625770
 MeshFilter:
   m_ObjectHideFlags: 0
