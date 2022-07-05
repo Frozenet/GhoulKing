@@ -59,3 +59,6 @@ sysinfo.txt
 crashlytics-build.properties
 
 *.dwlt
+*.asset
+GhoulKIng/UserSettings/Layouts/default-2021.dwlt
+*.dwlt
