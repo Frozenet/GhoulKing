@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+//using UnityEngine.UI;
 
 public class gamemanager : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class gamemanager : MonoBehaviour
     public GameObject pausemenu;
     public GameObject playerDeadMenu;
     public GameObject playerDamageFlash;
-    public Image HPBar;
+    //public Image HPBar;
 
     public bool paused = false;
 
