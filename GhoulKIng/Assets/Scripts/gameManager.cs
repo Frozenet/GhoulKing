@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class gameManager : MonoBehaviour
+public class gamemanager : MonoBehaviour
 {
-    public static gameManager instance;
+    public static gamemanager instance;
     public GameObject player;
     public playerController playerScript;
 
-    public GameObject pauseMenu;
+    public GameObject pausemenu;
     public GameObject playerDeadMenu;
     public GameObject playerDamageFlash;
-
     public Image HPBar;
 
     public bool paused = false;
@@ -23,18 +22,15 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<playerController>();
     }
-
-
     void Update()
     {
-        //pause menu
         if (Input.GetButtonDown("Cancel") && !playerDeadMenu.activeSelf)
         {
+
             if (!paused)
             {
                 paused = true;
-                
-                pauseMenu.SetActive(true);
+                pausemenu.SetActive(true);
                 Time.timeScale = 0;
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
@@ -44,26 +40,23 @@ public class gameManager : MonoBehaviour
                 resume();
             }
         }
-
     }
-
     public void resume()
     {
         paused = false;
-        pauseMenu.SetActive(false);
+        pausemenu.SetActive(false);
         playerDeadMenu.SetActive(false);
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
     public void playerDead()
     {
         paused = true;
         playerDeadMenu.SetActive(true);
-        //playerDamageFlash.SetActive(false);
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
     }
+    
 }

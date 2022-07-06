@@ -2,26 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class buttonFunctions : MonoBehaviour
+public class ButtonFunction : MonoBehaviour
 {
     public void resume()
     {
-        gameManager.instance.resume();
+        gamemanager.instance.resume();
     }
-
     public void quit()
     {
         Application.Quit();
     }
-
     public void givePlayerHP(int amount)
     {
-        gameManager.instance.playerScript.giveHP(amount);
+        gamemanager.instance.playerScript.giveHP(amount);
     }
-
     public void respawn()
     {
-        gameManager.instance.playerScript.respawn();
-        gameManager.instance.resume();
+        gamemanager.instance.playerScript.respawn();
+        gamemanager.instance.resume();
+
     }
 }

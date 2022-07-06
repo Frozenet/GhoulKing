@@ -2,38 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class playerController : MonoBehaviour, IDamagable
+
+public class playerController : MonoBehaviour, IDamageable
 {
     [Header("Components")]
     [SerializeField] CharacterController controller;
+    [Header("-----------------")]
 
     [Header("Player Attributes")]
-    [Header("------------------------------")]
-    [Range(5, 20)] [SerializeField] int HP;
-    [Range(3, 6)] [SerializeField] float playerSpeed;
-    [Range(1.5f, 4)] [SerializeField] float sprintMulti;
-    [Range(6, 10)] [SerializeField] float jumpHeight;
-    [Range(15, 30)] [SerializeField] float gravityValue;
-    [Range(1, 4)] [SerializeField] int jumps;
-
+    [Range(5, 20)][SerializeField] int HP;
+    [Range(1, 15)][SerializeField] float playerSpeed;
+    [Range(1.5f, 4f)][SerializeField] float sprintMult;
+    [Range(1, 5)][SerializeField] int jumps;
+    [Range(1, 10)][SerializeField] float jumpHeight;
+    [Range(15, 30)][SerializeField] float gravityValue;
+    [Header("-----------------")]
 
     [Header("Player Weapon Stats")]
-    [Header("------------------------------")]
-    [Range(0.1f, 3)] [SerializeField] float shootRate;
-    [Range(1, 10)] [SerializeField] int weaponDamage;
+    [Range(0.1f, 3)][SerializeField] float shootRate;
+    [Range(1, 10)][SerializeField] int weaponDamage;
 
+    [Header("-----------------")]
     [Header("Effects")]
-    [Header("------------------------------")]
     [SerializeField] GameObject hitEffectSpark;
     [SerializeField] GameObject muzzleFlash;
 
+    
     bool isSprinting = false;
     float playerSpeedOrig;
-    int timesJumped;
+    int timesjumped;
     Vector3 playerVelocity;
     Vector3 move;
+
     bool canShoot = true;
     int HPOrig;
+
     Vector3 playerSpawnPos;
 
     private void Start()
@@ -45,11 +48,12 @@ public class playerController : MonoBehaviour, IDamagable
 
     void Update()
     {
-        if (!gameManager.instance.paused)
+        if (!gamemanager.instance.paused)
         {
             movePlayer();
             sprint();
             StartCoroutine(shoot());
+
         }
     }
 
@@ -60,33 +64,37 @@ public class playerController : MonoBehaviour, IDamagable
             playerVelocity.y -= 3;
         }
 
+        //if we land reset player Y velocity and the jump counter
         if (controller.isGrounded && playerVelocity.y < 0)
         {
-            timesJumped = 0;
+            timesjumped = 0;
             playerVelocity.y = 0f;
         }
+        //get input from unity input system
+        move = (transform.right * Input.GetAxis("Horizontal")) + (transform.forward * Input.GetAxis("Vertical"));
 
-        move = (transform.right * Input.GetAxis("Horizontal") + transform.forward * Input.GetAxis("Vertical"));
+        // add our move vector  into charector controller move
         controller.Move(move * Time.deltaTime * playerSpeed);
 
-        // make the player jump
-        if (Input.GetButtonDown("Jump") && timesJumped < jumps)
+        // Changes the height position of the player..
+        if (Input.GetButtonDown("Jump") && timesjumped < jumps)
         {
-            timesJumped++;
+            timesjumped++;
             playerVelocity.y = jumpHeight;
         }
 
-        //add gravity back into the character controller move
+        //add gravity 
         playerVelocity.y -= gravityValue * Time.deltaTime;
+
+        //add gravity back into the charector controller move
         controller.Move(playerVelocity * Time.deltaTime);
     }
-
     void sprint()
     {
         if (Input.GetButtonDown("Sprint"))
         {
             isSprinting = true;
-            playerSpeed = playerSpeed * sprintMulti;
+            playerSpeed = playerSpeed * sprintMult;
         }
         else if (Input.GetButtonUp("Sprint"))
         {
@@ -94,83 +102,95 @@ public class playerController : MonoBehaviour, IDamagable
             playerSpeed = playerSpeedOrig;
         }
     }
-
     IEnumerator shoot()
     {
-        Debug.DrawLine(Camera.main.transform.position, Camera.main.transform.forward * 100, Color.red); // for a line to be drawn for hitscan
+        RaycastHit hit;
+
+        //Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 100, Color.red);
 
         if (Input.GetButton("Shoot") && canShoot)
         {
+
             canShoot = false;
 
-            RaycastHit hit;
-
-            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(.5f, .5f, 0)), out hit))
+            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit))
             {
                 Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
-                IDamagable isDamageable = hit.collider.GetComponent<IDamagable>();
 
-                if (hit.collider.GetComponent<IDamagable>() != null)
+                if (hit.collider.GetComponent<IDamageable>() != null)
                 {
+                    IDamageable isDamageable = hit.collider.GetComponent<IDamageable>();
                     if (hit.collider is SphereCollider)
-                        isDamageable.takeDamage(weaponDamage * 2);
+                    {
+                        isDamageable.takeDamage(weaponDamage * 5);
+                    }
                     else
+                    {
                         isDamageable.takeDamage(weaponDamage);
+
+                    }
+
                 }
+
+
+
             }
             muzzleFlash.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
             muzzleFlash.SetActive(true);
-            yield return new WaitForSeconds(.05f);
+            yield return new WaitForSeconds(0.05f);
             muzzleFlash.SetActive(false);
+
 
             yield return new WaitForSeconds(shootRate);
             canShoot = true;
+
         }
     }
-
     public void takeDamage(int dmg)
     {
         HP -= dmg;
-
         updatePlayerHP();
-
         StartCoroutine(damageFlash());
 
         if (HP <= 0)
         {
-            gameManager.instance.playerDead();
+            //kill player
+            gamemanager.instance.playerDead();
         }
     }
-
     IEnumerator damageFlash()
     {
-        gameManager.instance.playerDamageFlash.SetActive(true);
-        yield return new WaitForSeconds(.1f);
-        gameManager.instance.playerDamageFlash.SetActive(false);
-    }
+        gamemanager.instance.playerDamageFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gamemanager.instance.playerDamageFlash.SetActive(false);
 
+    }
     public void giveHP(int amount)
     {
         if (HP < HPOrig)
+        {
             HP += amount;
-
+        }
         if (HP > HPOrig)
+        {
             HP = HPOrig;
-
+        }
         updatePlayerHP();
-    }
 
+    }
     public void updatePlayerHP()
     {
-        gameManager.instance.HPBar.fillAmount = (float)HP / (float)HPOrig;
-    }
+        gamemanager.instance.HPBar.fillAmount = (float)HP / (float)HPOrig;
 
+    }
     public void respawn()
     {
         HP = HPOrig;
-        updatePlayerHP();
         controller.enabled = false;
         transform.position = playerSpawnPos;
         controller.enabled = true;
+        updatePlayerHP();
+
     }
+
 }

@@ -95,13 +95,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 963194225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ca7af837ad14fc48a0288f9be9ddce0, type: 3}
+  m_Script: {fileID: 11500000, guid: a44fa03f295e05c44bc35ef002e064c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sensHori: 300
   sensVert: 300
-  lockVertMax: 45
   lockVertMin: 45
+  lockVertMax: 45
   invertY: 0
 --- !u!1 &1118965853
 GameObject:
@@ -407,16 +407,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 7812847776632625774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58c739766e672904ba1109108f33404a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f8113278020f7144a6861b6790b81f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 7812847776632625768}
   HP: 20
-  playerSpeed: 5
-  sprintMulti: 2
+  playerSpeed: 8
+  sprintMult: 2
+  jumps: 2
   jumpHeight: 8
   gravityValue: 20
-  jumps: 2
   shootRate: 0.2
   weaponDamage: 1
   hitEffectSpark: {fileID: 7105177858108400233, guid: 9b0dc058cdcf796458724b48caed7bdb, type: 3}
