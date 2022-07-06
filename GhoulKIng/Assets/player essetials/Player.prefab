@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 7812847776632625768}
-  HP: 20
+  HP: 5
   playerSpeed: 8
   sprintMult: 2
   jumps: 2
