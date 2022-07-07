@@ -180,7 +180,7 @@ public class playerController : MonoBehaviour, IDamageable
     }
     public void updatePlayerHP()
     {
-        //gamemanager.instance.HPBar.fillAmount = (float)HP / (float)HPOrig;
+        gamemanager.instance.HPBar.fillAmount = (float)HP / (float)HPOrig;
 
     }
     public void respawn()

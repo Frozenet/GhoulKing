@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.UI;
+using UnityEngine.UI;
 
 public class gamemanager : MonoBehaviour
 {
@@ -9,54 +9,62 @@ public class gamemanager : MonoBehaviour
     public GameObject player;
     public playerController playerScript;
 
-    public GameObject pausemenu;
+    public GameObject pauseMenu;
     public GameObject playerDeadMenu;
     public GameObject playerDamageFlash;
-    //public Image HPBar;
+
+    public Image HPBar;
 
     public bool paused = false;
 
+    // Start is called before the first frame update
     void Awake()
     {
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<playerController>();
     }
+
+    // Update is called once per frame
     void Update()
     {
         if (Input.GetButtonDown("Cancel") && !playerDeadMenu.activeSelf)
         {
 
-            if (!paused)
+            if (!pauseMenu.activeSelf)
             {
-                paused = true;
-                pausemenu.SetActive(true);
+                pauseMenu.SetActive(true);
                 Time.timeScale = 0;
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
             }
             else
             {
+
                 resume();
             }
+
         }
     }
     public void resume()
     {
         paused = false;
-        pausemenu.SetActive(false);
+        pauseMenu.SetActive(false);
         playerDeadMenu.SetActive(false);
         Time.timeScale = 1;
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = false;
     }
+
     public void playerDead()
     {
         paused = true;
         playerDeadMenu.SetActive(true);
+        //playerDamageFlash.SetActive(false);
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
     }
+
 
 }

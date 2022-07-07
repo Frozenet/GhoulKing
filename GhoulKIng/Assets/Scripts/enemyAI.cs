@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class EnemyAi : MonoBehaviour, IDamageable
+public class enemyAI : MonoBehaviour, IDamageable
 {
     [Header("Components")]
     [SerializeField] NavMeshAgent agent;
