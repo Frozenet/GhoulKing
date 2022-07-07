@@ -139,8 +139,8 @@ MonoBehaviour:
   rend: {fileID: 4013946393195591594}
   HP: 10
   viewAngle: 90
-  playerFaceSpeed: 2
-  roamRadius: 3
+  playerFaceSpeed: 3
+  roamRadius: 7
   shootRate: 3
   bullet: {fileID: 1932097239730935228, guid: bdc0fc747edf954419dba03ba0b36fa8, type: 3}
 --- !u!195 &4013946393195591598
