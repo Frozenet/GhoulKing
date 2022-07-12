@@ -12,10 +12,14 @@ public class gamemanager : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject playerDeadMenu;
     public GameObject playerDamageFlash;
+    public GameObject winGameMenu;
 
     public Image HPBar;
 
     public bool paused = false;
+
+    int enemiesKilled;
+    public int enemyKillGoal;
 
     // Start is called before the first frame update
     void Awake()
@@ -28,7 +32,7 @@ public class gamemanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") && !playerDeadMenu.activeSelf)
+        if (Input.GetButtonDown("Cancel") && !playerDeadMenu.activeSelf && !winGameMenu.activeSelf)
         {
 
             if (!pauseMenu.activeSelf)
@@ -50,6 +54,7 @@ public class gamemanager : MonoBehaviour
     {
         paused = false;
         pauseMenu.SetActive(false);
+        winGameMenu.SetActive(false);
         playerDeadMenu.SetActive(false);
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Confined;
@@ -66,5 +71,17 @@ public class gamemanager : MonoBehaviour
         Cursor.visible = true;
     }
 
-
+    public void checkEnemyKills()
+    {
+        enemiesKilled++;
+        if(enemiesKilled >= enemyKillGoal)
+        {
+            //show win game popup
+            winGameMenu.SetActive(true);
+            paused = true;
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
+    }
 }
