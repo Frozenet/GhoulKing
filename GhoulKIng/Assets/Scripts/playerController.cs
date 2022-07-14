@@ -27,7 +27,11 @@ public class playerController : MonoBehaviour, IDamageable
     [SerializeField] GameObject hitEffectSpark;
     [SerializeField] GameObject muzzleFlash;
 
-    
+    [Header("-----------------")]
+    [Header("Physics")]
+    public Vector3 pushback = Vector3.zero;
+    [SerializeField] int pushResolve;
+
     bool isSprinting = false;
     float playerSpeedOrig;
     int timesjumped;
@@ -50,6 +54,7 @@ public class playerController : MonoBehaviour, IDamageable
     {
         if (!gamemanager.instance.paused)
         {
+            pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushResolve);
             movePlayer();
             sprint();
             StartCoroutine(shoot());
@@ -87,7 +92,7 @@ public class playerController : MonoBehaviour, IDamageable
         playerVelocity.y -= gravityValue * Time.deltaTime;
 
         //add gravity back into the charector controller move
-        controller.Move(playerVelocity * Time.deltaTime);
+        controller.Move((playerVelocity + pushback) * Time.deltaTime);
     }
     void sprint()
     {
@@ -189,6 +194,7 @@ public class playerController : MonoBehaviour, IDamageable
         controller.enabled = false;
         transform.position = playerSpawnPos;
         controller.enabled = true;
+        pushback = Vector3.zero;
         updatePlayerHP();
 
     }

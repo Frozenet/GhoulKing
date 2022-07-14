@@ -37,6 +37,9 @@ public class enemyAI : MonoBehaviour, IDamageable
     {
         startingPos = transform.position;
         StoppingDisOrig = agent.stoppingDistance;
+        //agent.radius = Random.Range(agent.radius, agent.radius + 3);
+        //agent.speed = Random.Range(agent.speed, agent.speed + 3);
+        gamemanager.instance.enemyKillGoal++;
     }
 
     // Update is called once per frame
@@ -125,6 +128,7 @@ public class enemyAI : MonoBehaviour, IDamageable
 
         if (HP <= 0)
         {
+            gamemanager.instance.checkEnemyKills();
             Destroy(gameObject);
         }
     }

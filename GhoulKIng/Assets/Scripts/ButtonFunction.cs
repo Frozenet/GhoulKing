@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ButtonFunction : MonoBehaviour
 {
@@ -21,5 +22,10 @@ public class ButtonFunction : MonoBehaviour
         gamemanager.instance.playerScript.respawn();
         gamemanager.instance.resume();
 
+    }
+    public void restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        gamemanager.instance.resume();
     }
 }
