@@ -45,11 +45,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4245223680510760296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03b9cedd755f6dc49adbcf35d231fd3a, type: 3}
+  m_Script: {fileID: 11500000, guid: 29c8c24da655d89488f30113bff413ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
-  pushBackAmount: 20
+  damage: 0
+  pushBackAmount: 0
 --- !u!54 &4245223680510760300
 Rigidbody:
   m_ObjectHideFlags: 0

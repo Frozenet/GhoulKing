@@ -45,13 +45,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7726195444585675168}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50d2b0179a8a46f4a956a846691b2ca1, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d289e2ffee4c5449ac995faaad4c219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 2832013689366954755}
-  speed: 10
-  timer: 2
-  explosion: {fileID: 4245223680510760296, guid: b2f9ba9c181ed004686ea1195dbf32bd, type: 3}
+  rb: {fileID: 0}
+  speed: 0
+  timer: 0
+  explosion: {fileID: 4245223680510760296, guid: cb9fb975be296b547b1ad219f0203297, type: 3}
 --- !u!33 &7726195444585675197
 MeshFilter:
   m_ObjectHideFlags: 0

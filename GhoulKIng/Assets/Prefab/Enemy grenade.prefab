@@ -138,11 +138,11 @@ MonoBehaviour:
   agent: {fileID: 5781514315137580233}
   rend: {fileID: 5582766462701988478}
   HP: 5
-  veiwangle: 90
+  viewAngle: 0
   playerFaceSpeed: 2
   roamRadius: 5
   shootRate: 3
-  bullet: {fileID: 7726195444585675168, guid: 649ba81fe9fba7c47b076be92840008f, type: 3}
+  bullet: {fileID: 7726195444585675168, guid: 8fd0f6aa66232c54d81d724cc32cc9a8, type: 3}
 --- !u!195 &5781514315137580233
 NavMeshAgent:
   m_ObjectHideFlags: 0

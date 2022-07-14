@@ -9,6 +9,7 @@ public class enemyAI : MonoBehaviour, IDamageable
     [Header("Components")]
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer rend;
+    [SerializeField] Animator anim;
 
     [Header("-----------------")]
 
@@ -23,7 +24,9 @@ public class enemyAI : MonoBehaviour, IDamageable
     [Header("Weapon Stats")]
     [SerializeField] float shootRate;
     [SerializeField] GameObject bullet;
-    
+    [SerializeField] GameObject shootPos;
+
+
 
     bool canShoot;
     bool playerInRange;
@@ -37,26 +40,28 @@ public class enemyAI : MonoBehaviour, IDamageable
     {
         startingPos = transform.position;
         StoppingDisOrig = agent.stoppingDistance;
-        //agent.radius = Random.Range(agent.radius, agent.radius + 3);
-        //agent.speed = Random.Range(agent.speed, agent.speed + 3);
-        gamemanager.instance.enemyKillGoal++;
+        gamemanager.instance.updateEnemyNumber();
     }
 
     // Update is called once per frame
     void Update()
     {
-        playerDir = gamemanager.instance.player.transform.position - transform.position;
-
-        if (playerInRange)
+        if (agent.isActiveAndEnabled)
         {
-            agent.SetDestination(gamemanager.instance.player.transform.position);
+            anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agent.velocity.normalized.magnitude, Time.deltaTime * 5));
 
-            canSeePlayer();
-            facePlayer();
+            playerDir = gamemanager.instance.player.transform.position - transform.position;
+
+            if (playerInRange)
+            {
+                agent.SetDestination(gamemanager.instance.player.transform.position);
+
+                canSeePlayer();
+                facePlayer();
+            }
+            else if (agent.remainingDistance < 0.1f)
+                roam();
         }
-        else if (agent.remainingDistance < 0.1f)
-            roam();
-            
     }
 
     void roam()
@@ -76,7 +81,7 @@ public class enemyAI : MonoBehaviour, IDamageable
 
     void facePlayer()
     {
-        if(agent.remainingDistance <= agent.stoppingDistance)
+        if (agent.remainingDistance <= agent.stoppingDistance)
         {
             playerDir.y = 0;
             Quaternion rotation = Quaternion.LookRotation(playerDir);
@@ -90,11 +95,11 @@ public class enemyAI : MonoBehaviour, IDamageable
 
         RaycastHit hit;
 
-        if(Physics.Raycast(transform.position, playerDir, out hit))
+        if (Physics.Raycast(transform.position, playerDir, out hit))
         {
             Debug.DrawRay(transform.position, playerDir);
 
-            if(hit.collider.CompareTag("Player") && canShoot && angle <= viewAngle)
+            if (hit.collider.CompareTag("Player") && canShoot && angle <= viewAngle)
                 StartCoroutine(shoot());
 
         }
@@ -123,13 +128,20 @@ public class enemyAI : MonoBehaviour, IDamageable
     {
         HP -= dmg;
 
+        anim.SetTrigger("Damage");
+
         StartCoroutine(flashColor());
         playerInRange = true;
 
         if (HP <= 0)
         {
             gamemanager.instance.checkEnemyKills();
-            Destroy(gameObject);
+            agent.enabled = false;
+            anim.SetBool("Dead", true);
+            foreach(Collider col in GetComponents<Collider>())
+            {
+                col.enabled = false;
+            }
         }
     }
 
@@ -145,7 +157,9 @@ public class enemyAI : MonoBehaviour, IDamageable
     {
         canShoot = false;
 
-        Instantiate(bullet, transform.position, bullet.transform.rotation);
+        anim.SetTrigger("Shoot");
+
+        Instantiate(bullet, shootPos.transform.position, bullet.transform.rotation);
 
         yield return new WaitForSeconds(shootRate);
 
