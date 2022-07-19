@@ -10,18 +10,17 @@ public class playerController : MonoBehaviour, IDamageable
     [Header("-----------------")]
 
     [Header("Player Attributes")]
-    public int keys = 0;
-    [Range(5, 20)][SerializeField] int HP;
-    [Range(1, 15)][SerializeField] float playerSpeed;
-    [Range(0, 4f)][SerializeField] float sprintMult;
-    [Range(1, 5)][SerializeField] int jumps;
-    [Range(1, 10)][SerializeField] float jumpHeight;
-    [Range(15, 30)][SerializeField] float gravityValue;
+    [Range(5, 20)] [SerializeField] int HP;
+    [Range(1, 15)] [SerializeField] float playerSpeed;
+    [Range(0, 4f)] [SerializeField] float sprintMult;
+    [Range(1, 5)] [SerializeField] int jumps;
+    [Range(1, 10)] [SerializeField] float jumpHeight;
+    [Range(15, 30)] [SerializeField] float gravityValue;
     [Header("-----------------")]
 
     [Header("Player Weapon Stats")]
-    [Range(0.1f, 3)][SerializeField] float shootRate;
-    [Range(1, 10)][SerializeField] int weaponDamage;
+    [Range(0.1f, 3)] [SerializeField] float shootRate;
+    [Range(1, 10)] [SerializeField] int weaponDamage;
 
     [Header("-----------------")]
     [Header("Effects")]
@@ -37,11 +36,11 @@ public class playerController : MonoBehaviour, IDamageable
     [Header("Audio")]//new
     public AudioSource aud;//new
     [SerializeField] AudioClip[] gunshot;//new
-    [Range(0, 1)][SerializeField] float gunshotVol;//new
+    [Range(0, 1)] [SerializeField] float gunshotVol;//new
     [SerializeField] AudioClip[] playerHurt;//new
-    [Range(0, 1)][SerializeField] float playerHurtVol;//new
+    [Range(0, 1)] [SerializeField] float playerHurtVol;//new
     [SerializeField] AudioClip[] playerFootsteps;//new
-    [Range(0, 1)][SerializeField] float playerFootstepsVol;//new
+    [Range(0, 1)] [SerializeField] float playerFootstepsVol;//new
 
     bool isSprinting = false;
     float playerSpeedOrig;
@@ -53,6 +52,7 @@ public class playerController : MonoBehaviour, IDamageable
     int HPOrig;
     Vector3 playerSpawnPos;
     bool footsetpPlaying;//new
+    public int weaponType = 0;
 
     private void Start()
     {
@@ -68,19 +68,9 @@ public class playerController : MonoBehaviour, IDamageable
             pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushResolve);
             movePlayer();
             sprint();
+            weaopnChoice();
             StartCoroutine(shoot());
             StartCoroutine(playFootsteps());//new
-        }
-    }
-    public void OnTriggerEnter(Collider other)
-    {
-        
-        if (other.gameObject.CompareTag("Key"))
-        {
-            keys++;
-            GameObject key = other.gameObject;
-            Destroy(key);
-            gamemanager.instance.updateKeysNumber();
         }
     }
 
@@ -144,6 +134,18 @@ public class playerController : MonoBehaviour, IDamageable
         }
     }
 
+    void weaopnChoice()
+    {
+        if (Input.GetKeyDown("1"))
+        {
+            weaponType = 0;
+        }
+        if (Input.GetKeyDown("2"))
+        {
+            weaponType = 1;
+        }
+    }
+
     IEnumerator shoot()
     {
         RaycastHit hit;
@@ -152,17 +154,37 @@ public class playerController : MonoBehaviour, IDamageable
 
         if (Input.GetButton("Shoot") && canShoot)
         {
-
             canShoot = false;
 
             aud.PlayOneShot(gunshot[Random.Range(0, gunshot.Length)], gunshotVol);//new
-            for (int i = 0; i < 12; i++)
-            {
 
-                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), out hit))
+            if (weaponType == 0) // 1 is shotgun 
+            {
+                for (int i = 0; i < 12; i++)
+                {
+                    if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), out hit))
+                    {
+                        Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
+                        if (hit.collider.GetComponent<IDamageable>() != null)
+                        {
+                            IDamageable isDamageable = hit.collider.GetComponent<IDamageable>();
+                            if (hit.collider is SphereCollider)
+                            {
+                                isDamageable.takeDamage(weaponDamage * 5);
+                            }
+                            else
+                            {
+                                isDamageable.takeDamage(weaponDamage);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (weaponType == 1)// 2 is pistol/rifle
+            {
+                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit))
                 {
                     Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
-
                     if (hit.collider.GetComponent<IDamageable>() != null)
                     {
                         IDamageable isDamageable = hit.collider.GetComponent<IDamageable>();
@@ -173,72 +195,72 @@ public class playerController : MonoBehaviour, IDamageable
                         else
                         {
                             isDamageable.takeDamage(weaponDamage);
-
                         }
                     }
-
                 }
             }
-                muzzleFlash.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
-                muzzleFlash.SetActive(true);
-                yield return new WaitForSeconds(0.05f);
-                muzzleFlash.SetActive(false);
-
-
-                yield return new WaitForSeconds(shootRate);
-                canShoot = true;
-
-            }
-        }
-        public void takeDamage(int dmg)
-        {
-            HP -= dmg;
-
-            aud.PlayOneShot(playerHurt[Random.Range(0, gunshot.Length)], playerHurtVol);//new
-
-            updatePlayerHP();
-            StartCoroutine(damageFlash());
-
-            if (HP <= 0)
+            else
             {
-                //kill player
-                gamemanager.instance.playerDead();
+                //in case of error
             }
-        }
-        IEnumerator damageFlash()
-        {
-            gamemanager.instance.playerDamageFlash.SetActive(true);
-            yield return new WaitForSeconds(0.1f);
-            gamemanager.instance.playerDamageFlash.SetActive(false);
 
+            muzzleFlash.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+            muzzleFlash.SetActive(true);
+            yield return new WaitForSeconds(0.05f);
+            muzzleFlash.SetActive(false);
+            yield return new WaitForSeconds(shootRate);
+            canShoot = true;
         }
-        public void giveHP(int amount)
-        {
-            if (HP < HPOrig)
-            {
-                HP += amount;
-            }
-            if (HP > HPOrig)
-            {
-                HP = HPOrig;
-            }
-            updatePlayerHP();
+    }
+    public void takeDamage(int dmg)
+    {
+        HP -= dmg;
 
-        }
-        public void updatePlayerHP()
-        {
-            gamemanager.instance.HPBar.fillAmount = (float)HP / (float)HPOrig;
+        aud.PlayOneShot(playerHurt[Random.Range(0, gunshot.Length)], playerHurtVol);//new
 
-        }
-        public void respawn()
-        {
-            HP = HPOrig;
-            controller.enabled = false;
-            transform.position = playerSpawnPos;
-            controller.enabled = true;
-            pushback = Vector3.zero;
-            updatePlayerHP();
+        updatePlayerHP();
+        StartCoroutine(damageFlash());
 
+        if (HP <= 0)
+        {
+            //kill player
+            gamemanager.instance.playerDead();
         }
+    }
+    IEnumerator damageFlash()
+    {
+        gamemanager.instance.playerDamageFlash.SetActive(true);
+        yield return new WaitForSeconds(0.1f);
+        gamemanager.instance.playerDamageFlash.SetActive(false);
 
     }
+    public void giveHP(int amount)
+    {
+        if (HP < HPOrig)
+        {
+            HP += amount;
+        }
+        if (HP > HPOrig)
+        {
+            HP = HPOrig;
+        }
+        updatePlayerHP();
+
+    }
+    public void updatePlayerHP()
+    {
+        gamemanager.instance.HPBar.fillAmount = (float)HP / (float)HPOrig;
+
+    }
+    public void respawn()
+    {
+        HP = HPOrig;
+        controller.enabled = false;
+        transform.position = playerSpawnPos;
+        controller.enabled = true;
+        pushback = Vector3.zero;
+        updatePlayerHP();
+
+    }
+
+}

@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timer: 1
   numEnemiesToSpawn: 5
-  enemy: {fileID: 0}
+  enemy: {fileID: 4263239107046865415, guid: ecf559684975fed4c8f7364ddf33e30e, type: 3}
