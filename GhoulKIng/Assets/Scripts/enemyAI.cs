@@ -9,6 +9,7 @@ public class enemyAI : MonoBehaviour, IDamageable
     [Header("Components")]
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Renderer rend;
+    [SerializeField] Animator anim;
 
     [Header("-----------------")]
 
@@ -23,6 +24,7 @@ public class enemyAI : MonoBehaviour, IDamageable
     [Header("Weapon Stats")]
     [SerializeField] float shootRate;
     [SerializeField] GameObject bullet;
+    [SerializeField] GameObject attackPos;
     
 
     bool canShoot;
@@ -45,18 +47,22 @@ public class enemyAI : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-        playerDir = gamemanager.instance.player.transform.position - transform.position;
-
-        if (playerInRange)
+        if (agent.isActiveAndEnabled)
         {
-            agent.SetDestination(gamemanager.instance.player.transform.position);
+            anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"),agent.velocity.normalized.magnitude, Time.deltaTime * 5));
 
-            canSeePlayer();
-            facePlayer();
+            playerDir = gamemanager.instance.player.transform.position - transform.position;
+
+            if (playerInRange)
+            {
+                agent.SetDestination(gamemanager.instance.player.transform.position);
+
+                canSeePlayer();
+                facePlayer();
+            }
+            else if (agent.remainingDistance < 0.1f)
+                roam();
         }
-        else if (agent.remainingDistance < 0.1f)
-            roam();
-            
     }
 
     void roam()
@@ -129,7 +135,11 @@ public class enemyAI : MonoBehaviour, IDamageable
         if (HP <= 0)
         {
             gamemanager.instance.checkEnemyKills();
-            Destroy(gameObject);
+            agent.enabled = false;
+            anim.SetBool("Dead", true);
+
+            foreach (Collider col in GetComponents<Collider>())
+                col.enabled = true;
         }
     }
 
@@ -145,7 +155,9 @@ public class enemyAI : MonoBehaviour, IDamageable
     {
         canShoot = false;
 
-        Instantiate(bullet, transform.position, bullet.transform.rotation);
+        anim.SetTrigger("Shoot");
+
+        Instantiate(bullet, attackPos.transform.position, bullet.transform.rotation);
 
         yield return new WaitForSeconds(shootRate);
 
