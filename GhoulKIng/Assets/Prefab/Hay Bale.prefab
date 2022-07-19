@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5411930143144308579}
   - component: {fileID: 8986038465822417094}
   - component: {fileID: 6579799832264152076}
+  - component: {fileID: 4421192292224177140}
   m_Layer: 0
   m_Name: Hay Bale
   m_TagString: Untagged
@@ -83,3 +84,17 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4421192292224177140
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4634443049645651417}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1209909588512940499, guid: d925c5f9fdc6843478535bc230e8fef9, type: 3}
