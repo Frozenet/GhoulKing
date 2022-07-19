@@ -2,21 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class gamemanager : MonoBehaviour
 {
-    public static gamemanager instance;
+    [HideInInspector] public static gamemanager instance;
+
+    [Header("Player Reference")]
     public GameObject player;
     public playerController playerScript;
 
+    [Header("-----------------")]
+    [Header("UI")]
     public GameObject pauseMenu;
     public GameObject playerDeadMenu;
     public GameObject playerDamageFlash;
     public GameObject winGameMenu;
-
     public Image HPBar;
+    public TMP_Text enemyDead;
+    public TMP_Text enemyTotal;
 
-    public bool paused = false;
+    [HideInInspector] public bool paused = false;
+    public GameObject menuCurrentlyOpen;
+    [HideInInspector] public bool gameOver;
 
     int enemiesKilled;
     public int enemyKillGoal;
@@ -32,19 +40,17 @@ public class gamemanager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") && !playerDeadMenu.activeSelf && !winGameMenu.activeSelf)
+        if (Input.GetButtonDown("Cancel") && !gameOver)
         {
-
-            if (!pauseMenu.activeSelf)
+            if (!paused && !menuCurrentlyOpen)
             {
-                pauseMenu.SetActive(true);
-                Time.timeScale = 0;
-                Cursor.lockState = CursorLockMode.Confined;
-                Cursor.visible = true;
+                paused = true;
+                menuCurrentlyOpen = pauseMenu;
+                menuCurrentlyOpen.SetActive(true);
+                lockCursorPause();
             }
             else
             {
-
                 resume();
             }
 
@@ -53,35 +59,59 @@ public class gamemanager : MonoBehaviour
     public void resume()
     {
         paused = false;
-        pauseMenu.SetActive(false);
-        winGameMenu.SetActive(false);
-        playerDeadMenu.SetActive(false);
-        Time.timeScale = 1;
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = false;
+        menuCurrentlyOpen.SetActive(false);
+        menuCurrentlyOpen = null;
+        unlockCursorUnpause();
     }
 
     public void playerDead()
     {
         paused = true;
-        playerDeadMenu.SetActive(true);
-        //playerDamageFlash.SetActive(false);
-        Time.timeScale = 0;
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
+        menuCurrentlyOpen = playerDeadMenu;
+        menuCurrentlyOpen.SetActive(true);
+        lockCursorPause();
     }
 
     public void checkEnemyKills()
     {
         enemiesKilled++;
+        enemyDead.text = enemiesKilled.ToString("F0");
+
         if(enemiesKilled >= enemyKillGoal)
         {
-            //show win game popup
-            winGameMenu.SetActive(true);
-            paused = true;
-            Time.timeScale = 0;
-            Cursor.lockState = CursorLockMode.Confined;
-            Cursor.visible = true;
+            menuCurrentlyOpen = winGameMenu;
+            menuCurrentlyOpen.SetActive(true);
+            gameOver = true;
+            lockCursorPause();
         }
+    }
+
+    public void restart()
+    {
+        gameOver = false;
+        paused = false;
+        menuCurrentlyOpen.SetActive(false);
+        menuCurrentlyOpen = null;
+        unlockCursorUnpause();
+    }
+
+    public void lockCursorPause()
+    {
+        Time.timeScale = 0;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+    }
+
+    public void unlockCursorUnpause()
+    {
+        Time.timeScale = 1;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    public void updateEnemyNumber()
+    {
+        enemyKillGoal++;
+        enemyTotal.text = enemyKillGoal.ToString("F0");
     }
 }

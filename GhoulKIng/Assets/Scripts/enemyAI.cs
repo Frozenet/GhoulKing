@@ -24,8 +24,9 @@ public class enemyAI : MonoBehaviour, IDamageable
     [Header("Weapon Stats")]
     [SerializeField] float shootRate;
     [SerializeField] GameObject bullet;
-    [SerializeField] GameObject attackPos;
-    
+    [SerializeField] GameObject shootPos;
+
+
 
     bool canShoot;
     bool playerInRange;
@@ -39,9 +40,7 @@ public class enemyAI : MonoBehaviour, IDamageable
     {
         startingPos = transform.position;
         StoppingDisOrig = agent.stoppingDistance;
-        //agent.radius = Random.Range(agent.radius, agent.radius + 3);
-        //agent.speed = Random.Range(agent.speed, agent.speed + 3);
-        gamemanager.instance.enemyKillGoal++;
+        gamemanager.instance.updateEnemyNumber();
     }
 
     // Update is called once per frame
@@ -49,7 +48,7 @@ public class enemyAI : MonoBehaviour, IDamageable
     {
         if (agent.isActiveAndEnabled)
         {
-            anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"),agent.velocity.normalized.magnitude, Time.deltaTime * 5));
+            anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agent.velocity.normalized.magnitude, Time.deltaTime * 5));
 
             playerDir = gamemanager.instance.player.transform.position - transform.position;
 
@@ -82,7 +81,7 @@ public class enemyAI : MonoBehaviour, IDamageable
 
     void facePlayer()
     {
-        if(agent.remainingDistance <= agent.stoppingDistance)
+        if (agent.remainingDistance <= agent.stoppingDistance)
         {
             playerDir.y = 0;
             Quaternion rotation = Quaternion.LookRotation(playerDir);
@@ -96,11 +95,11 @@ public class enemyAI : MonoBehaviour, IDamageable
 
         RaycastHit hit;
 
-        if(Physics.Raycast(transform.position, playerDir, out hit))
+        if (Physics.Raycast(transform.position, playerDir, out hit))
         {
             Debug.DrawRay(transform.position, playerDir);
 
-            if(hit.collider.CompareTag("Player") && canShoot && angle <= viewAngle)
+            if (hit.collider.CompareTag("Player") && canShoot && angle <= viewAngle)
                 StartCoroutine(shoot());
 
         }
@@ -129,6 +128,8 @@ public class enemyAI : MonoBehaviour, IDamageable
     {
         HP -= dmg;
 
+        anim.SetTrigger("Damage");
+
         StartCoroutine(flashColor());
         playerInRange = true;
 
@@ -137,9 +138,10 @@ public class enemyAI : MonoBehaviour, IDamageable
             gamemanager.instance.checkEnemyKills();
             agent.enabled = false;
             anim.SetBool("Dead", true);
-
-            foreach (Collider col in GetComponents<Collider>())
-                col.enabled = true;
+            foreach(Collider col in GetComponents<Collider>())
+            {
+                col.enabled = false;
+            }
         }
     }
 
@@ -157,7 +159,7 @@ public class enemyAI : MonoBehaviour, IDamageable
 
         anim.SetTrigger("Shoot");
 
-        Instantiate(bullet, attackPos.transform.position, bullet.transform.rotation);
+        Instantiate(bullet, shootPos.transform.position, bullet.transform.rotation);
 
         yield return new WaitForSeconds(shootRate);
 
