@@ -145,6 +145,14 @@ public class playerController : MonoBehaviour, IDamageable
 
             aud.PlayOneShot(gunshot[Random.Range(0, gunshot.Length)], gunshotVol);//new
 
+            //if (shotgun)
+            //{
+            //
+            //}
+            //else
+            //{
+            //
+            //}
             if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit))
             {
                 Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
@@ -161,12 +169,9 @@ public class playerController : MonoBehaviour, IDamageable
                         isDamageable.takeDamage(weaponDamage);
 
                     }
-
                 }
-
-
-
             }
+
             muzzleFlash.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
             muzzleFlash.SetActive(true);
             yield return new WaitForSeconds(0.05f);
