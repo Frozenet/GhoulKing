@@ -135,7 +135,7 @@ public class enemyAI : MonoBehaviour, IDamageable
 
         if (HP <= 0)
         {
-            gamemanager.instance.checkEnemyKills();
+            //gamemanager.instance.checkEnemyKills();
             agent.enabled = false;
             anim.SetBool("Dead", true);
             foreach(Collider col in GetComponents<Collider>())

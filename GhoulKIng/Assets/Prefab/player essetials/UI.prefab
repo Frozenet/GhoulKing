@@ -296,7 +296,7 @@ GameObject:
   - component: {fileID: 314829662}
   - component: {fileID: 314829661}
   m_Layer: 5
-  m_Name: Enemy Total
+  m_Name: keys Total
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 1032271837}
   - component: {fileID: 1032271836}
   m_Layer: 5
-  m_Name: Enemy Dead
+  m_Name: keys held
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -872,7 +872,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Enemy Count:'
+  m_text: 'Keys:
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2444,10 +2446,13 @@ MonoBehaviour:
   HPBar: {fileID: 1899303299}
   enemyDead: {fileID: 1032271836}
   enemyTotal: {fileID: 314829661}
+  keysHeld: {fileID: 0}
+  KeysTotal: {fileID: 0}
   paused: 0
   menuCurrentlyOpen: {fileID: 0}
   gameOver: 0
   enemyKillGoal: 0
+  KeysGoal: 1
 --- !u!1 &4214298872775406477
 GameObject:
   m_ObjectHideFlags: 0

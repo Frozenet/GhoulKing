@@ -10,6 +10,7 @@ public class playerController : MonoBehaviour, IDamageable
     [Header("-----------------")]
 
     [Header("Player Attributes")]
+    public int keys = 0;
     [Range(5, 20)][SerializeField] int HP;
     [Range(1, 15)][SerializeField] float playerSpeed;
     [Range(0, 4f)][SerializeField] float sprintMult;
@@ -69,6 +70,17 @@ public class playerController : MonoBehaviour, IDamageable
             sprint();
             StartCoroutine(shoot());
             StartCoroutine(playFootsteps());//new
+        }
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        
+        if (other.gameObject.CompareTag("Key"))
+        {
+            keys++;
+            GameObject key = other.gameObject;
+            Destroy(key);
+            gamemanager.instance.updateKeysNumber();
         }
     }
 
