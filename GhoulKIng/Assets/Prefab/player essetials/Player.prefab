@@ -413,8 +413,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 7812847776632625768}
   HP: 10
-  playerSpeed: 8
-  sprintMult: 2
+  playerSpeed: 10
+  sprintMult: 0.5
   jumps: 2
   jumpHeight: 8
   gravityValue: 20
@@ -427,7 +427,7 @@ MonoBehaviour:
   aud: {fileID: 1889870877}
   gunshot:
   - {fileID: 8300000, guid: fafc57758b4d88d4e97af10210a367c2, type: 3}
-  gunshotVol: 0
+  gunshotVol: 0.5
   playerHurt:
   - {fileID: 8300000, guid: 611a60498227503429a822d774a42ce7, type: 3}
   - {fileID: 8300000, guid: f130e13638fcca24db857c018f4ff306, type: 3}
@@ -435,7 +435,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1ea29fb9d85c73145a4978f74b73a3a8, type: 3}
   - {fileID: 8300000, guid: c94d3c88e72c5d84482328ce1170af20, type: 3}
   - {fileID: 8300000, guid: 3eef40edc4e103741aa9318c0fc8315a, type: 3}
-  playerHurtVol: 0
+  playerHurtVol: 0.5
   playerFootsteps:
   - {fileID: 8300000, guid: fb0d5db70b2b77346b026512bcbddeb3, type: 3}
   - {fileID: 8300000, guid: 065e44e7fd7f22549b6cf40491014943, type: 3}
@@ -446,7 +446,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7cdb124a44603314c8be5f4bace4c51c, type: 3}
   - {fileID: 8300000, guid: 72e7358dec8bd264aa2519fa29f7db33, type: 3}
   - {fileID: 8300000, guid: 0b2f5902eb6516a4c9f18b206c0ef650, type: 3}
-  playerFootstepsVol: 0
+  playerFootstepsVol: 0.2
 --- !u!33 &7812847776632625770
 MeshFilter:
   m_ObjectHideFlags: 0
