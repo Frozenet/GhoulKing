@@ -9,7 +9,7 @@ public class exitCon : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            gamemanager.instance.checkKeys();
+            //gameManager.instance.checkKeys();
         }
     }
 }

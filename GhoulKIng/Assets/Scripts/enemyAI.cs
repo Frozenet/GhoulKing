@@ -40,7 +40,7 @@ public class enemyAI : MonoBehaviour, IDamageable
     {
         startingPos = transform.position;
         StoppingDisOrig = agent.stoppingDistance;
-        gamemanager.instance.updateEnemyNumber();
+        gameManager.instance.updateEnemyNumber();
     }
 
     // Update is called once per frame
@@ -50,11 +50,11 @@ public class enemyAI : MonoBehaviour, IDamageable
         {
             anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agent.velocity.normalized.magnitude, Time.deltaTime * 5));
 
-            playerDir = gamemanager.instance.player.transform.position - transform.position;
+            playerDir = gameManager.instance.player.transform.position - transform.position;
 
             if (playerInRange)
             {
-                agent.SetDestination(gamemanager.instance.player.transform.position);
+                agent.SetDestination(gameManager.instance.player.transform.position);
 
                 canSeePlayer();
                 facePlayer();
@@ -135,7 +135,7 @@ public class enemyAI : MonoBehaviour, IDamageable
 
         if (HP <= 0)
         {
-            //gamemanager.instance.checkEnemyKills();
+            gameManager.instance.checkEnemyKills();
             agent.enabled = false;
             anim.SetBool("Dead", true);
             foreach(Collider col in GetComponents<Collider>())

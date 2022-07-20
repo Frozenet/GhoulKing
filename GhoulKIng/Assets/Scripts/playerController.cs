@@ -67,7 +67,7 @@ public class playerController : MonoBehaviour, IDamageable
 
     void Update()
     {
-        if (!gamemanager.instance.paused)
+        if (!gameManager.instance.paused)
         {
             pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushResolve);
             movePlayer();
@@ -234,14 +234,14 @@ public class playerController : MonoBehaviour, IDamageable
         if (HP <= 0)
         {
             //kill player
-            gamemanager.instance.playerDead();
+            gameManager.instance.playerDead();
         }
     }
     IEnumerator damageFlash()
     {
-        gamemanager.instance.playerDamageFlash.SetActive(true);
+        gameManager.instance.playerDamageFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        gamemanager.instance.playerDamageFlash.SetActive(false);
+        gameManager.instance.playerDamageFlash.SetActive(false);
 
     }
     public void giveHP(int amount)
@@ -259,7 +259,7 @@ public class playerController : MonoBehaviour, IDamageable
     }
     public void updatePlayerHP()
     {
-        gamemanager.instance.HPBar.fillAmount = (float)HP / (float)HPOrig;
+        gameManager.instance.HPBar.fillAmount = (float)HP / (float)HPOrig;
 
     }
     public void respawn()

@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class gamemanager : MonoBehaviour
+public class gameManager : MonoBehaviour
 {
-    [HideInInspector] public static gamemanager instance;
+    [HideInInspector] public static gameManager instance;
 
     [Header("Player Reference")]
     public GameObject player;
@@ -76,24 +76,12 @@ public class gamemanager : MonoBehaviour
         lockCursorPause();
     }
 
-    //public void checkEnemyKills()
-    //{
-    //    enemiesKilled++;
-    //    enemyDead.text = enemiesKilled.ToString("F0");
-
-    //    if (enemiesKilled >= enemyKillGoal)
-    //    {
-    //        menuCurrentlyOpen = winGameMenu;
-    //        menuCurrentlyOpen.SetActive(true);
-    //        gameOver = true;
-    //        lockCursorPause();
-    //    }
-    //}
-
-    public void checkKeys()
+    public void checkEnemyKills()
     {
-        keysHeld.text = playerScript.keys.ToString("F0");
-        if (playerScript.keys >= KeysGoal)
+        enemiesKilled++;
+        enemyDead.text = enemiesKilled.ToString("F0");
+
+        if (enemiesKilled >= enemyKillGoal)
         {
             menuCurrentlyOpen = winGameMenu;
             menuCurrentlyOpen.SetActive(true);
@@ -101,6 +89,18 @@ public class gamemanager : MonoBehaviour
             lockCursorPause();
         }
     }
+
+    //public void checkKeys()
+    //{
+    //    keysHeld.text = playerScript.keys.ToString("F0");
+    //    if (playerScript.keys >= KeysGoal)
+    //    {
+    //        menuCurrentlyOpen = winGameMenu;
+    //        menuCurrentlyOpen.SetActive(true);
+    //        gameOver = true;
+    //        lockCursorPause();
+    //    }
+    //}
 
     public void restart()
     {
@@ -130,8 +130,8 @@ public class gamemanager : MonoBehaviour
         enemyKillGoal++;
         enemyTotal.text = enemyKillGoal.ToString("F0");
     }
-    public void updateKeysNumber()
-    {
-        keysHeld.text = playerScript.keys.ToString("F0");
-    }
+    //public void updateKeysNumber()
+    //{
+    //    keysHeld.text = playerScript.keys.ToString("F0");
+    //}
 }
