@@ -201,11 +201,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &538968553 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132148862834733, guid: 48f791405b988d2419a3c51cf1be0465, type: 3}
-  m_PrefabInstance: {fileID: 797187496}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &548902522
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -278,26 +273,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1837255044, guid: 48f791405b988d2419a3c51cf1be0465, type: 3}
-      propertyPath: m_Name
-      value: Pistol
-      objectReference: {fileID: 0}
-    - target: {fileID: 1837255044, guid: 48f791405b988d2419a3c51cf1be0465, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132148862834733, guid: 48f791405b988d2419a3c51cf1be0465, type: 3}
-      propertyPath: m_Name
-      value: Shotgun
-      objectReference: {fileID: 0}
-    - target: {fileID: 7812847776632625748, guid: 48f791405b988d2419a3c51cf1be0465, type: 3}
-      propertyPath: pistol
-      value: 
-      objectReference: {fileID: 797187497}
-    - target: {fileID: 7812847776632625748, guid: 48f791405b988d2419a3c51cf1be0465, type: 3}
-      propertyPath: shotgun
-      value: 
-      objectReference: {fileID: 538968553}
     - target: {fileID: 7812847776632625771, guid: 48f791405b988d2419a3c51cf1be0465, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -348,11 +323,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48f791405b988d2419a3c51cf1be0465, type: 3}
---- !u!1 &797187497 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1837255044, guid: 48f791405b988d2419a3c51cf1be0465, type: 3}
-  m_PrefabInstance: {fileID: 797187496}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1118195256
 PrefabInstance:
   m_ObjectHideFlags: 0

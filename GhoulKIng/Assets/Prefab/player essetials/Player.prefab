@@ -142,7 +142,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.07231222, g: 0.13590989, b: 0.23584908, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -197,8 +197,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensHori: 600
   sensVert: 600
-  lockVertMin: -90
-  lockVertMax: 90
+  lockVertMin: -75
+  lockVertMax: 75
   invertY: 0
 --- !u!1 &1118965853
 GameObject:
@@ -517,6 +517,9 @@ MonoBehaviour:
   gravityValue: 20
   shootRate: 0.2
   weaponDamage: 1
+  pistol: {fileID: 1837255044}
+  shotgun: {fileID: 919132148862834733}
+  currentWeapon: {fileID: 0}
   hitEffectSpark: {fileID: 7105177858108400233, guid: 9b0dc058cdcf796458724b48caed7bdb, type: 3}
   muzzleFlash: {fileID: 1589149908793338289}
   pushback: {x: 0, y: 0, z: 0}
@@ -782,7 +785,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f18c8a79bbc86fa4482552afd42565ae, type: 2}
     - target: {fileID: 919132149155446097, guid: ecd4df6c01668ee4baea5daa8268b264, type: 3}
       propertyPath: m_Name
-      value: Triple_Barrel_Shotgun
+      value: Shotgun
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ecd4df6c01668ee4baea5daa8268b264, type: 3}
       propertyPath: m_IsActive
@@ -795,6 +798,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ecd4df6c01668ee4baea5daa8268b264, type: 3}
   m_PrefabInstance: {fileID: 915498364}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &919132148862834733 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ecd4df6c01668ee4baea5daa8268b264, type: 3}
+  m_PrefabInstance: {fileID: 915498364}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1837354788
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -804,11 +812,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 5d06c8e481e9c63409f7653006d9e396, type: 3}
       propertyPath: m_Name
-      value: 45 ACP Smith and Wesson Gun
+      value: Pistol
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 5d06c8e481e9c63409f7653006d9e396, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 5d06c8e481e9c63409f7653006d9e396, type: 3}
       propertyPath: m_IsActive
@@ -864,6 +872,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d06c8e481e9c63409f7653006d9e396, type: 3}
+--- !u!1 &1837255044 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 5d06c8e481e9c63409f7653006d9e396, type: 3}
+  m_PrefabInstance: {fileID: 1837354788}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1837487524 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 5d06c8e481e9c63409f7653006d9e396, type: 3}
