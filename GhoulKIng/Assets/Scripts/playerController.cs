@@ -21,6 +21,9 @@ public class playerController : MonoBehaviour, IDamageable
     [Header("Player Weapon Stats")]
     [Range(0.1f, 3)] [SerializeField] float shootRate;
     [Range(1, 10)] [SerializeField] int weaponDamage;
+    public GameObject pistol;
+    public GameObject shotgun;
+    public GameObject currentWeapon;
 
     [Header("-----------------")]
     [Header("Effects")]
@@ -59,6 +62,7 @@ public class playerController : MonoBehaviour, IDamageable
         playerSpeedOrig = playerSpeed;
         HPOrig = HP;
         playerSpawnPos = transform.position;
+        currentWeapon = shotgun;
     }
 
     void Update()
@@ -139,10 +143,16 @@ public class playerController : MonoBehaviour, IDamageable
         if (Input.GetKeyDown("1"))
         {
             weaponType = 0;
+            currentWeapon.SetActive(false);
+            currentWeapon = shotgun;
+            currentWeapon.SetActive(true);
         }
         if (Input.GetKeyDown("2"))
         {
             weaponType = 1;
+            currentWeapon.SetActive(false);
+            currentWeapon = pistol;
+            currentWeapon.SetActive(true);
         }
     }
 
