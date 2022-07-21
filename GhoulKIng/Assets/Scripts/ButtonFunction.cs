@@ -7,7 +7,7 @@ public class ButtonFunction : MonoBehaviour
 {
     public void resume()
     {
-        gamemanager.instance.resume();
+        gameManager.instance.resume();
     }
     public void quit()
     {
@@ -15,16 +15,16 @@ public class ButtonFunction : MonoBehaviour
     }
     public void givePlayerHP(int amount)
     {
-        gamemanager.instance.playerScript.giveHP(amount);
+        gameManager.instance.playerScript.giveHP(amount);
     }
     public void respawn()
     {
-        gamemanager.instance.playerScript.respawn();
-        gamemanager.instance.restart();
+        gameManager.instance.playerScript.respawn();
+        gameManager.instance.restart();
     }
     public void restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        gamemanager.instance.restart();
+        gameManager.instance.restart();
     }
 }

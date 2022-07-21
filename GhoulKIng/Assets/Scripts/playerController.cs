@@ -12,7 +12,7 @@ public class playerController : MonoBehaviour, IDamageable
     [Header("Player Attributes")]
     [Range(5, 20)] [SerializeField] int HP;
     [Range(1, 15)] [SerializeField] float playerSpeed;
-    [Range(1.5f, 4f)] [SerializeField] float sprintMult;
+    [Range(0, 4f)] [SerializeField] float sprintMult;
     [Range(1, 5)] [SerializeField] int jumps;
     [Range(1, 10)] [SerializeField] float jumpHeight;
     [Range(15, 30)] [SerializeField] float gravityValue;
@@ -21,6 +21,9 @@ public class playerController : MonoBehaviour, IDamageable
     [Header("Player Weapon Stats")]
     [Range(0.1f, 3)] [SerializeField] float shootRate;
     [Range(1, 10)] [SerializeField] int weaponDamage;
+    public GameObject pistol;
+    public GameObject shotgun;
+    public GameObject currentWeapon;
 
     [Header("-----------------")]
     [Header("Effects")]
@@ -52,21 +55,24 @@ public class playerController : MonoBehaviour, IDamageable
     int HPOrig;
     Vector3 playerSpawnPos;
     bool footsetpPlaying;//new
+    public int weaponType = 0;
 
     private void Start()
     {
         playerSpeedOrig = playerSpeed;
         HPOrig = HP;
         playerSpawnPos = transform.position;
+        currentWeapon = shotgun;
     }
 
     void Update()
     {
-        if (!gamemanager.instance.paused)
+        if (!gameManager.instance.paused)
         {
             pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushResolve);
             movePlayer();
             sprint();
+            weaopnChoice();
             StartCoroutine(shoot());
             StartCoroutine(playFootsteps());//new
         }
@@ -124,11 +130,29 @@ public class playerController : MonoBehaviour, IDamageable
             footsetpPlaying = true;
             aud.PlayOneShot(playerFootsteps[Random.Range(0, playerFootsteps.Length)], playerFootstepsVol);
             if (isSprinting)
-                yield return new WaitForSeconds(.3f);
-            else
                 yield return new WaitForSeconds(.4f);
+            else
+                yield return new WaitForSeconds(.2f);
 
             footsetpPlaying = false;
+        }
+    }
+
+    void weaopnChoice()
+    {
+        if (Input.GetKeyDown("1"))
+        {
+            weaponType = 0;
+            currentWeapon.SetActive(false);
+            currentWeapon = shotgun;
+            currentWeapon.SetActive(true);
+        }
+        if (Input.GetKeyDown("2"))
+        {
+            weaponType = 1;
+            currentWeapon.SetActive(false);
+            currentWeapon = pistol;
+            currentWeapon.SetActive(true);
         }
     }
 
@@ -140,42 +164,62 @@ public class playerController : MonoBehaviour, IDamageable
 
         if (Input.GetButton("Shoot") && canShoot)
         {
-
             canShoot = false;
 
             aud.PlayOneShot(gunshot[Random.Range(0, gunshot.Length)], gunshotVol);//new
 
-            if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit))
+            if (weaponType == 0) // 1 is shotgun 
             {
-                Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
-
-                if (hit.collider.GetComponent<IDamageable>() != null)
+                for (int i = 0; i < 12; i++)
                 {
-                    IDamageable isDamageable = hit.collider.GetComponent<IDamageable>();
-                    if (hit.collider is SphereCollider)
+                    if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), out hit))
                     {
-                        isDamageable.takeDamage(weaponDamage * 5);
+                        Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
+                        if (hit.collider.GetComponent<IDamageable>() != null)
+                        {
+                            IDamageable isDamageable = hit.collider.GetComponent<IDamageable>();
+                            if (hit.collider is SphereCollider)
+                            {
+                                isDamageable.takeDamage(weaponDamage * 5);
+                            }
+                            else
+                            {
+                                isDamageable.takeDamage(weaponDamage);
+                            }
+                        }
                     }
-                    else
-                    {
-                        isDamageable.takeDamage(weaponDamage);
-
-                    }
-
                 }
-
-
-
             }
+            else if (weaponType == 1)// 2 is pistol/rifle
+            {
+                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit))
+                {
+                    Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
+                    if (hit.collider.GetComponent<IDamageable>() != null)
+                    {
+                        IDamageable isDamageable = hit.collider.GetComponent<IDamageable>();
+                        if (hit.collider is SphereCollider)
+                        {
+                            isDamageable.takeDamage(weaponDamage * 5);
+                        }
+                        else
+                        {
+                            isDamageable.takeDamage(weaponDamage);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                //in case of error
+            }
+
             muzzleFlash.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
             muzzleFlash.SetActive(true);
             yield return new WaitForSeconds(0.05f);
             muzzleFlash.SetActive(false);
-
-
             yield return new WaitForSeconds(shootRate);
             canShoot = true;
-
         }
     }
     public void takeDamage(int dmg)
@@ -190,14 +234,14 @@ public class playerController : MonoBehaviour, IDamageable
         if (HP <= 0)
         {
             //kill player
-            gamemanager.instance.playerDead();
+            gameManager.instance.playerDead();
         }
     }
     IEnumerator damageFlash()
     {
-        gamemanager.instance.playerDamageFlash.SetActive(true);
+        gameManager.instance.playerDamageFlash.SetActive(true);
         yield return new WaitForSeconds(0.1f);
-        gamemanager.instance.playerDamageFlash.SetActive(false);
+        gameManager.instance.playerDamageFlash.SetActive(false);
 
     }
     public void giveHP(int amount)
@@ -215,7 +259,7 @@ public class playerController : MonoBehaviour, IDamageable
     }
     public void updatePlayerHP()
     {
-        gamemanager.instance.HPBar.fillAmount = (float)HP / (float)HPOrig;
+        gameManager.instance.HPBar.fillAmount = (float)HP / (float)HPOrig;
 
     }
     public void respawn()

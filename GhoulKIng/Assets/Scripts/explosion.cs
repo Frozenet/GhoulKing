@@ -18,7 +18,7 @@ public class explosion : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            gamemanager.instance.playerScript.pushback = (gamemanager.instance.player.transform.position - transform.position) * pushBackAmount;
+            gameManager.instance.playerScript.pushback = (gameManager.instance.player.transform.position - transform.position) * pushBackAmount;
             if (other.GetComponent<IDamageable>() != null)
             {
                 IDamageable isDamageable = other.GetComponent<IDamageable>();
