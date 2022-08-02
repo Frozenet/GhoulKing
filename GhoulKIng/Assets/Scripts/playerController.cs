@@ -10,20 +10,20 @@ public class playerController : MonoBehaviour, IDamageable
     [Header("-----------------")]
 
     [Header("Player Attributes")]
-    [Range(5, 20)] [SerializeField] int HP;
-    [Range(1, 15)] [SerializeField] float playerSpeed;
-    [Range(0, 4f)] [SerializeField] float sprintMult;
-    [Range(1, 5)] [SerializeField] int jumps;
-    [Range(1, 10)] [SerializeField] float jumpHeight;
-    [Range(15, 30)] [SerializeField] float gravityValue;
+    [Range(5, 20)][SerializeField] int HP;
+    [Range(1, 15)][SerializeField] float playerSpeed;
+    [Range(0, 4f)][SerializeField] float sprintMult;
+    [Range(1, 5)][SerializeField] int jumps;
+    [Range(1, 10)][SerializeField] float jumpHeight;
+    [Range(15, 30)][SerializeField] float gravityValue;
     [Header("-----------------")]
 
     [Header("Player Weapon Stats")]
-    [Range(0.1f, 3)] [SerializeField] float shootRate;
-    [Range(1, 10)] [SerializeField] int weaponDamage;
-    //public GameObject pistol;//old
-    //public GameObject shotgun;//old
-    //public GameObject currentWeapon;//old
+    [Range(0.1f, 3)][SerializeField] float shootRate;
+    [Range(1, 10)][SerializeField] int weaponDamage;
+    public GameObject pistol;
+    public GameObject shotgun;
+    public GameObject currentWeapon;
     [SerializeField] GameObject gunModel;
     public List<gunStats> gunstat = new List<gunStats>();
 
@@ -41,11 +41,11 @@ public class playerController : MonoBehaviour, IDamageable
     [Header("Audio")]
     public AudioSource aud;
     [SerializeField] AudioClip[] gunshot;
-    [Range(0, 1)] [SerializeField] float gunshotVol;
+    [Range(0, 1)][SerializeField] float gunshotVol;
     [SerializeField] AudioClip[] playerHurt;
-    [Range(0, 1)] [SerializeField] float playerHurtVol;
+    [Range(0, 1)][SerializeField] float playerHurtVol;
     [SerializeField] AudioClip[] playerFootsteps;
-    [Range(0, 1)] [SerializeField] float playerFootstepsVol;
+    [Range(0, 1)][SerializeField] float playerFootstepsVol;
 
     bool isSprinting = false;
     float playerSpeedOrig;
@@ -64,7 +64,7 @@ public class playerController : MonoBehaviour, IDamageable
         playerSpeedOrig = playerSpeed;
         HPOrig = HP;
         playerSpawnPos = transform.position;
-        //currentWeapon = shotgun;
+        currentWeapon = shotgun;
     }
 
     void Update()
@@ -74,7 +74,7 @@ public class playerController : MonoBehaviour, IDamageable
             pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushResolve);
             movePlayer();
             sprint();
-            //weaopnChoice();
+            weaopnChoice();
             StartCoroutine(shoot());
             StartCoroutine(playFootsteps());//new
         }
@@ -140,23 +140,23 @@ public class playerController : MonoBehaviour, IDamageable
         }
     }
 
-    /*void weaopnChoice()
+    void weaopnChoice()
     {
         if (Input.GetKeyDown("1"))
         {
             weaponType = 0;
             currentWeapon.SetActive(false);
-            currentWeapon = shotgun;
+            currentWeapon = pistol;
             currentWeapon.SetActive(true);
         }
         if (Input.GetKeyDown("2"))
         {
             weaponType = 1;
             currentWeapon.SetActive(false);
-            currentWeapon = pistol;
+            currentWeapon = shotgun;
             currentWeapon.SetActive(true);
         }
-    }*/
+    }
 
     IEnumerator shoot()
     {
@@ -170,30 +170,30 @@ public class playerController : MonoBehaviour, IDamageable
 
             aud.PlayOneShot(gunshot[Random.Range(0, gunshot.Length)], gunshotVol);//new
 
-            //if (weaponType == 0) // 1 is shotgun 
-            //{
-            //    for (int i = 0; i < 12; i++)
-            //    {
-            //        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), out hit))
-            //        {
-            //            Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
-            //            if (hit.collider.GetComponent<IDamageable>() != null)
-            //            {
-            //                IDamageable isDamageable = hit.collider.GetComponent<IDamageable>();
-            //                if (hit.collider is SphereCollider)
-            //                {
-            //                    isDamageable.takeDamage(weaponDamage * 5);
-            //                }
-            //                else
-            //                {
-            //                    isDamageable.takeDamage(weaponDamage);
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
-            //else if (weaponType == 1)// 2 is pistol/rifle
-            //{
+            if (weaponType == 0) // 1 is shotgun 
+            {
+                for (int i = 0; i < 12; i++)
+                {
+                    if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), out hit))
+                    {
+                        Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
+                        if (hit.collider.GetComponent<IDamageable>() != null)
+                        {
+                            IDamageable isDamageable = hit.collider.GetComponent<IDamageable>();
+                            if (hit.collider is SphereCollider)
+                            {
+                                isDamageable.takeDamage(weaponDamage * 5);
+                            }
+                            else
+                            {
+                                isDamageable.takeDamage(weaponDamage);
+                            }
+                        }
+                    }
+                }
+            }
+            else if (weaponType == 1)// 2 is pistol/rifle
+            {
                 if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit))
                 {
                     Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
@@ -210,7 +210,7 @@ public class playerController : MonoBehaviour, IDamageable
                         }
                     }
                 }
-            //}
+            }
 
             muzzleFlash.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
             muzzleFlash.SetActive(true);
@@ -282,3 +282,4 @@ public class playerController : MonoBehaviour, IDamageable
     }
 
 }
+
