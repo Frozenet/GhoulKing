@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29c8c24da655d89488f30113bff413ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0
-  pushBackAmount: 0
+  damage: 1
+  pushBackAmount: 50
 --- !u!54 &4245223680510760300
 Rigidbody:
   m_ObjectHideFlags: 0
