@@ -23,6 +23,7 @@ public class gameManager : MonoBehaviour
     public TMP_Text enemyTotal;
     public TMP_Text keysHeld;
     public TMP_Text KeysTotal;
+    public TMP_Text HPpercent;
 
     [HideInInspector] public bool paused = false;
     public GameObject menuCurrentlyOpen;
