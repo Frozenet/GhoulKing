@@ -21,6 +21,8 @@ public class playerController : MonoBehaviour, IDamageable
     [Header("Player Weapon Stats")]
     [Range(0.1f, 3)][SerializeField] float shootRate;
     [Range(1, 10)][SerializeField] int weaponDamage;
+    [Range(5, 100)][SerializeField] float range;
+
     public GameObject pistol;
     public GameObject shotgun;
     public GameObject RocketLancher;
@@ -63,7 +65,7 @@ public class playerController : MonoBehaviour, IDamageable
     int HPOrig;
     Vector3 playerSpawnPos;
     bool footsetpPlaying;
-    public int weaponType = 0;
+    public int weaponType;
 
     private void Start()
     {
@@ -71,6 +73,10 @@ public class playerController : MonoBehaviour, IDamageable
         HPOrig = HP;
         playerSpawnPos = transform.position;
         currentWeapon = pistol;
+        weaponType = 0;
+        shootRate = 0.5f;
+        weaponDamage = 1;
+        range = 50;
     }
 
     void Update()
@@ -82,7 +88,7 @@ public class playerController : MonoBehaviour, IDamageable
             sprint();
             if (weaponType != gameManager.instance.playerWeaponSwap.selectedweapon)
             {
-            weaopnChoice();
+                weaopnChoice();
             }
             StartCoroutine(shoot());
             StartCoroutine(playFootsteps());//new
@@ -154,19 +160,21 @@ public class playerController : MonoBehaviour, IDamageable
         weaponType = gameManager.instance.playerWeaponSwap.selectedweapon;
         if (weaponType == 0)
         {
-        currentWeapon.SetActive(false);
-        shootRate = 0.5f;
-        weaponDamage = 1;
-        currentWeapon = pistol;
-        currentWeapon.SetActive(true);
+            currentWeapon.SetActive(false);
+            shootRate = 0.5f;
+            weaponDamage = 1;
+            range = 50;
+            currentWeapon = pistol;
+            currentWeapon.SetActive(true);
         }
         if (weaponType == 1)
         {
-        currentWeapon.SetActive(false);
-        shootRate = 1f;
-        weaponDamage = 5;
-        currentWeapon = shotgun;
-        currentWeapon.SetActive(true);
+            currentWeapon.SetActive(false);
+            shootRate = 1f;
+            weaponDamage = 1;
+            range = 20;
+            currentWeapon = shotgun;
+            currentWeapon.SetActive(true);
 
         }
         if (weaponType == 2)
@@ -193,7 +201,7 @@ public class playerController : MonoBehaviour, IDamageable
             if (weaponType == 0)// 0 is pistol
             {
                 aud.PlayOneShot(PistolAud[Random.Range(0, PistolAud.Length)], PistolAudVol);//new
-                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit))
+                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit, range))
                 {
                     Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
                     if (hit.collider.GetComponent<IDamageable>() != null)
@@ -215,7 +223,7 @@ public class playerController : MonoBehaviour, IDamageable
                 aud.PlayOneShot(ShotgunAud[Random.Range(0, ShotgunAud.Length)], ShotgunAudVol);
                 for (int i = 0; i < 12; i++)
                 {
-                    if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), out hit))
+                    if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), out hit, range))
                     {
                         Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
                         if (hit.collider.GetComponent<IDamageable>() != null)
@@ -223,7 +231,7 @@ public class playerController : MonoBehaviour, IDamageable
                             IDamageable isDamageable = hit.collider.GetComponent<IDamageable>();
                             if (hit.collider is SphereCollider)
                             {
-                                isDamageable.takeDamage(weaponDamage * 5);
+                                isDamageable.takeDamage(weaponDamage);
                             }
                             else
                             {
@@ -237,7 +245,7 @@ public class playerController : MonoBehaviour, IDamageable
             {
                 aud.PlayOneShot(RocketLancherAud[Random.Range(0, RocketLancherAud.Length)], RocketLancherAudVol);//new
                 Instantiate(rocket, RocketLancher.transform.position, RocketLancher.transform.rotation);
-                
+
             }
             muzzleFlash.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
             muzzleFlash.SetActive(true);

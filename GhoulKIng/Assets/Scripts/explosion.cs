@@ -16,17 +16,19 @@ public class explosion : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-
-        if (other.GetComponent<IDamageable>() != null)
+        if (!other.isTrigger)
         {
-            if (other.CompareTag("Player"))
+            if (other.gameObject.GetComponent<IDamageable>() != null)
             {
-                gameManager.instance.playerScript.pushback = (gameManager.instance.player.transform.position - transform.position) * pushBackAmount;
+                if (other.CompareTag("Player"))
+                {
+                    gameManager.instance.playerScript.pushback = (gameManager.instance.player.transform.position - transform.position) * pushBackAmount;
+                }
+                IDamageable isDamageable = other.GetComponent<IDamageable>();
+                isDamageable.takeDamage(damage);
             }
-            IDamageable isDamageable = other.GetComponent<IDamageable>();
-            isDamageable.takeDamage(damage);
-        }
 
+        }
 
     }
 }
