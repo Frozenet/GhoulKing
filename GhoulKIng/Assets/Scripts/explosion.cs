@@ -11,19 +11,22 @@ public class explosion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+
+        if (other.GetComponent<IDamageable>() != null)
         {
-            gameManager.instance.playerScript.pushback = (gameManager.instance.player.transform.position - transform.position) * pushBackAmount;
-            if (other.GetComponent<IDamageable>() != null)
+            if (other.CompareTag("Player"))
             {
-                IDamageable isDamageable = other.GetComponent<IDamageable>();
-                isDamageable.takeDamage(damage);
+                gameManager.instance.playerScript.pushback = (gameManager.instance.player.transform.position - transform.position) * pushBackAmount;
             }
+            IDamageable isDamageable = other.GetComponent<IDamageable>();
+            isDamageable.takeDamage(damage);
         }
+
+
     }
 }

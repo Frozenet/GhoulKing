@@ -80,7 +80,10 @@ public class playerController : MonoBehaviour, IDamageable
             pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushResolve);
             movePlayer();
             sprint();
+            if (weaponType != gameManager.instance.playerWeaponSwap.selectedweapon)
+            {
             weaopnChoice();
+            }
             StartCoroutine(shoot());
             StartCoroutine(playFootsteps());//new
         }
@@ -148,24 +151,29 @@ public class playerController : MonoBehaviour, IDamageable
 
     void weaopnChoice()
     {
-        if (Input.GetKeyDown("1"))
+        weaponType = gameManager.instance.playerWeaponSwap.selectedweapon;
+        if (weaponType == 0)
         {
-            weaponType = 0;
-            currentWeapon.SetActive(false);
-            currentWeapon = pistol;
-            currentWeapon.SetActive(true);
+        currentWeapon.SetActive(false);
+        shootRate = 0.5f;
+        weaponDamage = 1;
+        currentWeapon = pistol;
+        currentWeapon.SetActive(true);
         }
-        if (Input.GetKeyDown("2"))
+        if (weaponType == 1)
         {
-            weaponType = 1;
-            currentWeapon.SetActive(false);
-            currentWeapon = shotgun;
-            currentWeapon.SetActive(true);
+        currentWeapon.SetActive(false);
+        shootRate = 1f;
+        weaponDamage = 5;
+        currentWeapon = shotgun;
+        currentWeapon.SetActive(true);
+
         }
-        if (Input.GetKeyDown("3"))
+        if (weaponType == 2)
         {
-            weaponType = 2;
             currentWeapon.SetActive(false);
+            shootRate = 1f;
+            weaponDamage = 10;
             currentWeapon = RocketLancher;
             currentWeapon.SetActive(true);
         }
