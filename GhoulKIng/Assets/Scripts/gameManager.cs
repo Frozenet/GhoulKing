@@ -11,7 +11,6 @@ public class gameManager : MonoBehaviour
     [Header("Player Reference")]
     public GameObject player;
     public playerController playerScript;
-    public weaponSwap playerWeaponSwap;
 
     [Header("-----------------")]
     [Header("UI")]
@@ -41,7 +40,6 @@ public class gameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<playerController>();
-        playerWeaponSwap = player.GetComponentInChildren<weaponSwap>();
     }
 
     // Update is called once per frame
@@ -136,7 +134,4 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
-
-
 }

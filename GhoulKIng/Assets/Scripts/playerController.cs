@@ -86,10 +86,14 @@ public class playerController : MonoBehaviour, IDamageable
             pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushResolve);
             movePlayer();
             sprint();
+<<<<<<< HEAD
             if (weaponType != gameManager.instance.playerWeaponSwap.selectedweapon)
             {
                 weaopnChoice();
             }
+=======
+            weaopnChoice();
+>>>>>>> e9a3e928c893fe58e21a8d13b2cbc95d06350a37
             StartCoroutine(shoot());
             StartCoroutine(playFootsteps());//new
         }
@@ -157,6 +161,7 @@ public class playerController : MonoBehaviour, IDamageable
 
     void weaopnChoice()
     {
+<<<<<<< HEAD
         weaponType = gameManager.instance.playerWeaponSwap.selectedweapon;
         if (weaponType == 0)
         {
@@ -178,10 +183,26 @@ public class playerController : MonoBehaviour, IDamageable
 
         }
         if (weaponType == 2)
+=======
+        if (Input.GetKeyDown("1"))
+>>>>>>> e9a3e928c893fe58e21a8d13b2cbc95d06350a37
         {
+            weaponType = 0;
             currentWeapon.SetActive(false);
-            shootRate = 1f;
-            weaponDamage = 10;
+            currentWeapon = pistol;
+            currentWeapon.SetActive(true);
+        }
+        if (Input.GetKeyDown("2"))
+        {
+            weaponType = 1;
+            currentWeapon.SetActive(false);
+            currentWeapon = shotgun;
+            currentWeapon.SetActive(true);
+        }
+        if (Input.GetKeyDown("3"))
+        {
+            weaponType = 2;
+            currentWeapon.SetActive(false);
             currentWeapon = RocketLancher;
             currentWeapon.SetActive(true);
         }
@@ -302,7 +323,7 @@ public class playerController : MonoBehaviour, IDamageable
     }
     public void updatePlayerHP()
     {
-        int hpPercent = (HP / HPOrig * 100);
+        float hpPercent = ((float)HP / (float)HPOrig * 100);
         gameManager.instance.HPBar.fillAmount = (float)HP / (float)HPOrig;
         gameManager.instance.HPpercent.text = hpPercent.ToString("F0");
     }

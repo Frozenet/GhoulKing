@@ -95,12 +95,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 259380859947749549}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD
   m_Script: {fileID: 11500000, guid: 415d28b098771e6449d7cf1feaebad2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 60
   rb: {fileID: 5152305432340972238}
   destoryTime: 10
+=======
+  m_Script: {fileID: 11500000, guid: 5916a6b5007223d43903a6efc3ecde14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 20
+  rb: {fileID: 5152305432340972238}
+  destoryTime: 3
+>>>>>>> e9a3e928c893fe58e21a8d13b2cbc95d06350a37
   explosion: {fileID: 4245223680510760296, guid: cb9fb975be296b547b1ad219f0203297, type: 3}
 --- !u!136 &9217093751640739881
 CapsuleCollider:
