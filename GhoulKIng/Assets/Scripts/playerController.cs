@@ -229,9 +229,8 @@ public class playerController : MonoBehaviour, IDamageable
             {
                 aud.PlayOneShot(RocketLancherAud[Random.Range(0, RocketLancherAud.Length)], RocketLancherAudVol);//new
                 Instantiate(rocket, RocketLancher.transform.position, RocketLancher.transform.rotation);
+                
             }
-
-
             muzzleFlash.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
             muzzleFlash.SetActive(true);
             yield return new WaitForSeconds(0.05f);
