@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 87e4b8001142f6542b75aa2991768635, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: a4d0c22350b36cf4d909bf8437c10e7d, type: 2}
 --- !u!1001 &26574358
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -244,22 +244,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4214298872521133619, guid: 854d43d4001924b40931fa14134a3e0c, type: 3}
-      propertyPath: HPBar
-      value: 
-      objectReference: {fileID: 1056097178}
-    - target: {fileID: 4214298872521133619, guid: 854d43d4001924b40931fa14134a3e0c, type: 3}
-      propertyPath: pauseMenu
-      value: 
-      objectReference: {fileID: 953968694}
-    - target: {fileID: 4214298872521133619, guid: 854d43d4001924b40931fa14134a3e0c, type: 3}
-      propertyPath: playerDeadMenu
-      value: 
-      objectReference: {fileID: 1093402387}
-    - target: {fileID: 4214298872521133619, guid: 854d43d4001924b40931fa14134a3e0c, type: 3}
-      propertyPath: playerDamageFlash
-      value: 
-      objectReference: {fileID: 724525017}
+    - target: {fileID: 537372066724480165, guid: 854d43d4001924b40931fa14134a3e0c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4214298872775406477, guid: 854d43d4001924b40931fa14134a3e0c, type: 3}
       propertyPath: m_Name
       value: UI
@@ -501,11 +489,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aa550948142eae40a9c4da3825229e4, type: 3}
---- !u!1 &724525017 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8183260284474057693, guid: 854d43d4001924b40931fa14134a3e0c, type: 3}
-  m_PrefabInstance: {fileID: 590036682}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &808066021
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -620,27 +603,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2aa550948142eae40a9c4da3825229e4, type: 3}
---- !u!1 &953968694 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 537372066724480165, guid: 854d43d4001924b40931fa14134a3e0c, type: 3}
-  m_PrefabInstance: {fileID: 590036682}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1056097178 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1899303299, guid: 854d43d4001924b40931fa14134a3e0c, type: 3}
-  m_PrefabInstance: {fileID: 590036682}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1093402387 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4042502846642214087, guid: 854d43d4001924b40931fa14134a3e0c, type: 3}
-  m_PrefabInstance: {fileID: 590036682}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1187039021
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -753,6 +715,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Floor
       objectReference: {fileID: 0}
+    - target: {fileID: 7911037264685943716, guid: 6cdeb05ab4b289c4d89c110ab53e4d7f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 284f26f426b6b8844a09660df1012b80, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6cdeb05ab4b289c4d89c110ab53e4d7f, type: 3}
 --- !u!1001 &1709689510
