@@ -3940,7 +3940,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4908109935836309513
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5456,6 +5456,7 @@ MonoBehaviour:
   playerDeadMenu: {fileID: 4042502846642214087}
   playerDamageFlash: {fileID: 8183260284474057693}
   winGameMenu: {fileID: 1535107547}
+  titleScreen: {fileID: 771350416003293165}
   HPBar: {fileID: 1899303299}
   enemyDead: {fileID: 1032271836}
   enemyTotal: {fileID: 314829661}
@@ -6078,9 +6079,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Resume
-
-'
+  m_text: Start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7489,7 +7488,7 @@ GameObject:
   - component: {fileID: 7935324016420698675}
   - component: {fileID: 280147753485832567}
   m_Layer: 5
-  m_Name: Button Resume
+  m_Name: Button Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

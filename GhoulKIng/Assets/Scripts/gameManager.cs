@@ -19,6 +19,7 @@ public class gameManager : MonoBehaviour
     public GameObject playerDeadMenu;
     public GameObject playerDamageFlash;
     public GameObject winGameMenu;
+    public GameObject titleScreen;
     public Image HPBar;
     public TMP_Text enemyDead;
     public TMP_Text enemyTotal;
@@ -33,6 +34,7 @@ public class gameManager : MonoBehaviour
     [HideInInspector] public bool paused = false;
     public GameObject menuCurrentlyOpen;
     [HideInInspector] public bool gameOver;
+    [HideInInspector] public bool titleScreenOn;
 
     int enemiesKilled;
     public int enemyKillGoal;
@@ -46,12 +48,19 @@ public class gameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<playerController>();
         playerWeaponSwap = player.GetComponentInChildren<weaponSwap>();
+
+        ////pause game when started up          requires debuggins
+        //paused = true;
+        //menuCurrentlyOpen = titleScreen;
+        //titleScreenOn = true;
+        //menuCurrentlyOpen.SetActive(true);
+        //lockCursorPause();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") && !gameOver)
+        if (Input.GetButtonDown("Cancel") && !gameOver && !titleScreenOn)
         {
             if (!paused && !menuCurrentlyOpen)
             {
