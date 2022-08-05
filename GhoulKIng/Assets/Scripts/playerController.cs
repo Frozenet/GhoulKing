@@ -330,7 +330,7 @@ public class playerController : MonoBehaviour, IDamageable
     }
     public void updatePlayerHP()
     {
-        int hpPercent = (HP / HPOrig * 100);
+        float hpPercent = ((float)HP / (float)HPOrig * 100);
         gameManager.instance.HPBar.fillAmount = (float)HP / (float)HPOrig;
         gameManager.instance.HPpercent.text = hpPercent.ToString("F0");
     }
@@ -344,6 +344,5 @@ public class playerController : MonoBehaviour, IDamageable
         updatePlayerHP();
 
     }
-
 }
 
