@@ -11,6 +11,7 @@ public class gameManager : MonoBehaviour
     [Header("Player Reference")]
     public GameObject player;
     public playerController playerScript;
+    public weaponSwap playerWeaponSwap;
 
     [Header("-----------------")]
     [Header("UI")]

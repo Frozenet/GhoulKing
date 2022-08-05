@@ -38,8 +38,6 @@ public class weaponSwap : MonoBehaviour
                 selectedweapon--;
             }
         }
-
-<<<<<<< HEAD
         if (Input.GetKeyDown("1"))
         {
             selectedweapon = 0;
@@ -52,9 +50,6 @@ public class weaponSwap : MonoBehaviour
         {
             selectedweapon = 2;
         }
-
-=======
->>>>>>> e9a3e928c893fe58e21a8d13b2cbc95d06350a37
         if (previousSelectedWeapon != selectedweapon)
         {
             selectweapon();
