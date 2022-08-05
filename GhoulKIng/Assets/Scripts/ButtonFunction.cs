@@ -27,4 +27,12 @@ public class ButtonFunction : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameManager.instance.restart();
     }
+    public void settings()
+    {
+        gameManager.instance.settings();
+    }
+    public void back()
+    {
+        gameManager.instance.back();
+    }
 }

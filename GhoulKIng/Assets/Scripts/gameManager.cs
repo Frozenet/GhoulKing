@@ -20,6 +20,7 @@ public class gameManager : MonoBehaviour
     public GameObject playerDamageFlash;
     public GameObject winGameMenu;
     public GameObject titleScreen;
+    public GameObject settingsMenu;
     public Image HPBar;
     public TMP_Text enemyDead;
     public TMP_Text enemyTotal;
@@ -33,6 +34,7 @@ public class gameManager : MonoBehaviour
 
     [HideInInspector] public bool paused = false;
     public GameObject menuCurrentlyOpen;
+    public GameObject prevOpenMenu;
     [HideInInspector] public bool gameOver;
     [HideInInspector] public bool titleScreenOn;
 
@@ -162,5 +164,18 @@ public class gameManager : MonoBehaviour
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+    }
+    public void settings()
+    {
+        prevOpenMenu = menuCurrentlyOpen;
+        menuCurrentlyOpen.SetActive(false);
+        menuCurrentlyOpen = settingsMenu;
+        menuCurrentlyOpen.SetActive(true);
+    }
+    public void back()
+    {
+        menuCurrentlyOpen.SetActive(false);
+        menuCurrentlyOpen = prevOpenMenu;
+        menuCurrentlyOpen.SetActive(true);
     }
 }
