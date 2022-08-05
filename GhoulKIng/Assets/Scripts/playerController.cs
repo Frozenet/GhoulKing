@@ -10,20 +10,32 @@ public class playerController : MonoBehaviour, IDamageable
     [Header("-----------------")]
 
     [Header("Player Attributes")]
-    [Range(5, 20)] [SerializeField] int HP;
-    [Range(1, 15)] [SerializeField] float playerSpeed;
-    [Range(0, 4f)] [SerializeField] float sprintMult;
-    [Range(1, 5)] [SerializeField] int jumps;
-    [Range(1, 10)] [SerializeField] float jumpHeight;
-    [Range(15, 30)] [SerializeField] float gravityValue;
+    [Range(5, 20)][SerializeField] int HP;
+    [Range(1, 15)][SerializeField] float playerSpeed;
+    [Range(0, 4f)][SerializeField] float sprintMult;
+    [Range(1, 5)][SerializeField] int jumps;
+    [Range(1, 10)][SerializeField] float jumpHeight;
+    [Range(15, 30)][SerializeField] float gravityValue;
     [Header("-----------------")]
 
     [Header("Player Weapon Stats")]
-    [Range(0.1f, 3)] [SerializeField] float shootRate;
-    [Range(1, 10)] [SerializeField] int weaponDamage;
+    [Range(0.1f, 3)][SerializeField] float shootRate;
+    [Range(1, 10)][SerializeField] int weaponDamage;
+    [Range(5, 100)][SerializeField] float range;
+
+    [Range(1, 10)][SerializeField] int shotgunAmmoMax;
+    [Range(1, 10)][SerializeField] int rocketAmmoMax;
+
+    public int shotgunAmmo;
+    public int rocketAmmo;
+
     public GameObject pistol;
     public GameObject shotgun;
+    public GameObject RocketLancher;
+    [SerializeField] GameObject rocket;
     public GameObject currentWeapon;
+    [SerializeField] GameObject gunModel;
+    public List<gunStats> gunstat = new List<gunStats>();
 
     [Header("-----------------")]
     [Header("Effects")]
@@ -35,15 +47,19 @@ public class playerController : MonoBehaviour, IDamageable
     public Vector3 pushback = Vector3.zero;
     [SerializeField] int pushResolve;
 
-    [Header("-----------------")]//new
-    [Header("Audio")]//new
-    public AudioSource aud;//new
-    [SerializeField] AudioClip[] gunshot;//new
-    [Range(0, 1)] [SerializeField] float gunshotVol;//new
-    [SerializeField] AudioClip[] playerHurt;//new
-    [Range(0, 1)] [SerializeField] float playerHurtVol;//new
-    [SerializeField] AudioClip[] playerFootsteps;//new
-    [Range(0, 1)] [SerializeField] float playerFootstepsVol;//new
+    [Header("-----------------")]
+    [Header("Audio")]
+    public AudioSource aud;
+    [SerializeField] AudioClip[] PistolAud;
+    [Range(0, 1)][SerializeField] float PistolAudVol;
+    [SerializeField] AudioClip[] ShotgunAud;
+    [Range(0, 1)][SerializeField] float ShotgunAudVol;
+    [SerializeField] AudioClip[] RocketLancherAud;
+    [Range(0, 1)][SerializeField] float RocketLancherAudVol;
+    [SerializeField] AudioClip[] playerHurt;
+    [Range(0, 1)][SerializeField] float playerHurtVol;
+    [SerializeField] AudioClip[] playerFootsteps;
+    [Range(0, 1)][SerializeField] float playerFootstepsVol;
 
     bool isSprinting = false;
     float playerSpeedOrig;
@@ -54,15 +70,21 @@ public class playerController : MonoBehaviour, IDamageable
     bool canShoot = true;
     int HPOrig;
     Vector3 playerSpawnPos;
-    bool footsetpPlaying;//new
-    public int weaponType = 0;
+    bool footsetpPlaying;
+    public int weaponType;
 
     private void Start()
     {
         playerSpeedOrig = playerSpeed;
         HPOrig = HP;
         playerSpawnPos = transform.position;
-        currentWeapon = shotgun;
+        shotgunAmmo = shotgunAmmoMax;
+        rocketAmmo = rocketAmmoMax;
+        currentWeapon = pistol;
+        weaponType = 0;
+        shootRate = 0.5f;
+        weaponDamage = 1;
+        range = 50;
     }
 
     void Update()
@@ -72,7 +94,10 @@ public class playerController : MonoBehaviour, IDamageable
             pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushResolve);
             movePlayer();
             sprint();
-            weaopnChoice();
+            if (weaponType != gameManager.instance.playerWeaponSwap.selectedweapon)
+            {
+                weaopnChoice();
+            }
             StartCoroutine(shoot());
             StartCoroutine(playFootsteps());//new
         }
@@ -140,18 +165,32 @@ public class playerController : MonoBehaviour, IDamageable
 
     void weaopnChoice()
     {
-        if (Input.GetKeyDown("1"))
+        weaponType = gameManager.instance.playerWeaponSwap.selectedweapon;
+        if (weaponType == 0)
         {
-            weaponType = 0;
             currentWeapon.SetActive(false);
-            currentWeapon = shotgun;
+            shootRate = 0.5f;
+            weaponDamage = 1;
+            range = 50;
+            currentWeapon = pistol;
             currentWeapon.SetActive(true);
         }
-        if (Input.GetKeyDown("2"))
+        if (weaponType == 1)
         {
-            weaponType = 1;
             currentWeapon.SetActive(false);
-            currentWeapon = pistol;
+            shootRate = 1f;
+            weaponDamage = 1;
+            range = 20;
+            currentWeapon = shotgun;
+            currentWeapon.SetActive(true);
+
+        }
+        if (weaponType == 2)
+        {
+            currentWeapon.SetActive(false);
+            shootRate = 1f;
+            weaponDamage = 10;
+            currentWeapon = RocketLancher;
             currentWeapon.SetActive(true);
         }
     }
@@ -166,33 +205,11 @@ public class playerController : MonoBehaviour, IDamageable
         {
             canShoot = false;
 
-            aud.PlayOneShot(gunshot[Random.Range(0, gunshot.Length)], gunshotVol);//new
 
-            if (weaponType == 0) // 1 is shotgun 
+            if (weaponType == 0)// 0 is pistol
             {
-                for (int i = 0; i < 12; i++)
-                {
-                    if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), out hit))
-                    {
-                        Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
-                        if (hit.collider.GetComponent<IDamageable>() != null)
-                        {
-                            IDamageable isDamageable = hit.collider.GetComponent<IDamageable>();
-                            if (hit.collider is SphereCollider)
-                            {
-                                isDamageable.takeDamage(weaponDamage * 5);
-                            }
-                            else
-                            {
-                                isDamageable.takeDamage(weaponDamage);
-                            }
-                        }
-                    }
-                }
-            }
-            else if (weaponType == 1)// 2 is pistol/rifle
-            {
-                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit))
+                aud.PlayOneShot(PistolAud[Random.Range(0, PistolAud.Length)], PistolAudVol);//new
+                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit, range))
                 {
                     Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
                     if (hit.collider.GetComponent<IDamageable>() != null)
@@ -209,11 +226,52 @@ public class playerController : MonoBehaviour, IDamageable
                     }
                 }
             }
-            else
+            else if (weaponType == 1) // 1 is shotgun 
             {
-                //in case of error
+                if (shotgunAmmo != 0)
+                {
+                shotgunAmmo--;
+                    aud.PlayOneShot(ShotgunAud[0], ShotgunAudVol);
+                    for (int i = 0; i < 12; i++)
+                    {
+                        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), out hit, range))
+                        {
+                            Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
+                            if (hit.collider.GetComponent<IDamageable>() != null)
+                            {
+                                IDamageable isDamageable = hit.collider.GetComponent<IDamageable>();
+                                if (hit.collider is SphereCollider)
+                                {
+                                    isDamageable.takeDamage(weaponDamage);
+                                }
+                                else
+                                {
+                                    isDamageable.takeDamage(weaponDamage);
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    aud.PlayOneShot(ShotgunAud[1], ShotgunAudVol);
+                }
             }
+            else if (weaponType == 2)// 2 is rockectlancher
+            {
+                if (rocketAmmo != 0)
+                {
+                rocketAmmo--;
+                aud.PlayOneShot(RocketLancherAud[0], RocketLancherAudVol);//new
+                Instantiate(rocket, RocketLancher.transform.position, RocketLancher.transform.rotation);
 
+                }
+                else
+                {
+                    aud.PlayOneShot(RocketLancherAud[1], RocketLancherAudVol);
+                }
+
+            }
             muzzleFlash.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
             muzzleFlash.SetActive(true);
             yield return new WaitForSeconds(0.05f);
@@ -222,11 +280,21 @@ public class playerController : MonoBehaviour, IDamageable
             canShoot = true;
         }
     }
+
+    public void gunPickup(float fireRate, int damage, GameObject model, gunStats stats)
+    {
+        shootRate = fireRate;
+        weaponDamage = damage;
+        gunModel.GetComponent<MeshFilter>().sharedMesh = model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = model.GetComponent<MeshRenderer>().sharedMaterial;
+        gunstat.Add(stats);
+    }
+
     public void takeDamage(int dmg)
     {
         HP -= dmg;
 
-        aud.PlayOneShot(playerHurt[Random.Range(0, gunshot.Length)], playerHurtVol);//new
+        aud.PlayOneShot(playerHurt[Random.Range(0, playerHurt.Length)], playerHurtVol);//new
 
         updatePlayerHP();
         StartCoroutine(damageFlash());
@@ -259,8 +327,9 @@ public class playerController : MonoBehaviour, IDamageable
     }
     public void updatePlayerHP()
     {
+        int hpPercent = (HP / HPOrig * 100);
         gameManager.instance.HPBar.fillAmount = (float)HP / (float)HPOrig;
-
+        gameManager.instance.HPpercent.text = hpPercent.ToString("F0");
     }
     public void respawn()
     {
@@ -274,3 +343,4 @@ public class playerController : MonoBehaviour, IDamageable
     }
 
 }
+

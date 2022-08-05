@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 4263239107046898908}
   - component: {fileID: 4263239107046898909}
   m_Layer: 7
-  m_Name: Enemy 3
+  m_Name: ranged enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -225,10 +225,10 @@ MonoBehaviour:
   agent: {fileID: 4263239107046898910}
   rend: {fileID: 4263239107058366323}
   anim: {fileID: 4263239107054242227}
-  HP: 10
+  HP: 20
   viewAngle: 90
   playerFaceSpeed: 3
-  roamRadius: 7
+  roamRadius: 0
   shootRate: 3
   bullet: {fileID: 1932097239730935228, guid: bdc0fc747edf954419dba03ba0b36fa8, type: 3}
   shootPos: {fileID: 5012532311736057395}
@@ -241,7 +241,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 4263239107046865415}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1
+  m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
