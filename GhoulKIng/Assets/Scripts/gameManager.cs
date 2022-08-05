@@ -55,7 +55,7 @@ public class gameManager : MonoBehaviour
         playerScript = player.GetComponent<playerController>();
         playerWeaponSwap = player.GetComponentInChildren<weaponSwap>();
 
-        ////pause game when started up          requires debuggins
+        ////pause game when started up          requires debugging
         //paused = true;
         //menuCurrentlyOpen = titleScreen;
         //titleScreenOn = true;
