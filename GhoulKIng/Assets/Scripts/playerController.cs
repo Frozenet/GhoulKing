@@ -86,14 +86,10 @@ public class playerController : MonoBehaviour, IDamageable
             pushback = Vector3.Lerp(pushback, Vector3.zero, Time.deltaTime * pushResolve);
             movePlayer();
             sprint();
-
             if (weaponType != gameManager.instance.playerWeaponSwap.selectedweapon)
             {
                 weaopnChoice();
             }
-
-            weaopnChoice();
-
             StartCoroutine(shoot());
             StartCoroutine(playFootsteps());//new
         }
@@ -161,7 +157,6 @@ public class playerController : MonoBehaviour, IDamageable
 
     void weaopnChoice()
     {
-
         weaponType = gameManager.instance.playerWeaponSwap.selectedweapon;
         if (weaponType == 0)
         {
@@ -190,8 +185,6 @@ public class playerController : MonoBehaviour, IDamageable
             currentWeapon = RocketLancher;
             currentWeapon.SetActive(true);
         }
-
-        
     }
 
     IEnumerator shoot()
@@ -309,7 +302,7 @@ public class playerController : MonoBehaviour, IDamageable
     }
     public void updatePlayerHP()
     {
-        float hpPercent = ((float)HP / (float)HPOrig * 100);
+        int hpPercent = (HP / HPOrig * 100);
         gameManager.instance.HPBar.fillAmount = (float)HP / (float)HPOrig;
         gameManager.instance.HPpercent.text = hpPercent.ToString("F0");
     }

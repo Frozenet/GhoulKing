@@ -225,17 +225,10 @@ MonoBehaviour:
   agent: {fileID: 4263239107046898910}
   rend: {fileID: 4263239107058366323}
   anim: {fileID: 4263239107054242227}
-<<<<<<< HEAD
   HP: 20
   viewAngle: 90
   playerFaceSpeed: 3
   roamRadius: 0
-=======
-  HP: 10
-  viewAngle: 90
-  playerFaceSpeed: 3
-  roamRadius: 7
->>>>>>> e9a3e928c893fe58e21a8d13b2cbc95d06350a37
   shootRate: 3
   bullet: {fileID: 1932097239730935228, guid: bdc0fc747edf954419dba03ba0b36fa8, type: 3}
   shootPos: {fileID: 5012532311736057395}

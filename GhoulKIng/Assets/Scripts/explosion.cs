@@ -11,12 +11,11 @@ public class explosion : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     public void OnTriggerEnter(Collider other)
     {
-
         if (!other.isTrigger)
         {
             if (other.gameObject.GetComponent<IDamageable>() != null)
@@ -30,5 +29,6 @@ public class explosion : MonoBehaviour
             }
 
         }
+
     }
 }
