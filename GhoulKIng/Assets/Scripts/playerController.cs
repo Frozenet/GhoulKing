@@ -307,7 +307,7 @@ public class playerController : MonoBehaviour, IDamageable
         {
             //kill player
             playerDeathCount++;
-            gameManager.instance.totalDeaths.text = playerDeathCount.ToString();
+            gameManager.instance.totalDeaths.text = playerDeathCount.ToString("F0");
             gameManager.instance.playerDead();
         }
     }

@@ -36,7 +36,10 @@ public class gameManager : MonoBehaviour
     public TMP_Text enemyTotal;
     public TMP_Text keysHeld;
     public TMP_Text KeysTotal;
+
     public TMP_Text totalDeaths;
+    public TMP_Text totalKilled;
+    //public TMP_Text totalKeys;
 
     [Header("-----------------")]
     [Header("Weapons")]
@@ -127,6 +130,7 @@ public class gameManager : MonoBehaviour
     {
         enemiesKilled++;
         enemyDead.text = enemiesKilled.ToString("F0");
+        totalKilled.text = enemiesKilled.ToString("F0");
 
         if (enemiesKilled >= enemyKillGoal)
         {
