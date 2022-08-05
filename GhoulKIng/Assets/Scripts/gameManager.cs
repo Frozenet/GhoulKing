@@ -154,7 +154,4 @@ public class gameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-
-
-
 }
