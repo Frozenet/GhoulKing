@@ -2897,6 +2897,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerScript: {fileID: 0}
+  playerWeaponSwap: {fileID: 0}
   pauseMenu: {fileID: 537372066724480165}
   playerDeadMenu: {fileID: 4042502846642214087}
   playerDamageFlash: {fileID: 8183260284474057693}
