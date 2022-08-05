@@ -25,6 +25,10 @@ public class gameManager : MonoBehaviour
     public TMP_Text keysHeld;
     public TMP_Text KeysTotal;
     public TMP_Text HPpercent;
+    public TMP_Text shotgunAmmo;
+    public TMP_Text shotgunAmmoMax;
+    public TMP_Text rocketAmmo;
+    public TMP_Text rocketAmmoMax;
 
     [HideInInspector] public bool paused = false;
     public GameObject menuCurrentlyOpen;
@@ -63,6 +67,20 @@ public class gameManager : MonoBehaviour
 
         }
     }
+
+    public void updateAmmo()
+    {
+
+        
+        shotgunAmmoMax.text = playerScript.shotgunAmmoMax.ToString("F0");
+        rocketAmmoMax.text = playerScript.rocketAmmoMax.ToString("F0");
+
+        shotgunAmmo.text = playerScript.shotgunAmmo.ToString("F0");
+        rocketAmmo.text = playerScript.rocketAmmo.ToString("F0");
+        
+    }
+
+
     public void resume()
     {
         paused = false;
