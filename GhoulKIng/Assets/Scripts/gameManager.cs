@@ -21,6 +21,7 @@ public class gameManager : MonoBehaviour
     public GameObject winGameMenu;
     public GameObject titleScreen;
     public GameObject settingsMenu;
+    public GameObject creditsScreen;
     public Image HPBar;
     public TMP_Text enemyDead;
     public TMP_Text enemyTotal;
@@ -176,6 +177,12 @@ public class gameManager : MonoBehaviour
     {
         menuCurrentlyOpen.SetActive(false);
         menuCurrentlyOpen = prevOpenMenu;
+        menuCurrentlyOpen.SetActive(true);
+    }
+    public void creditsContinue()
+    {
+        menuCurrentlyOpen.SetActive(false);
+        menuCurrentlyOpen = creditsScreen;
         menuCurrentlyOpen.SetActive(true);
     }
 }

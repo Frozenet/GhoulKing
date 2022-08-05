@@ -35,4 +35,8 @@ public class ButtonFunction : MonoBehaviour
     {
         gameManager.instance.back();
     }
+    public void creditsContinue()
+    {
+        gameManager.instance.creditsContinue();
+    }
 }
