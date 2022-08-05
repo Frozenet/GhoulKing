@@ -5564,11 +5564,13 @@ MonoBehaviour:
   settingsMenu: {fileID: 7313378923575423489}
   creditsScreen: {fileID: 871204887}
   HPBar: {fileID: 1899303299}
+  HPpercent: {fileID: 8238131283961596543}
   enemyDead: {fileID: 1032271836}
   enemyTotal: {fileID: 314829661}
   keysHeld: {fileID: 0}
   KeysTotal: {fileID: 0}
-  HPpercent: {fileID: 8238131283961596543}
+  totalDeaths: {fileID: 9084335960526002273}
+  totalKilled: {fileID: 2055115192920197666}
   shotgunAmmo: {fileID: 1154026354}
   shotgunAmmoMax: {fileID: 936839554}
   rocketAmmo: {fileID: 1561211328}
