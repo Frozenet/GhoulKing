@@ -39,4 +39,8 @@ public class ButtonFunction : MonoBehaviour
     {
         gameManager.instance.creditsContinue();
     }
+    public void titleScreen()
+    {
+        gameManager.instance.titleScreenBTN();
+    }
 }

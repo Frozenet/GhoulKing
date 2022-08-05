@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
@@ -42,6 +43,8 @@ public class gameManager : MonoBehaviour
     int enemiesKilled;
     public int enemyKillGoal;
     [SerializeField] int KeysGoal;
+
+    static public string sceneName;
 
 
     // Start is called before the first frame update
@@ -184,5 +187,10 @@ public class gameManager : MonoBehaviour
         menuCurrentlyOpen.SetActive(false);
         menuCurrentlyOpen = creditsScreen;
         menuCurrentlyOpen.SetActive(true);
+    }
+    public void titleScreenBTN()//debugging required
+    {
+        sceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(sceneName);
     }
 }
