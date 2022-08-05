@@ -187,10 +187,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 871204887, guid: 854d43d4001924b40931fa14134a3e0c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4214298872775406477, guid: 854d43d4001924b40931fa14134a3e0c, type: 3}
       propertyPath: m_Name
       value: UI
@@ -838,6 +834,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7192753789312961087, guid: 48f791405b988d2419a3c51cf1be0465, type: 3}
+      propertyPath: muzzleFlash
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7812847776632625771, guid: 48f791405b988d2419a3c51cf1be0465, type: 3}
       propertyPath: m_RootOrder
       value: 2
