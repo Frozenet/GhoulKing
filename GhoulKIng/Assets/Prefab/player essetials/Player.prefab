@@ -992,6 +992,11 @@ MonoBehaviour:
   gravityValue: 20
   shootRate: 1
   weaponDamage: 1
+  range: 0
+  shotgunAmmoMax: 5
+  rocketAmmoMax: 3
+  shotgunAmmo: 0
+  rocketAmmo: 0
   pistol: {fileID: 1134068035367803375}
   shotgun: {fileID: 251195590957271110}
   RocketLancher: {fileID: 8957964680788646093}
@@ -1009,9 +1014,11 @@ MonoBehaviour:
   PistolAudVol: 0.3
   ShotgunAud:
   - {fileID: 8300000, guid: f7b3093677e5b2e43979be356b9893e0, type: 3}
+  - {fileID: 8300000, guid: 14802a3cd8fc88b48ad621bd7ba21546, type: 3}
   ShotgunAudVol: 0.3
   RocketLancherAud:
   - {fileID: 8300000, guid: 989f582d814dff848af6780b81dd4a52, type: 3}
+  - {fileID: 8300000, guid: 14802a3cd8fc88b48ad621bd7ba21546, type: 3}
   RocketLancherAudVol: 0.3
   playerHurt:
   - {fileID: 8300000, guid: 611a60498227503429a822d774a42ce7, type: 3}

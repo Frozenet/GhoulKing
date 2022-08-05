@@ -23,6 +23,12 @@ public class playerController : MonoBehaviour, IDamageable
     [Range(1, 10)][SerializeField] int weaponDamage;
     [Range(5, 100)][SerializeField] float range;
 
+    [Range(1, 10)][SerializeField] int shotgunAmmoMax;
+    [Range(1, 10)][SerializeField] int rocketAmmoMax;
+
+    public int shotgunAmmo;
+    public int rocketAmmo;
+
     public GameObject pistol;
     public GameObject shotgun;
     public GameObject RocketLancher;
@@ -72,6 +78,8 @@ public class playerController : MonoBehaviour, IDamageable
         playerSpeedOrig = playerSpeed;
         HPOrig = HP;
         playerSpawnPos = transform.position;
+        shotgunAmmo = shotgunAmmoMax;
+        rocketAmmo = rocketAmmoMax;
         currentWeapon = pistol;
         weaponType = 0;
         shootRate = 0.5f;
@@ -220,31 +228,48 @@ public class playerController : MonoBehaviour, IDamageable
             }
             else if (weaponType == 1) // 1 is shotgun 
             {
-                aud.PlayOneShot(ShotgunAud[Random.Range(0, ShotgunAud.Length)], ShotgunAudVol);
-                for (int i = 0; i < 12; i++)
+                if (shotgunAmmo != 0)
                 {
-                    if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), out hit, range))
+                shotgunAmmo--;
+                    aud.PlayOneShot(ShotgunAud[0], ShotgunAudVol);
+                    for (int i = 0; i < 12; i++)
                     {
-                        Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
-                        if (hit.collider.GetComponent<IDamageable>() != null)
+                        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), out hit, range))
                         {
-                            IDamageable isDamageable = hit.collider.GetComponent<IDamageable>();
-                            if (hit.collider is SphereCollider)
+                            Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
+                            if (hit.collider.GetComponent<IDamageable>() != null)
                             {
-                                isDamageable.takeDamage(weaponDamage);
-                            }
-                            else
-                            {
-                                isDamageable.takeDamage(weaponDamage);
+                                IDamageable isDamageable = hit.collider.GetComponent<IDamageable>();
+                                if (hit.collider is SphereCollider)
+                                {
+                                    isDamageable.takeDamage(weaponDamage);
+                                }
+                                else
+                                {
+                                    isDamageable.takeDamage(weaponDamage);
+                                }
                             }
                         }
                     }
                 }
+                else
+                {
+                    aud.PlayOneShot(ShotgunAud[1], ShotgunAudVol);
+                }
             }
             else if (weaponType == 2)// 2 is rockectlancher
             {
-                aud.PlayOneShot(RocketLancherAud[Random.Range(0, RocketLancherAud.Length)], RocketLancherAudVol);//new
+                if (rocketAmmo != 0)
+                {
+                rocketAmmo--;
+                aud.PlayOneShot(RocketLancherAud[0], RocketLancherAudVol);//new
                 Instantiate(rocket, RocketLancher.transform.position, RocketLancher.transform.rotation);
+
+                }
+                else
+                {
+                    aud.PlayOneShot(RocketLancherAud[1], RocketLancherAudVol);
+                }
 
             }
             muzzleFlash.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
