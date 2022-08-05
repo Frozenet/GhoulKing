@@ -16,6 +16,7 @@ public class gameManager : MonoBehaviour
 
     [Header("-----------------")]
     [Header("UI")]
+    [Header("Menus")]
     public GameObject pauseMenu;
     public GameObject playerDeadMenu;
     public GameObject playerDamageFlash;
@@ -23,12 +24,22 @@ public class gameManager : MonoBehaviour
     public GameObject titleScreen;
     public GameObject settingsMenu;
     public GameObject creditsScreen;
+
+    [Header("-----------------")]
+    [Header("Health")]
     public Image HPBar;
+    public TMP_Text HPpercent;
+
+    [Header("-----------------")]
+    [Header("Stats")]
     public TMP_Text enemyDead;
     public TMP_Text enemyTotal;
     public TMP_Text keysHeld;
     public TMP_Text KeysTotal;
-    public TMP_Text HPpercent;
+    public TMP_Text totalDeaths;
+
+    [Header("-----------------")]
+    [Header("Weapons")]
     public TMP_Text shotgunAmmo;
     public TMP_Text shotgunAmmoMax;
     public TMP_Text rocketAmmo;

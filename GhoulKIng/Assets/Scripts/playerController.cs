@@ -66,6 +66,7 @@ public class playerController : MonoBehaviour, IDamageable
     int timesjumped;
     Vector3 playerVelocity;
     Vector3 move;
+    public int playerDeathCount = 0;
 
     bool canShoot = true;
     int HPOrig;
@@ -305,6 +306,8 @@ public class playerController : MonoBehaviour, IDamageable
         if (HP <= 0)
         {
             //kill player
+            playerDeathCount++;
+            gameManager.instance.totalDeaths.text = playerDeathCount.ToString();
             gameManager.instance.playerDead();
         }
     }
