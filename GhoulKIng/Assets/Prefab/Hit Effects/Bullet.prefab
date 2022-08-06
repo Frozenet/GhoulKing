@@ -60,8 +60,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d08ef575f6c07d47a8bbb3e989e2a70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
-  speed: 10
+  damage: 10
+  speed: 15
   rb: {fileID: 1523903456640870995}
   destoryTime: 3
   hitEffect: {fileID: 7105177858108400233, guid: 9b0dc058cdcf796458724b48caed7bdb, type: 3}
