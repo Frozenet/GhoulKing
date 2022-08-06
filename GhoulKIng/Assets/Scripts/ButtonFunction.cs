@@ -43,4 +43,8 @@ public class ButtonFunction : MonoBehaviour
     {
         gameManager.instance.titleScreenBTN();
     }
+    public void start()
+    {
+        gameManager.instance.startBTN();
+    }
 }

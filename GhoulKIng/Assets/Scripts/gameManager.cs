@@ -58,23 +58,26 @@ public class gameManager : MonoBehaviour
     public int enemyKillGoal;
     [SerializeField] int KeysGoal;
 
-    static public string sceneName;
+    public GameObject titleScreenCam;
 
 
     // Start is called before the first frame update
     void Awake()
     {
         instance = this;
+
+        //sets the title screen to active
+        menuCurrentlyOpen = titleScreen;
+        titleScreenOn = true;
+
+        //finds player components
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<playerController>();
         playerWeaponSwap = player.GetComponentInChildren<weaponSwap>();
 
-        ////pause game when started up          requires debugging
-        //paused = true;
-        //menuCurrentlyOpen = titleScreen;
-        //titleScreenOn = true;
-        //menuCurrentlyOpen.SetActive(true);
-        //lockCursorPause();
+        //makes title screen operational
+        titleScreenCam.SetActive(true);
+        player.SetActive(false);
     }
 
     // Update is called once per frame
@@ -93,20 +96,19 @@ public class gameManager : MonoBehaviour
             {
                 resume();
             }
-
         }
     }
 
     public void updateAmmo()
     {
 
-        
+
         shotgunAmmoMax.text = playerScript.shotgunAmmoMax.ToString("F0");
         rocketAmmoMax.text = playerScript.rocketAmmoMax.ToString("F0");
 
         shotgunAmmo.text = playerScript.shotgunAmmo.ToString("F0");
         rocketAmmo.text = playerScript.rocketAmmo.ToString("F0");
-        
+
     }
 
 
@@ -145,7 +147,7 @@ public class gameManager : MonoBehaviour
         enemyKillGoal++;
         enemyTotal.text = enemyKillGoal.ToString("F0");
     }
-    
+
     //public void checkKeys()
     //{
     //    keysHeld.text = playerScript.keys.ToString("F0");
@@ -173,6 +175,7 @@ public class gameManager : MonoBehaviour
 
     public void lockCursorPause()
     {
+        //used when in the menus
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
@@ -180,12 +183,14 @@ public class gameManager : MonoBehaviour
 
     public void unlockCursorUnpause()
     {
+        //used then controlling the player
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
     public void settings()
     {
+        //opens the settings menu
         prevOpenMenu = menuCurrentlyOpen;
         menuCurrentlyOpen.SetActive(false);
         menuCurrentlyOpen = settingsMenu;
@@ -193,19 +198,30 @@ public class gameManager : MonoBehaviour
     }
     public void back()
     {
+        //goes back to the previous open menu
         menuCurrentlyOpen.SetActive(false);
         menuCurrentlyOpen = prevOpenMenu;
         menuCurrentlyOpen.SetActive(true);
     }
     public void creditsContinue()
     {
+        //changes to credits scene
         menuCurrentlyOpen.SetActive(false);
         menuCurrentlyOpen = creditsScreen;
         menuCurrentlyOpen.SetActive(true);
     }
     public void titleScreenBTN()//debugging required
     {
-        sceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(sceneName);
+        //change scene name to final game lvl
+        //reloads the scene
+        SceneManager.LoadScene("ChaseScene");
+    }
+    public void startBTN()
+    {
+        //changes from title screen to game screen
+        titleScreenOn = false;
+        titleScreen.SetActive(false);
+        titleScreenCam.SetActive(false);
+        player.SetActive(true);
     }
 }
