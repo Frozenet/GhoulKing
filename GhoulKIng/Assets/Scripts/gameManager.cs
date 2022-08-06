@@ -78,6 +78,7 @@ public class gameManager : MonoBehaviour
         //makes title screen operational
         titleScreenCam.SetActive(true);
         player.SetActive(false);
+        lockCursorPause();
     }
 
     // Update is called once per frame
@@ -223,5 +224,6 @@ public class gameManager : MonoBehaviour
         titleScreen.SetActive(false);
         titleScreenCam.SetActive(false);
         player.SetActive(true);
+        unlockCursorUnpause();
     }
 }
