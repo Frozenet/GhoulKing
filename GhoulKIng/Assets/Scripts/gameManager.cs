@@ -154,7 +154,6 @@ public class gameManager : MonoBehaviour
     }
     public void checkKeys()
     {
-        keysCollected++;
         keysHeld.text = keysCollected.ToString("F0");
         KeysTotal.text = keysCollected.ToString("F0");
         if (keysCollected >= keysGoal)
@@ -167,9 +166,9 @@ public class gameManager : MonoBehaviour
     }
     public void updateKeyNumber()
     {
-        keysGoal++;
-        //keysHeld.text = playerScript.keys.ToString("F0");
-        KeysTotal.text = keysGoal.ToString("F0");
+        keysCollected++;
+        keysHeld.text = keysCollected.ToString("F0");
+        KeysTotal.text = keysCollected.ToString("F0");
     }
 
     public void restart()
