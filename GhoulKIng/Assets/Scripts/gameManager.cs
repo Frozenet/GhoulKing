@@ -243,7 +243,7 @@ public class gameManager : MonoBehaviour
     }
     public void loadLevelTwo()
     {
-        SceneManager.LoadScene("");
+        SceneManager.LoadScene("CorridoLevelOne");
     }
     public void loadLevelThree()
     {
