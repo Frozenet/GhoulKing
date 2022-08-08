@@ -39,7 +39,7 @@ public class gameManager : MonoBehaviour
 
     public TMP_Text totalDeaths;
     public TMP_Text totalKilled;
-    //public TMP_Text totalKeys;
+    public TMP_Text totalKeys;
 
     [Header("-----------------")]
     [Header("Weapons")]
@@ -56,7 +56,9 @@ public class gameManager : MonoBehaviour
 
     int enemiesKilled;
     public int enemyKillGoal;
-    [SerializeField] int KeysGoal;
+    int keysCollected;
+    public int keysGoal;
+    //[SerializeField] int KeysGoals;
 
     public GameObject titleScreenCam;
 
@@ -148,23 +150,26 @@ public class gameManager : MonoBehaviour
         enemyKillGoal++;
         enemyTotal.text = enemyKillGoal.ToString("F0");
     }
+    public void checkKeys()
+    {
+        keysCollected++;
+        keysHeld.text = keysCollected.ToString("F0");
+        KeysTotal.text = keysCollected.ToString("F0");
+        if (keysCollected >= keysGoal)
+        {
+            menuCurrentlyOpen = winGameMenu;
+            menuCurrentlyOpen.SetActive(true);
+            gameOver = true;
+            lockCursorPause();
+        }
+    }
+    public void updateKeyNumber()
+    {
+        keysGoal++;
+        //keysHeld.text = playerScript.keys.ToString("F0");
+        KeysTotal.text = keysGoal.ToString("F0");
+    }
 
-    //public void checkKeys()
-    //{
-    //    keysHeld.text = playerScript.keys.ToString("F0");
-    //    if (playerScript.keys >= KeysGoal)
-    //    {
-    //        menuCurrentlyOpen = winGameMenu;
-    //        menuCurrentlyOpen.SetActive(true);
-    //        gameOver = true;
-    //        lockCursorPause();
-    //    }
-    //}
-
-    //public void updateKeysNumber()
-    //{
-    //    keysHeld.text = playerScript.keys.ToString("F0");
-    //}
     public void restart()
     {
         gameOver = false;

@@ -284,6 +284,40 @@ public class playerController : MonoBehaviour, IDamageable
             canShoot = true;
         }
     }
+    public void giveShots(int shells)
+    {
+        if (shotgunAmmo < shotgunAmmoMax)
+        {
+            shotgunAmmo += shells;
+        }
+        if (shotgunAmmo > shotgunAmmoMax)
+        {
+            shotgunAmmo = shotgunAmmoMax;
+        }
+        updatePlayerShells();
+
+    }
+    public void updatePlayerShells()
+    {
+        shotgunAmmoMax = shotgunAmmo;
+    }
+    public void giverockets(int rounds)
+    {
+        if (rocketAmmo < rocketAmmoMax)
+        {
+            rocketAmmo += rounds;
+        }
+        if (rocketAmmo > rocketAmmoMax)
+        {
+            rocketAmmo = rocketAmmoMax;
+        }
+        updatePlayerRounds();
+
+    }
+    public void updatePlayerRounds()
+    {
+        rocketAmmoMax = rocketAmmo;
+    }
 
     public void gunPickup(float fireRate, int damage, GameObject model, gunStats stats)
     {
