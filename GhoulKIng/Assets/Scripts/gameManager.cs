@@ -172,7 +172,7 @@ public class gameManager : MonoBehaviour
     {
         keysCollected++;
         keysHeld.text = keysCollected.ToString("F0");
-        KeysTotal.text = keysCollected.ToString("F0");
+        totalKeys.text = keysCollected.ToString("F0");
     }
 
     public void restart()

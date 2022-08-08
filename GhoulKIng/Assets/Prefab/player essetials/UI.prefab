@@ -7150,9 +7150,9 @@ MonoBehaviour:
   HPpercent: {fileID: 8238131283961596543}
   keysHeld: {fileID: 1032271836}
   KeysTotal: {fileID: 0}
-  totalDeaths: {fileID: 9084335960526002273}
-  totalKilled: {fileID: 2055115192920197666}
-  totalKeys: {fileID: 8761053792056715237}
+  totalDeaths: {fileID: 1923412367}
+  totalKilled: {fileID: 176524673}
+  totalKeys: {fileID: 47675632}
   shotgunAmmo: {fileID: 1154026354}
   shotgunAmmoMax: {fileID: 936839554}
   rocketAmmo: {fileID: 1561211328}
