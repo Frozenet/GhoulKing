@@ -24,6 +24,7 @@ public class gameManager : MonoBehaviour
     public GameObject titleScreen;
     public GameObject settingsMenu;
     public GameObject creditsScreen;
+    public GameObject loadLevelMenu;
 
     [Header("-----------------")]
     [Header("Health")]
@@ -32,8 +33,8 @@ public class gameManager : MonoBehaviour
 
     [Header("-----------------")]
     [Header("Stats")]
-    public TMP_Text enemyDead;
-    public TMP_Text enemyTotal;
+    //public TMP_Text enemyDead;
+    //public TMP_Text enemyTotal;
     public TMP_Text keysHeld;
     public TMP_Text KeysTotal;
 
@@ -54,9 +55,9 @@ public class gameManager : MonoBehaviour
     [HideInInspector] public bool gameOver;
     [HideInInspector] public bool titleScreenOn;
 
-    int enemiesKilled;
+    int enemiesKilled = 0;
     public int enemyKillGoal;
-    int keysCollected;
+    public int keysCollected = 0;
     public int keysGoal;
     //[SerializeField] int KeysGoals;
 
@@ -136,7 +137,7 @@ public class gameManager : MonoBehaviour
     public void checkEnemyKills()
     {
         enemiesKilled++;
-        enemyDead.text = enemiesKilled.ToString("F0");
+        //enemyDead.text = enemiesKilled.ToString("F0");
         totalKilled.text = enemiesKilled.ToString("F0");
 
         //if (enemiesKilled >= enemyKillGoal)
@@ -150,26 +151,19 @@ public class gameManager : MonoBehaviour
     public void updateEnemyNumber()
     {
         enemyKillGoal++;
-        enemyTotal.text = enemyKillGoal.ToString("F0");
+        //enemyTotal.text = enemyKillGoal.ToString("F0");
     }
     public void checkKeys()
+    {
+        keysHeld.text = keysCollected.ToString("F0");
+        totalKeys.text = keysCollected.ToString("F0");
+        loadMenuCondition();
+    }
+    public void updateKeyNumber()
     {
         keysCollected++;
         keysHeld.text = keysCollected.ToString("F0");
         KeysTotal.text = keysCollected.ToString("F0");
-        if (keysCollected >= keysGoal)
-        {
-            menuCurrentlyOpen = winGameMenu;
-            menuCurrentlyOpen.SetActive(true);
-            gameOver = true;
-            lockCursorPause();
-        }
-    }
-    public void updateKeyNumber()
-    {
-        keysGoal++;
-        //keysHeld.text = playerScript.keys.ToString("F0");
-        KeysTotal.text = keysGoal.ToString("F0");
     }
 
     public void restart()
@@ -236,18 +230,61 @@ public class gameManager : MonoBehaviour
     }
     public void loadShowcase()
     {
+        loadMenuCondition();
         SceneManager.LoadScene("Show case level");
     }
     public void loadLevelOne()
     {
-        SceneManager.LoadScene("Terrain level");
+        if (keysCollected >= keysGoal)
+        {
+            loadMenuCondition();
+            SceneManager.LoadScene("Terrain level");
+        }
     }
     public void loadLevelTwo()
     {
-        SceneManager.LoadScene("");
+        if (keysCollected >= keysGoal)
+        {
+            loadMenuCondition();
+            SceneManager.LoadScene("CorridoLevelOne");
+        }
     }
     public void loadLevelThree()
     {
-        SceneManager.LoadScene("");
+        if (keysCollected >= keysGoal)
+        {
+            loadMenuCondition();
+            SceneManager.LoadScene("CorridorLevelTwo");
+        }
+    }
+    public void loadLevelFour()
+    {
+        if (keysCollected >= keysGoal)
+        {
+            loadMenuCondition();
+            SceneManager.LoadScene("CorridorLevelThree");
+        }
+    }
+    public void loadLevelFive()
+    {
+        if (keysCollected >= keysGoal)
+        {
+            loadMenuCondition();
+            SceneManager.LoadScene("FinalLevel");
+        }
+    }
+    public void winMenuCondition()
+    {
+        menuCurrentlyOpen = winGameMenu;
+        menuCurrentlyOpen.SetActive(true);
+        gameOver = true;
+        lockCursorPause();
+    }
+    public void loadMenuCondition()
+    {
+        menuCurrentlyOpen = loadLevelMenu;
+        menuCurrentlyOpen.SetActive(true);
+        gameOver = true;
+        lockCursorPause();
     }
 }
