@@ -8,6 +8,8 @@ public class loadLevel : MonoBehaviour
     public bool level1;
     public bool level2;
     public bool level3;
+    public bool level4;
+    public bool level5;
     public bool gameComplete;
 
     private void OnTriggerEnter(Collider other)
@@ -22,6 +24,10 @@ public class loadLevel : MonoBehaviour
                 gameManager.instance.loadLevelTwo();
             else if (level3 == true)
                 gameManager.instance.loadLevelThree();
+            else if (level4 == true)
+                gameManager.instance.loadLevelFour();
+            else if (level5 == true)
+                gameManager.instance.loadLevelFive();
             else if (gameComplete == true)
                 gameManager.instance.checkKeys();
         }

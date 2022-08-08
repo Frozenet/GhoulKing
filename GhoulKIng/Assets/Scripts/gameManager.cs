@@ -249,4 +249,12 @@ public class gameManager : MonoBehaviour
     {
         SceneManager.LoadScene("");
     }
+    public void loadLevelFour()
+    {
+        SceneManager.LoadScene("");
+    }
+    public void loadLevelFive()
+    {
+        SceneManager.LoadScene("");
+    }
 }
