@@ -10,7 +10,7 @@ public class playerController : MonoBehaviour, IDamageable
     [Header("-----------------")]
 
     [Header("Player Attributes")]
-    [Range(5, 20)][SerializeField] int HP;
+    [Range(5, 20)][SerializeField] public int HP;
     [Range(1, 15)][SerializeField] float playerSpeed;
     [Range(0, 4f)][SerializeField] float sprintMult;
     [Range(1, 5)][SerializeField] int jumps;
@@ -69,7 +69,7 @@ public class playerController : MonoBehaviour, IDamageable
     public int playerDeathCount = 0;
 
     bool canShoot = true;
-    int HPOrig;
+    public int HPOrig;
     Vector3 playerSpawnPos;
     bool footsetpPlaying;
     public int weaponType;
@@ -299,7 +299,9 @@ public class playerController : MonoBehaviour, IDamageable
     }
     public void updatePlayerShells()
     {
-        shotgunAmmoMax = shotgunAmmo;
+         //shotgunAmmo = shotgunAmmoMax;
+        float shellPercent = ((float)shotgunAmmo / (float)shotgunAmmoMax);
+        gameManager.instance.shotgunAmmo.text = shellPercent.ToString("F0");
     }
     public void giverockets(int rounds)
     {
@@ -316,7 +318,9 @@ public class playerController : MonoBehaviour, IDamageable
     }
     public void updatePlayerRounds()
     {
-        rocketAmmoMax = rocketAmmo;
+         rocketAmmo = rocketAmmoMax;
+        float rocketPercent = ((float)rocketAmmo / (float)rocketAmmoMax);
+        gameManager.instance.shotgunAmmo.text = rocketPercent.ToString("F0");
     }
 
     public void gunPickup(float fireRate, int damage, GameObject model, gunStats stats)

@@ -10,16 +10,17 @@ public class shotGunAmmo : MonoBehaviour
     {
         gameManager.instance.playerScript.giveShots(shells);
     }
+
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (gameManager.instance.playerScript.shotgunAmmo < gameManager.instance.playerScript.shotgunAmmoMax)
         {
-            gameManager.instance.playerScript.giveShots(shells);
-        }
-        for (int i = 0; i < shells; i++)
-        {
-           gameManager.instance.playerScript.respawn();
-           gameManager.instance.restart();
+            if (other.CompareTag("Player"))
+            {
+                gameManager.instance.playerScript.giveShots(shells);
+                Destroy(gameObject);
+
+            }
         }
     }
 }
