@@ -32,8 +32,8 @@ public class gameManager : MonoBehaviour
 
     [Header("-----------------")]
     [Header("Stats")]
-    public TMP_Text enemyDead;
-    public TMP_Text enemyTotal;
+    //public TMP_Text enemyDead;
+    //public TMP_Text enemyTotal;
     public TMP_Text keysHeld;
     public TMP_Text KeysTotal;
 
@@ -136,7 +136,7 @@ public class gameManager : MonoBehaviour
     public void checkEnemyKills()
     {
         enemiesKilled++;
-        enemyDead.text = enemiesKilled.ToString("F0");
+        //enemyDead.text = enemiesKilled.ToString("F0");
         totalKilled.text = enemiesKilled.ToString("F0");
 
         //if (enemiesKilled >= enemyKillGoal)
@@ -150,7 +150,7 @@ public class gameManager : MonoBehaviour
     public void updateEnemyNumber()
     {
         enemyKillGoal++;
-        enemyTotal.text = enemyKillGoal.ToString("F0");
+        //enemyTotal.text = enemyKillGoal.ToString("F0");
     }
     public void checkKeys()
     {
