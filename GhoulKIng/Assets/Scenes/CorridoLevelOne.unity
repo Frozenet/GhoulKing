@@ -485,6 +485,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8132317782886209595, guid: b0bd3627c82783541b2d3d764cf18ecd, type: 3}
       propertyPath: level2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8132317782886209595, guid: b0bd3627c82783541b2d3d764cf18ecd, type: 3}
+      propertyPath: level3
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
