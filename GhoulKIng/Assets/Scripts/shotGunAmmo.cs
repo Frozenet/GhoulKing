@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class shotGunAmmo : MonoBehaviour
 {
-    [Range(1, 5)] [SerializeField] public int shells;
+    [Range(1, 10)] [SerializeField] public int shells;
 
     public void givePlayerShells(int shells)
     {
@@ -12,10 +12,14 @@ public class shotGunAmmo : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-         if (other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
             gameManager.instance.playerScript.giveShots(shells);
-            Destroy(gameObject);
+        }
+        for (int i = 0; i < shells; i++)
+        {
+           gameManager.instance.playerScript.respawn();
+           gameManager.instance.restart();
         }
     }
 }
