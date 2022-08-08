@@ -139,13 +139,13 @@ public class gameManager : MonoBehaviour
         enemyDead.text = enemiesKilled.ToString("F0");
         totalKilled.text = enemiesKilled.ToString("F0");
 
-        if (enemiesKilled >= enemyKillGoal)
-        {
-            menuCurrentlyOpen = winGameMenu;
-            menuCurrentlyOpen.SetActive(true);
-            gameOver = true;
-            lockCursorPause();
-        }
+        //if (enemiesKilled >= enemyKillGoal)
+        //{
+        //    menuCurrentlyOpen = winGameMenu;
+        //    menuCurrentlyOpen.SetActive(true);
+        //    gameOver = true;
+        //    lockCursorPause();
+        //}
     }
     public void updateEnemyNumber()
     {
