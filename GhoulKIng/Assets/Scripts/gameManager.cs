@@ -70,9 +70,13 @@ public class gameManager : MonoBehaviour
         instance = this;
 
         //sets the title screen to active
-        menuCurrentlyOpen = titleScreen;
-        titleScreenOn = true;
-        gameOver = true;
+        if (SceneManager.GetActiveScene().name == "Show case level")//based on first level of game
+        {
+            menuCurrentlyOpen = titleScreen;
+            titleScreenOn = true;
+            gameOver = true;
+        }
+
 
         //finds player components
         player = GameObject.FindGameObjectWithTag("Player");
@@ -80,9 +84,14 @@ public class gameManager : MonoBehaviour
         playerWeaponSwap = player.GetComponentInChildren<weaponSwap>();
 
         //makes title screen operational
-        titleScreenCam.SetActive(true);
-        player.SetActive(false);
-        lockCursorPause();
+        if (SceneManager.GetActiveScene().name == "Show case level")//based on first level of game
+        {
+            titleScreenCam.SetActive(true);
+            player.SetActive(false);
+            lockCursorPause();
+        }
+        else
+            unlockCursorUnpause();
     }
 
     // Update is called once per frame

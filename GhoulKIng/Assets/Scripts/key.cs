@@ -15,6 +15,7 @@ public class key : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
+            gameManager.instance.updateKeyNumber();//this works no touch
             Destroy(gameObject);
         }
         
