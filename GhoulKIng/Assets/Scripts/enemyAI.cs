@@ -19,6 +19,7 @@ public class enemyAI : MonoBehaviour, IDamageable
     [SerializeField] int viewAngle;
     [SerializeField] int playerFaceSpeed;
     [SerializeField] int roamRadius;
+    [SerializeField] bool deleteBody;
     [Header("-----------------")]
 
     [Header("Weapon Stats")]
@@ -133,15 +134,24 @@ public class enemyAI : MonoBehaviour, IDamageable
         StartCoroutine(flashColor());
         playerInRange = true;
 
-        if (HP <= 0)
+
+        if (deleteBody != true)
+        {
+            if (HP <= 0)
+            {
+                gameManager.instance.checkEnemyKills();
+                agent.enabled = false;
+                anim.SetBool("Dead", true);
+                foreach(Collider col in GetComponents<Collider>())
+                {
+                    col.enabled = false;
+                }
+            }
+        }
+        else
         {
             gameManager.instance.checkEnemyKills();
-            agent.enabled = false;
-            anim.SetBool("Dead", true);
-            foreach(Collider col in GetComponents<Collider>())
-            {
-                col.enabled = false;
-            }
+            Destroy(gameObject);
         }
     }
 
