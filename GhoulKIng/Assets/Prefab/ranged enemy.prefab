@@ -228,7 +228,7 @@ MonoBehaviour:
   HP: 20
   viewAngle: 90
   playerFaceSpeed: 3
-  roamRadius: 0
+  roamRadius: 1
   shootRate: 3
   bullet: {fileID: 1932097239730935228, guid: bdc0fc747edf954419dba03ba0b36fa8, type: 3}
   shootPos: {fileID: 5012532311736057395}

@@ -66,6 +66,7 @@ public class weaponSwap : MonoBehaviour
             if (i == selectedweapon)
             {
                 weapon.gameObject.SetActive(true);
+                
             }
             else
             {

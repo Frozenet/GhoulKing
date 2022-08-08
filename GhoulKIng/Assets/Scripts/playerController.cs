@@ -23,8 +23,8 @@ public class playerController : MonoBehaviour, IDamageable
     [Range(1, 10)][SerializeField] int weaponDamage;
     [Range(5, 100)][SerializeField] float range;
 
-    [Range(1, 10)][SerializeField] int shotgunAmmoMax;
-    [Range(1, 10)][SerializeField] int rocketAmmoMax;
+    [Range(1, 10)][SerializeField] public int shotgunAmmoMax;
+    [Range(1, 10)][SerializeField] public int rocketAmmoMax;
 
     public int shotgunAmmo;
     public int rocketAmmo;
@@ -66,6 +66,7 @@ public class playerController : MonoBehaviour, IDamageable
     int timesjumped;
     Vector3 playerVelocity;
     Vector3 move;
+    public int playerDeathCount = 0;
 
     bool canShoot = true;
     int HPOrig;
@@ -80,6 +81,7 @@ public class playerController : MonoBehaviour, IDamageable
         playerSpawnPos = transform.position;
         shotgunAmmo = shotgunAmmoMax;
         rocketAmmo = rocketAmmoMax;
+        gameManager.instance.updateAmmo();
         currentWeapon = pistol;
         weaponType = 0;
         shootRate = 0.5f;
@@ -230,7 +232,8 @@ public class playerController : MonoBehaviour, IDamageable
             {
                 if (shotgunAmmo != 0)
                 {
-                shotgunAmmo--;
+                    shotgunAmmo--;
+
                     aud.PlayOneShot(ShotgunAud[0], ShotgunAudVol);
                     for (int i = 0; i < 12; i++)
                     {
@@ -272,6 +275,7 @@ public class playerController : MonoBehaviour, IDamageable
                 }
 
             }
+            gameManager.instance.updateAmmo();
             muzzleFlash.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
             muzzleFlash.SetActive(true);
             yield return new WaitForSeconds(0.05f);
@@ -279,6 +283,40 @@ public class playerController : MonoBehaviour, IDamageable
             yield return new WaitForSeconds(shootRate);
             canShoot = true;
         }
+    }
+    public void giveShots(int shells)
+    {
+        if (shotgunAmmo < shotgunAmmoMax)
+        {
+            shotgunAmmo += shells;
+        }
+        if (shotgunAmmo > shotgunAmmoMax)
+        {
+            shotgunAmmo = shotgunAmmoMax;
+        }
+        updatePlayerShells();
+
+    }
+    public void updatePlayerShells()
+    {
+        shotgunAmmoMax = shotgunAmmo;
+    }
+    public void giverockets(int rounds)
+    {
+        if (rocketAmmo < rocketAmmoMax)
+        {
+            rocketAmmo += rounds;
+        }
+        if (rocketAmmo > rocketAmmoMax)
+        {
+            rocketAmmo = rocketAmmoMax;
+        }
+        updatePlayerRounds();
+
+    }
+    public void updatePlayerRounds()
+    {
+        rocketAmmoMax = rocketAmmo;
     }
 
     public void gunPickup(float fireRate, int damage, GameObject model, gunStats stats)
@@ -302,6 +340,8 @@ public class playerController : MonoBehaviour, IDamageable
         if (HP <= 0)
         {
             //kill player
+            playerDeathCount++;
+            gameManager.instance.totalDeaths.text = playerDeathCount.ToString("F0");
             gameManager.instance.playerDead();
         }
     }
@@ -327,7 +367,7 @@ public class playerController : MonoBehaviour, IDamageable
     }
     public void updatePlayerHP()
     {
-        int hpPercent = (HP / HPOrig * 100);
+        float hpPercent = ((float)HP / (float)HPOrig * 100);
         gameManager.instance.HPBar.fillAmount = (float)HP / (float)HPOrig;
         gameManager.instance.HPpercent.text = hpPercent.ToString("F0");
     }
@@ -341,6 +381,5 @@ public class playerController : MonoBehaviour, IDamageable
         updatePlayerHP();
 
     }
-
 }
 

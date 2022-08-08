@@ -27,4 +27,24 @@ public class ButtonFunction : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         gameManager.instance.restart();
     }
+    public void settings()
+    {
+        gameManager.instance.settings();
+    }
+    public void back()
+    {
+        gameManager.instance.back();
+    }
+    public void creditsContinue()
+    {
+        gameManager.instance.creditsContinue();
+    }
+    public void titleScreen()
+    {
+        gameManager.instance.titleScreenBTN();
+    }
+    public void start()
+    {
+        gameManager.instance.startBTN();
+    }
 }
