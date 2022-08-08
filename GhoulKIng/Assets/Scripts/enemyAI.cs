@@ -150,6 +150,7 @@ public class enemyAI : MonoBehaviour, IDamageable
         }
         else
         {
+            gameManager.instance.checkEnemyKills();
             Destroy(gameObject);
         }
     }

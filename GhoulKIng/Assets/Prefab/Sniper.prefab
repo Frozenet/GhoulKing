@@ -675,7 +675,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3426122708717534819}
-  m_LocalRotation: {x: -0, y: 0.75842905, z: -0, w: 0.65175563}
+  m_LocalRotation: {x: 0, y: 0.7584302, z: 0, w: 0.6517544}
   m_LocalPosition: {x: -33.49, y: -0, z: -6.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -717,9 +717,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68c7aeb587963f04bb706c8844603917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 3426122708726877659}
+  agent: {fileID: 0}
   rend: {fileID: 3426122708731130655}
-  anim: {fileID: 3426122708726877663}
+  anim: {fileID: 0}
   HP: 1
   viewAngle: 70
   playerFaceSpeed: 5
