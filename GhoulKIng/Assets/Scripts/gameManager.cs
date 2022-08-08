@@ -220,7 +220,7 @@ public class gameManager : MonoBehaviour
     {
         //change scene name to final game lvl
         //reloads the scene
-        SceneManager.LoadScene("ChaseScene");
+        SceneManager.LoadScene("Terrain level");
     }
     public void startBTN()
     {
