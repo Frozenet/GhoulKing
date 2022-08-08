@@ -14,6 +14,7 @@ public class key : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            gameManager.instance.keysCollected++;
             Destroy(gameObject);
         }
         
