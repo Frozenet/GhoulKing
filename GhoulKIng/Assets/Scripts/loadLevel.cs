@@ -16,6 +16,7 @@ public class loadLevel : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            Debug.Log("loading...");
             if (showCase == true)
                 gameManager.instance.loadShowcase();
             else if (level1 == true)

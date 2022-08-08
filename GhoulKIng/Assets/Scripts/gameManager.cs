@@ -246,7 +246,7 @@ public class gameManager : MonoBehaviour
         if (keysCollected >= keysGoal)
         {
             loadMenuCondition();
-            SceneManager.LoadScene("CorridoLevelOne");
+            SceneManager.LoadScene("CorridorLevelOne");
         }
     }
     public void loadLevelThree()
