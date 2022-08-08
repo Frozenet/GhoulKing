@@ -312,6 +312,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7192753789312961087, guid: 48f791405b988d2419a3c51cf1be0465, type: 3}
+      propertyPath: rocketAmmoMax
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192753789312961087, guid: 48f791405b988d2419a3c51cf1be0465, type: 3}
+      propertyPath: shotgunAmmoMax
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48f791405b988d2419a3c51cf1be0465, type: 3}
 --- !u!4 &178789522 stripped
@@ -2114,6 +2122,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2200569422918181784, guid: eff5def0e2eca0d44971c6fd1ff492d3, type: 3}
+      propertyPath: rockets
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2200569422918181785, guid: eff5def0e2eca0d44971c6fd1ff492d3, type: 3}
       propertyPath: m_Name
       value: RocketLauncherAmmo
