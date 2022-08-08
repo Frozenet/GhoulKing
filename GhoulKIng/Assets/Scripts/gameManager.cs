@@ -71,6 +71,7 @@ public class gameManager : MonoBehaviour
         //sets the title screen to active
         menuCurrentlyOpen = titleScreen;
         titleScreenOn = true;
+        gameOver = true;
 
         //finds player components
         player = GameObject.FindGameObjectWithTag("Player");
@@ -86,7 +87,7 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") && !gameOver || Input.GetButtonDown("Cancel") && !titleScreenOn)
+        if (Input.GetButtonDown("Cancel") && !gameOver)
         {
             if (!paused && !menuCurrentlyOpen)
             {
@@ -125,6 +126,7 @@ public class gameManager : MonoBehaviour
 
     public void playerDead()
     {
+        gameOver = true;
         paused = true;
         menuCurrentlyOpen = playerDeadMenu;
         menuCurrentlyOpen.SetActive(true);
@@ -225,6 +227,7 @@ public class gameManager : MonoBehaviour
     public void startBTN()
     {
         //changes from title screen to game screen
+        gameOver = false;
         titleScreenOn = false;
         titleScreen.SetActive(false);
         titleScreenCam.SetActive(false);
