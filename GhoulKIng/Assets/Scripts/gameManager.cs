@@ -156,7 +156,7 @@ public class gameManager : MonoBehaviour
     public void checkKeys()
     {
         keysHeld.text = keysCollected.ToString("F0");
-        KeysTotal.text = keysCollected.ToString("F0");
+        totalKeys.text = keysCollected.ToString("F0");
         loadMenuCondition();
     }
     public void updateKeyNumber()
