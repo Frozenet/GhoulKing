@@ -24,6 +24,7 @@ public class gameManager : MonoBehaviour
     public GameObject titleScreen;
     public GameObject settingsMenu;
     public GameObject creditsScreen;
+    public GameObject loadLevelMenu;
 
     [Header("-----------------")]
     [Header("Health")]
@@ -56,7 +57,7 @@ public class gameManager : MonoBehaviour
 
     int enemiesKilled = 0;
     public int enemyKillGoal;
-    int keysCollected = 0;
+    public int keysCollected = 0;
     public int keysGoal;
     //[SerializeField] int KeysGoals;
 
@@ -156,7 +157,7 @@ public class gameManager : MonoBehaviour
     {
         keysHeld.text = keysCollected.ToString("F0");
         KeysTotal.text = keysCollected.ToString("F0");
-        winMenuCondition();
+        loadMenuCondition();
     }
     public void updateKeyNumber()
     {
@@ -229,36 +230,61 @@ public class gameManager : MonoBehaviour
     }
     public void loadShowcase()
     {
+        loadMenuCondition();
         SceneManager.LoadScene("Show case level");
     }
     public void loadLevelOne()
     {
-        SceneManager.LoadScene("Terrain level");
+        if (keysCollected >= keysGoal)
+        {
+            loadMenuCondition();
+            SceneManager.LoadScene("Terrain level");
+        }
     }
     public void loadLevelTwo()
     {
-        SceneManager.LoadScene("CorridoLevelOne");
+        if (keysCollected >= keysGoal)
+        {
+            loadMenuCondition();
+            SceneManager.LoadScene("CorridoLevelOne");
+        }
     }
     public void loadLevelThree()
     {
-        SceneManager.LoadScene("CorridorLevelTwo");
+        if (keysCollected >= keysGoal)
+        {
+            loadMenuCondition();
+            SceneManager.LoadScene("CorridorLevelTwo");
+        }
     }
     public void loadLevelFour()
     {
-        SceneManager.LoadScene("CorridorLevelThree");
+        if (keysCollected >= keysGoal)
+        {
+            loadMenuCondition();
+            SceneManager.LoadScene("CorridorLevelThree");
+        }
     }
     public void loadLevelFive()
     {
-        SceneManager.LoadScene("FinalLevel");
+        if (keysCollected >= keysGoal)
+        {
+            loadMenuCondition();
+            SceneManager.LoadScene("FinalLevel");
+        }
     }
     public void winMenuCondition()
     {
-        if (keysCollected >= keysGoal)
-        {
-            menuCurrentlyOpen = winGameMenu;
-            menuCurrentlyOpen.SetActive(true);
-            gameOver = true;
-            lockCursorPause();
-        }
+        menuCurrentlyOpen = winGameMenu;
+        menuCurrentlyOpen.SetActive(true);
+        gameOver = true;
+        lockCursorPause();
+    }
+    public void loadMenuCondition()
+    {
+        menuCurrentlyOpen = loadLevelMenu;
+        menuCurrentlyOpen.SetActive(true);
+        gameOver = true;
+        lockCursorPause();
     }
 }

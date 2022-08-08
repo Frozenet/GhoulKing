@@ -29,7 +29,7 @@ public class loadLevel : MonoBehaviour
             else if (level5 == true)
                 gameManager.instance.loadLevelFive();
             else if (gameComplete == true)
-                gameManager.instance.checkKeys();
+                gameManager.instance.winMenuCondition();
         }
     }
 }
