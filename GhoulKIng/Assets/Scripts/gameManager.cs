@@ -222,7 +222,7 @@ public class gameManager : MonoBehaviour
     {
         //change scene name to final game lvl
         //reloads the scene
-        SceneManager.LoadScene("Terrain level");
+        loadShowcase();
     }
     public void startBTN()
     {
@@ -233,5 +233,21 @@ public class gameManager : MonoBehaviour
         titleScreenCam.SetActive(false);
         player.SetActive(true);
         unlockCursorUnpause();
+    }
+    public void loadShowcase()
+    {
+        SceneManager.LoadScene("Show case level");
+    }
+    public void loadLevelOne()
+    {
+        SceneManager.LoadScene("Terrain level");
+    }
+    public void loadLevelTwo()
+    {
+        SceneManager.LoadScene("");
+    }
+    public void loadLevelThree()
+    {
+        SceneManager.LoadScene("");
     }
 }
