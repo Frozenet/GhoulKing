@@ -86,7 +86,7 @@ public class gameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") && !gameOver && !titleScreenOn)
+        if (Input.GetButtonDown("Cancel") && !gameOver || Input.GetButtonDown("Cancel") && !titleScreenOn)
         {
             if (!paused && !menuCurrentlyOpen)
             {
