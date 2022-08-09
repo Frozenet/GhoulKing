@@ -109,6 +109,7 @@ public class gameManager : MonoBehaviour
         {
             if (!paused && !menuCurrentlyOpen)
             {
+                audi.PlayOneShot(menuClick[0], clickVol);
                 paused = true;
                 menuCurrentlyOpen = pauseMenu;
                 menuCurrentlyOpen.SetActive(true);
