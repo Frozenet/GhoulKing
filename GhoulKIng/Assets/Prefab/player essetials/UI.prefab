@@ -2198,7 +2198,7 @@ GameObject:
   - component: {fileID: 1032271837}
   - component: {fileID: 1032271836}
   m_Layer: 5
-  m_Name: Key Count
+  m_Name: Key Counter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7445,7 +7445,8 @@ MonoBehaviour:
   gameOver: 0
   titleScreenOn: 0
   enemyKillGoal: 0
-  keysGoal: 0
+  keysCollected: 0
+  keysGoal: 1
   titleScreenCam: {fileID: 4512118760471432010}
 --- !u!1 &4214298872775406477
 GameObject:
@@ -8959,7 +8960,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6408294829679694299}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8972,7 +8973,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 58.2, y: 0}
+  m_AnchoredPosition: {x: 58.200012, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7043470427563488236
@@ -9806,6 +9807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1786531847741223342}
   - component: {fileID: 5658053640047496561}
+  - component: {fileID: 914081166}
   m_Layer: 5
   m_Name: SFXSlider
   m_TagString: Untagged
@@ -9820,7 +9822,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7184717465290433061}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9833,7 +9835,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 58.2, y: -55}
+  m_AnchoredPosition: {x: 58.200012, y: -55.000008}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5658053640047496561
@@ -9880,13 +9882,39 @@ MonoBehaviour:
   m_FillRect: {fileID: 9080639877361269427}
   m_HandleRect: {fileID: 2438972750309488486}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 914081166}
+        m_TargetAssemblyTypeName: Audio, Assembly-CSharp
+        m_MethodName: master
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &914081166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7184717465290433061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed1b0e21c856369489c66435a1170ef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 5658053640047496561}
+  mixer: {fileID: 24100000, guid: 629b185b97c77b84193eb6bcf980f290, type: 2}
 --- !u!1 &7290459938721871625
 GameObject:
   m_ObjectHideFlags: 0

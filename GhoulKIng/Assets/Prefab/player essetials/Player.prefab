@@ -993,8 +993,8 @@ MonoBehaviour:
   shootRate: 1
   weaponDamage: 1
   range: 0
-  shotgunAmmoMax: 5
-  rocketAmmoMax: 3
+  shotgunAmmoMax: 10
+  rocketAmmoMax: 10
   shotgunAmmo: 0
   rocketAmmo: 0
   pistol: {fileID: 1134068035367803375}
@@ -1040,6 +1040,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0b2f5902eb6516a4c9f18b206c0ef650, type: 3}
   playerFootstepsVol: 0.2
   playerDeathCount: 0
+  HPOrig: 0
   weaponType: 0
 --- !u!33 &7192753789312961025
 MeshFilter:
@@ -1118,7 +1119,7 @@ AudioSource:
   m_GameObject: {fileID: 7192753789312961029}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4360144922630638833, guid: 629b185b97c77b84193eb6bcf980f290, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
