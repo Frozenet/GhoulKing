@@ -19,6 +19,7 @@ public class skeletonScript : MonoBehaviour, IDamageable
     [SerializeField] int playerFaceSpeed;
     [SerializeField] int roamRadius;
     [SerializeField] bool deleteBody;
+    [SerializeField] float AttackAnimBuffer;
     [Header("-----------------")]
 
     [Header("Weapon Stats")]
@@ -168,8 +169,6 @@ public class skeletonScript : MonoBehaviour, IDamageable
         rend.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         rend.material.color = Color.white;
-
-
     }
     IEnumerator shoot()
     {
@@ -178,6 +177,8 @@ public class skeletonScript : MonoBehaviour, IDamageable
             canShoot = false;
 
             anim.SetTrigger("Shoot");
+
+            yield return new WaitForSeconds(AttackAnimBuffer);
 
             Instantiate(bullet, shootPos.transform.position, bullet.transform.rotation);
 
