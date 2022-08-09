@@ -24,6 +24,7 @@ public class gameManager : MonoBehaviour
     public GameObject titleScreen;
     public GameObject settingsMenu;
     public GameObject creditsScreen;
+    public GameObject loadLevelMenu;
 
     [Header("-----------------")]
     [Header("Health")]
@@ -32,8 +33,8 @@ public class gameManager : MonoBehaviour
 
     [Header("-----------------")]
     [Header("Stats")]
-    public TMP_Text enemyDead;
-    public TMP_Text enemyTotal;
+    //public TMP_Text enemyDead;
+    //public TMP_Text enemyTotal;
     public TMP_Text keysHeld;
     public TMP_Text KeysTotal;
 
@@ -48,15 +49,23 @@ public class gameManager : MonoBehaviour
     public TMP_Text rocketAmmo;
     public TMP_Text rocketAmmoMax;
 
+    [Header("-----------------")]
+    [Header("Audio")]
+    public AudioSource audi;
+    [SerializeField] AudioClip[] menuClick;
+    [Range(0, 1)] [SerializeField] float clickVol;
+
+    [Header("-----------------")]
     [HideInInspector] public bool paused = false;
     public GameObject menuCurrentlyOpen;
     public GameObject prevOpenMenu;
     [HideInInspector] public bool gameOver;
     [HideInInspector] public bool titleScreenOn;
 
-    int enemiesKilled;
+    [Header("-----------------")]
+    int enemiesKilled = 0;
     public int enemyKillGoal;
-    int keysCollected;
+    public int keysCollected = 0;
     public int keysGoal;
     //[SerializeField] int KeysGoals;
 
@@ -69,8 +78,13 @@ public class gameManager : MonoBehaviour
         instance = this;
 
         //sets the title screen to active
-        menuCurrentlyOpen = titleScreen;
-        titleScreenOn = true;
+        if (SceneManager.GetActiveScene().name == "Show case level")//based on first level of game
+        {
+            menuCurrentlyOpen = titleScreen;
+            titleScreenOn = true;
+            gameOver = true;
+        }
+
 
         //finds player components
         player = GameObject.FindGameObjectWithTag("Player");
@@ -78,18 +92,24 @@ public class gameManager : MonoBehaviour
         playerWeaponSwap = player.GetComponentInChildren<weaponSwap>();
 
         //makes title screen operational
-        titleScreenCam.SetActive(true);
-        player.SetActive(false);
-        lockCursorPause();
+        if (SceneManager.GetActiveScene().name == "Show case level")//based on first level of game
+        {
+            titleScreenCam.SetActive(true);
+            player.SetActive(false);
+            lockCursorPause();
+        }
+        else
+            unlockCursorUnpause();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Cancel") && !gameOver || Input.GetButtonDown("Cancel") && !titleScreenOn)
+        if (Input.GetButtonDown("Cancel") && !gameOver)
         {
             if (!paused && !menuCurrentlyOpen)
             {
+                audi.PlayOneShot(menuClick[0], clickVol);
                 paused = true;
                 menuCurrentlyOpen = pauseMenu;
                 menuCurrentlyOpen.SetActive(true);
@@ -117,6 +137,7 @@ public class gameManager : MonoBehaviour
 
     public void resume()
     {
+        audi.PlayOneShot(menuClick[0], clickVol);
         paused = false;
         menuCurrentlyOpen.SetActive(false);
         menuCurrentlyOpen = null;
@@ -125,6 +146,7 @@ public class gameManager : MonoBehaviour
 
     public void playerDead()
     {
+        gameOver = true;
         paused = true;
         menuCurrentlyOpen = playerDeadMenu;
         menuCurrentlyOpen.SetActive(true);
@@ -134,44 +156,39 @@ public class gameManager : MonoBehaviour
     public void checkEnemyKills()
     {
         enemiesKilled++;
-        enemyDead.text = enemiesKilled.ToString("F0");
+        //enemyDead.text = enemiesKilled.ToString("F0");
         totalKilled.text = enemiesKilled.ToString("F0");
 
-        if (enemiesKilled >= enemyKillGoal)
-        {
-            menuCurrentlyOpen = winGameMenu;
-            menuCurrentlyOpen.SetActive(true);
-            gameOver = true;
-            lockCursorPause();
-        }
+        //if (enemiesKilled >= enemyKillGoal)
+        //{
+        //    menuCurrentlyOpen = winGameMenu;
+        //    menuCurrentlyOpen.SetActive(true);
+        //    gameOver = true;
+        //    lockCursorPause();
+        //}
     }
     public void updateEnemyNumber()
     {
         enemyKillGoal++;
-        enemyTotal.text = enemyKillGoal.ToString("F0");
+        //enemyTotal.text = enemyKillGoal.ToString("F0");
     }
     public void checkKeys()
     {
-        keysCollected++;
         keysHeld.text = keysCollected.ToString("F0");
-        KeysTotal.text = keysCollected.ToString("F0");
-        if (keysCollected >= keysGoal)
-        {
-            menuCurrentlyOpen = winGameMenu;
-            menuCurrentlyOpen.SetActive(true);
-            gameOver = true;
-            lockCursorPause();
-        }
+        totalKeys.text = keysCollected.ToString("F0");
+        loadMenuCondition();
     }
     public void updateKeyNumber()
     {
-        keysGoal++;
-        //keysHeld.text = playerScript.keys.ToString("F0");
-        KeysTotal.text = keysGoal.ToString("F0");
+        Debug.Log("Function called");
+        keysCollected++;
+        keysHeld.text = keysCollected.ToString("F0");
+        totalKeys.text = keysCollected.ToString("F0");
     }
 
     public void restart()
     {
+        audi.PlayOneShot(menuClick[0], clickVol);
         gameOver = false;
         paused = false;
         menuCurrentlyOpen.SetActive(false);
@@ -197,6 +214,7 @@ public class gameManager : MonoBehaviour
     public void settings()
     {
         //opens the settings menu
+        audi.PlayOneShot(menuClick[0], clickVol);
         prevOpenMenu = menuCurrentlyOpen;
         menuCurrentlyOpen.SetActive(false);
         menuCurrentlyOpen = settingsMenu;
@@ -205,6 +223,7 @@ public class gameManager : MonoBehaviour
     public void back()
     {
         //goes back to the previous open menu
+        audi.PlayOneShot(menuClick[0], clickVol);
         menuCurrentlyOpen.SetActive(false);
         menuCurrentlyOpen = prevOpenMenu;
         menuCurrentlyOpen.SetActive(true);
@@ -212,6 +231,7 @@ public class gameManager : MonoBehaviour
     public void creditsContinue()
     {
         //changes to credits scene
+        audi.PlayOneShot(menuClick[0], clickVol);
         menuCurrentlyOpen.SetActive(false);
         menuCurrentlyOpen = creditsScreen;
         menuCurrentlyOpen.SetActive(true);
@@ -220,15 +240,77 @@ public class gameManager : MonoBehaviour
     {
         //change scene name to final game lvl
         //reloads the scene
-        SceneManager.LoadScene("Terrain level");
+        audi.PlayOneShot(menuClick[0], clickVol);
+        loadShowcase();
     }
     public void startBTN()
     {
         //changes from title screen to game screen
+        audi.PlayOneShot(menuClick[0], clickVol);
+        gameOver = false;
         titleScreenOn = false;
         titleScreen.SetActive(false);
         titleScreenCam.SetActive(false);
         player.SetActive(true);
         unlockCursorUnpause();
+    }
+    public void loadShowcase()
+    {
+        loadMenuCondition();
+        SceneManager.LoadScene("Show case level");
+    }
+    public void loadLevelOne()
+    {
+        if (keysCollected >= keysGoal)
+        {
+            loadMenuCondition();
+            SceneManager.LoadScene("Terrain level");
+        }
+    }
+    public void loadLevelTwo()
+    {
+        if (keysCollected >= keysGoal)
+        {
+            loadMenuCondition();
+            SceneManager.LoadScene("CorridorLevelOne");
+        }
+    }
+    public void loadLevelThree()
+    {
+        if (keysCollected >= keysGoal)
+        {
+            loadMenuCondition();
+            SceneManager.LoadScene("CorridorLevelTwo");
+        }
+    }
+    public void loadLevelFour()
+    {
+        if (keysCollected >= keysGoal)
+        {
+            loadMenuCondition();
+            SceneManager.LoadScene("CorridorLevelThree");
+        }
+    }
+    public void loadLevelFive()
+    {
+        if (keysCollected >= keysGoal)
+        {
+            loadMenuCondition();
+            SceneManager.LoadScene("FinalLevel");
+        }
+    }
+    public void winMenuCondition()
+    {
+        menuCurrentlyOpen = winGameMenu;
+        menuCurrentlyOpen.SetActive(true);
+        gameOver = true;
+        lockCursorPause();
+    }
+    public void loadMenuCondition()
+    {
+        menuCurrentlyOpen = loadLevelMenu;
+        menuCurrentlyOpen.SetActive(true);
+        gameOver = true;
+        lockCursorPause();
     }
 }

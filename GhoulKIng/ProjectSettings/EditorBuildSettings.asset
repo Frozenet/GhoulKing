@@ -5,15 +5,30 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Title Screen.unity
     guid: 210b4285a2843b940b7fdd08f3236187
   - enabled: 1
-    path: Assets/Scenes/ChaseScene.unity
-    guid: 9ea4fdf3e1b1652479b0dc8ab8b82853
+    path: Assets/Scenes/Show case level.unity
+    guid: 53096f154ac37fa48aadf84cd0ed0f55
   - enabled: 1
     path: Assets/Scenes/Terrain level.unity
     guid: a16bcb14933e31f4f8408256e429c81e
+  - enabled: 1
+    path: Assets/Scenes/CorridorLevelOne.unity
+    guid: 1091d280c27ec504b84818caf56133ab
+  - enabled: 1
+    path: Assets/Scenes/CorridorLevelTwo.unity
+    guid: 103560453823e3841a8870dd18e7f512
+  - enabled: 1
+    path: Assets/Scenes/CorridorLevelThree.unity
+    guid: 6b769150efc632f4c8190c2e902013db
+  - enabled: 1
+    path: Assets/Scenes/FinalLevel.unity
+    guid: b8d1b354cbe874b429e7e71eced4a269
+  - enabled: 0
+    path: Assets/Scenes/ChaseScene.unity
+    guid: 9ea4fdf3e1b1652479b0dc8ab8b82853
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab

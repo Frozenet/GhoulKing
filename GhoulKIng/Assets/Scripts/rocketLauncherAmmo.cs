@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class rocketLauncherAmmo : MonoBehaviour
 {
-    [Range(1, 3)] [SerializeField] public int rockets;
+    [Range(1, 10)] [SerializeField] public int rockets;
 
     public void givePlayerRockets(int rounds)
     {
@@ -12,10 +12,13 @@ public class rocketLauncherAmmo : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (gameManager.instance.playerScript.rocketAmmo < gameManager.instance.playerScript.rocketAmmoMax)
         {
-            gameManager.instance.playerScript.giverockets(rockets);
-            Destroy(gameObject);
+            if (other.CompareTag("Player"))
+            {
+                gameManager.instance.playerScript.giverockets(rockets);
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -647,9 +647,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02eb27c64731e6d42b81d3da7440bff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 3267814681005877677}
-  rend: {fileID: 3267814681019840696}
-  anim: {fileID: 3267814681005877675}
+  agent: {fileID: 3426122708726877659}
+  rend: {fileID: 3426122708731130655}
+  anim: {fileID: 3426122708726877663}
   HP: 1
   viewAngle: 10000
   playerFaceSpeed: 120
@@ -666,9 +666,9 @@ NavMeshAgent:
   m_GameObject: {fileID: 3267814681006241220}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.3
+  m_Radius: 0.5
   m_Speed: 0
-  m_Acceleration: 0
+  m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 200
   m_StoppingDistance: 1
