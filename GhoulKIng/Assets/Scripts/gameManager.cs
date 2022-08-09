@@ -79,11 +79,13 @@ public class gameManager : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "Title Screen")
         {
+            Debug.Log("this is title scene");
             menuCurrentlyOpen = titleScreen;
             lockCursorPause();
         }
         else
         {
+            Debug.Log("this is game scene");
             //finds player components
             player = GameObject.FindGameObjectWithTag("Player");
             playerScript = player.GetComponent<playerController>();
