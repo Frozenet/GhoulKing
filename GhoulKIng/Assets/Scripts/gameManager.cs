@@ -76,16 +76,6 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-
-        //sets the title screen to active
-        if (SceneManager.GetActiveScene().name == "Show case level")//based on first level of game
-        {
-            menuCurrentlyOpen = titleScreen;
-            titleScreenOn = true;
-            gameOver = true;
-        }
-
-
         //finds player components
         player = GameObject.FindGameObjectWithTag("Player");
         playerScript = player.GetComponent<playerController>();
@@ -94,9 +84,13 @@ public class gameManager : MonoBehaviour
         //makes title screen operational
         if (SceneManager.GetActiveScene().name == "Show case level")//based on first level of game
         {
+            menuCurrentlyOpen = titleScreen;
+            titleScreenOn = true;
+            gameOver = true;
             titleScreenCam.SetActive(true);
             player.SetActive(false);
             lockCursorPause();
+            
         }
         else
             unlockCursorUnpause();
@@ -202,6 +196,7 @@ public class gameManager : MonoBehaviour
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+        Debug.Log("paused");
     }
 
     public void unlockCursorUnpause()
@@ -210,6 +205,8 @@ public class gameManager : MonoBehaviour
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        Debug.Log("unpaused");
+
     }
     public void settings()
     {
