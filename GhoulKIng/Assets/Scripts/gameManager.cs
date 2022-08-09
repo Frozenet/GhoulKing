@@ -236,7 +236,7 @@ public class gameManager : MonoBehaviour
         //change scene name to final game lvl
         //reloads the scene
         audi.PlayOneShot(menuClick[0], clickVol);
-        loadShowcase();
+        SceneManager.LoadScene("Title Screen");
     }
     public void startBTN()
     {
