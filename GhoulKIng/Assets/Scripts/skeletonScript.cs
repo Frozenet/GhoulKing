@@ -26,6 +26,16 @@ public class skeletonScript : MonoBehaviour, IDamageable
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject shootPos;
 
+    [Header("-----------------")]
+    [Header("Audio")]
+    public AudioSource aud;
+    [SerializeField] AudioClip[] enemyidle;
+    [Range(0, 1)][SerializeField] float idleAudVol;
+    [SerializeField] AudioClip[] enemyTakeDamage;
+    [Range(0, 1)][SerializeField] float damageAudVol;
+    [SerializeField] AudioClip[] deadAud;
+    [Range(0, 1)][SerializeField] float deadAudVol;
+
 
 
     bool canShoot = true;
