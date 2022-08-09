@@ -17,6 +17,8 @@ public class Audio : MonoBehaviour
     public void master(float num)
     {
         mixer.SetFloat("SFX", Mathf.Log10(num) * 20);
+        
+        mixer.SetFloat("Music", Mathf.Log10(num) * 20);
     }
 
 }
