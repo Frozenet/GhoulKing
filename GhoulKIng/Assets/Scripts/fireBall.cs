@@ -5,6 +5,15 @@ using UnityEngine;
 public class fireBall : MonoBehaviour
 {
     [SerializeField] int damage;
+    [SerializeField] Rigidbody rb;
+    [SerializeField] int speed;
+    [SerializeField] int destoryTime;
+
+    void Start()
+    {
+        rb.velocity = (gameManager.instance.player.transform.position - transform.position).normalized * speed;
+        Destroy(gameObject, destoryTime);
+    }
 
     public void OnTriggerEnter(Collider other)
     {
