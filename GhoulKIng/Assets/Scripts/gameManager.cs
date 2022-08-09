@@ -180,6 +180,7 @@ public class gameManager : MonoBehaviour
     }
     public void updateKeyNumber()
     {
+        Debug.Log("Function called");
         keysCollected++;
         keysHeld.text = keysCollected.ToString("F0");
         totalKeys.text = keysCollected.ToString("F0");

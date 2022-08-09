@@ -12,9 +12,10 @@ public class key : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-
+        Debug.Log("Collider Entered");
         if (other.CompareTag("Player"))
         {
+            Debug.Log("Was Player Specific");
             gameManager.instance.updateKeyNumber();//this works no touch
             Destroy(gameObject);
         }
