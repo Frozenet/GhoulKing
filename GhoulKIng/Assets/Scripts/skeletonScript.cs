@@ -137,16 +137,16 @@ public class skeletonScript : MonoBehaviour, IDamageable
     public void takeDamage(int dmg)
     {
         HP -= dmg;
-
+        aud.PlayOneShot(enemyTakeDamage[0], damageAudVol);
         anim.SetTrigger("Damage");
 
-        StartCoroutine(flashColor());
+        //StartCoroutine(flashColor());
         playerInRange = true;
 
 
-        if (deleteBody != true)
+        if (HP <= 0)
         {
-            if (HP <= 0)
+            if (deleteBody != true)
             {
                 gameManager.instance.checkEnemyKills();
                 agent.enabled = false;
@@ -156,11 +156,11 @@ public class skeletonScript : MonoBehaviour, IDamageable
                     col.enabled = false;
                 }
             }
-        }
-        else
-        {
-            gameManager.instance.checkEnemyKills();
-            Destroy(gameObject);
+            else
+            {
+                gameManager.instance.checkEnemyKills();
+                Destroy(gameObject);
+            }
         }
     }
 

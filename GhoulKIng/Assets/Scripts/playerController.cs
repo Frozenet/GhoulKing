@@ -79,8 +79,8 @@ public class playerController : MonoBehaviour, IDamageable
         playerSpeedOrig = playerSpeed;
         HPOrig = HP;
         playerSpawnPos = transform.position;
-        shotgunAmmo = shotgunAmmoMax;
-        rocketAmmo = rocketAmmoMax;
+        shotgunAmmo = 0;
+        rocketAmmo = 0;
         gameManager.instance.updateAmmo();
         currentWeapon = pistol;
         weaponType = 0;
@@ -99,7 +99,9 @@ public class playerController : MonoBehaviour, IDamageable
             if (weaponType != gameManager.instance.playerWeaponSwap.selectedweapon)
             {
                 weaopnChoice();
+
             }
+            gameManager.instance.updateAmmo();
             StartCoroutine(shoot());
             StartCoroutine(playFootsteps());//new
         }

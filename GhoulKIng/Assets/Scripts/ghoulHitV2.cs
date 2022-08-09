@@ -133,6 +133,8 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
     {
         HP -= dmg;
         playerInRange = true;
+        //aud.PlayOneShot(playerHurt[Random.Range(0, playerHurt.Length)], playerHurtVol);\
+        aud.PlayOneShot(enemyTakeDamage[0], damageAudVol);
         StartCoroutine(flashColor());
         if (HP <= 0)
         {
