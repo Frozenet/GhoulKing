@@ -1021,25 +1021,26 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d61acdd028b98eb4c8b6e9bc8e6e190e, type: 3}
   RocketLancherAudVol: 0.3
   playerHurt:
-  - {fileID: 8300000, guid: 611a60498227503429a822d774a42ce7, type: 3}
-  - {fileID: 8300000, guid: f130e13638fcca24db857c018f4ff306, type: 3}
-  - {fileID: 8300000, guid: 09f4c30c19c8140449613543f6e867fa, type: 3}
-  - {fileID: 8300000, guid: 1ea29fb9d85c73145a4978f74b73a3a8, type: 3}
-  - {fileID: 8300000, guid: c94d3c88e72c5d84482328ce1170af20, type: 3}
-  - {fileID: 8300000, guid: 3eef40edc4e103741aa9318c0fc8315a, type: 3}
+  - {fileID: 8300000, guid: 15916f3a3fc7f6240a83ef30fb99b17f, type: 3}
+  - {fileID: 8300000, guid: 2206d4982bba5d646aec16e8d51575ea, type: 3}
+  - {fileID: 8300000, guid: 4dbf03672e6211b40a352e2dd3624868, type: 3}
+  - {fileID: 8300000, guid: 64a53781038f8d144a6e31487cb63d7d, type: 3}
+  - {fileID: 8300000, guid: 3201734226404c84297545e0503f737e, type: 3}
+  - {fileID: 8300000, guid: e89aed9562660364c8ae5f2fef1a65db, type: 3}
   playerHurtVol: 0.3
   playerFootsteps:
-  - {fileID: 8300000, guid: fb0d5db70b2b77346b026512bcbddeb3, type: 3}
-  - {fileID: 8300000, guid: 065e44e7fd7f22549b6cf40491014943, type: 3}
-  - {fileID: 8300000, guid: b93b9689617bfe340980a2d3e1093a1b, type: 3}
-  - {fileID: 8300000, guid: 1baf634037097bd498ec6e8d3a2deb39, type: 3}
-  - {fileID: 8300000, guid: 96c45e6ab36f206478c586bcbf135579, type: 3}
-  - {fileID: 8300000, guid: 454102b07352c4a44b30159d00748c77, type: 3}
-  - {fileID: 8300000, guid: 7cdb124a44603314c8be5f4bace4c51c, type: 3}
-  - {fileID: 8300000, guid: 72e7358dec8bd264aa2519fa29f7db33, type: 3}
-  - {fileID: 8300000, guid: 0b2f5902eb6516a4c9f18b206c0ef650, type: 3}
+  - {fileID: 8300000, guid: 9ea1ecdb60d57f54e852fa211999c765, type: 3}
+  - {fileID: 8300000, guid: f288badfc1329d644ac4be62b42f000b, type: 3}
+  - {fileID: 8300000, guid: f7ed85975dad5a64c970cd18439b995a, type: 3}
+  - {fileID: 8300000, guid: 31e46e7b2365237408ec7d862324f6b1, type: 3}
+  - {fileID: 8300000, guid: 4fb9eaa93dfd1384f9e69aff5f20882d, type: 3}
+  - {fileID: 8300000, guid: cf27772291b332a43a5607ef5df4e7a0, type: 3}
+  - {fileID: 8300000, guid: faed18a92b59ef64ea02d0ae0cb28fb6, type: 3}
+  - {fileID: 8300000, guid: b715a7c9943d6df43becc74b1690bfc9, type: 3}
+  - {fileID: 8300000, guid: 0af0d5e532bbdc44fa6f94ad896e3c71, type: 3}
   playerFootstepsVol: 0.2
   playerDeathCount: 0
+  HPOrig: 0
   weaponType: 0
 --- !u!33 &7192753789312961025
 MeshFilter:
