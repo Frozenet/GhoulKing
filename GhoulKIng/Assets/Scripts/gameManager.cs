@@ -76,24 +76,20 @@ public class gameManager : MonoBehaviour
     void Awake()
     {
         instance = this;
-        //finds player components
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerScript = player.GetComponent<playerController>();
-        playerWeaponSwap = player.GetComponentInChildren<weaponSwap>();
 
-        //makes title screen operational
-        if (SceneManager.GetActiveScene().name == "Show case level")//based on first level of game
+        if (SceneManager.GetActiveScene().name == "Title Screen")
         {
             menuCurrentlyOpen = titleScreen;
-            titleScreenOn = true;
-            gameOver = true;
-            titleScreenCam.SetActive(true);
-            player.SetActive(false);
             lockCursorPause();
-            
         }
         else
+        {
+            //finds player components
+            player = GameObject.FindGameObjectWithTag("Player");
+            playerScript = player.GetComponent<playerController>();
+            playerWeaponSwap = player.GetComponentInChildren<weaponSwap>();
             unlockCursorUnpause();
+        }
     }
 
     // Update is called once per frame
@@ -244,12 +240,7 @@ public class gameManager : MonoBehaviour
     {
         //changes from title screen to game screen
         audi.PlayOneShot(menuClick[0], clickVol);
-        gameOver = false;
-        titleScreenOn = false;
-        titleScreen.SetActive(false);
-        titleScreenCam.SetActive(false);
-        player.SetActive(true);
-        unlockCursorUnpause();
+        loadShowcase();
     }
     public void loadShowcase()
     {
