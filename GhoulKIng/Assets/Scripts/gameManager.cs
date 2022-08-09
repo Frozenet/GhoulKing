@@ -49,12 +49,20 @@ public class gameManager : MonoBehaviour
     public TMP_Text rocketAmmo;
     public TMP_Text rocketAmmoMax;
 
+    [Header("-----------------")]
+    [Header("Audio")]
+    public AudioSource audi;
+    [SerializeField] AudioClip[] menuClick;
+    [Range(0, 1)] [SerializeField] float clickVol;
+
+    [Header("-----------------")]
     [HideInInspector] public bool paused = false;
     public GameObject menuCurrentlyOpen;
     public GameObject prevOpenMenu;
     [HideInInspector] public bool gameOver;
     [HideInInspector] public bool titleScreenOn;
 
+    [Header("-----------------")]
     int enemiesKilled = 0;
     public int enemyKillGoal;
     public int keysCollected = 0;
@@ -128,6 +136,7 @@ public class gameManager : MonoBehaviour
 
     public void resume()
     {
+        audi.PlayOneShot(menuClick[0], clickVol);
         paused = false;
         menuCurrentlyOpen.SetActive(false);
         menuCurrentlyOpen = null;
@@ -177,6 +186,7 @@ public class gameManager : MonoBehaviour
 
     public void restart()
     {
+        audi.PlayOneShot(menuClick[0], clickVol);
         gameOver = false;
         paused = false;
         menuCurrentlyOpen.SetActive(false);
@@ -202,6 +212,7 @@ public class gameManager : MonoBehaviour
     public void settings()
     {
         //opens the settings menu
+        audi.PlayOneShot(menuClick[0], clickVol);
         prevOpenMenu = menuCurrentlyOpen;
         menuCurrentlyOpen.SetActive(false);
         menuCurrentlyOpen = settingsMenu;
@@ -210,6 +221,7 @@ public class gameManager : MonoBehaviour
     public void back()
     {
         //goes back to the previous open menu
+        audi.PlayOneShot(menuClick[0], clickVol);
         menuCurrentlyOpen.SetActive(false);
         menuCurrentlyOpen = prevOpenMenu;
         menuCurrentlyOpen.SetActive(true);
@@ -217,6 +229,7 @@ public class gameManager : MonoBehaviour
     public void creditsContinue()
     {
         //changes to credits scene
+        audi.PlayOneShot(menuClick[0], clickVol);
         menuCurrentlyOpen.SetActive(false);
         menuCurrentlyOpen = creditsScreen;
         menuCurrentlyOpen.SetActive(true);
@@ -225,11 +238,13 @@ public class gameManager : MonoBehaviour
     {
         //change scene name to final game lvl
         //reloads the scene
+        audi.PlayOneShot(menuClick[0], clickVol);
         loadShowcase();
     }
     public void startBTN()
     {
         //changes from title screen to game screen
+        audi.PlayOneShot(menuClick[0], clickVol);
         gameOver = false;
         titleScreenOn = false;
         titleScreen.SetActive(false);
