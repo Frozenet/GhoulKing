@@ -25,6 +25,14 @@ public class sniperScript : MonoBehaviour, IDamageable
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject shootPos;
 
+    [Header("-----------------")]
+    [Header("Audio")]
+    public AudioSource aud;
+    [SerializeField] AudioClip[] sniperShot;
+    [Range(0, 1)][SerializeField] float sniperAudVol;
+    [SerializeField] AudioClip[] deadAud;
+    [Range(0, 1)][SerializeField] float deadAudVol;
+
 
 
     bool canShoot = true;

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8264004728367940366
+--- !u!1 &39186610193205392
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,70 +8,69 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8264004728367940373}
-  - component: {fileID: 8264004728367940370}
-  - component: {fileID: 8264004728367940371}
-  - component: {fileID: 8264004728367940368}
-  - component: {fileID: 8264004728367940369}
+  - component: {fileID: 39186610193205396}
+  - component: {fileID: 4463687405971931452}
+  - component: {fileID: 39186610193205395}
+  - component: {fileID: 6434803460010014874}
+  - component: {fileID: 4463687405971931426}
   m_Layer: 8
-  m_Name: Sniper Bullet
+  m_Name: Fireball demo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8264004728367940373
+--- !u!4 &39186610193205396
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8264004728367940366}
+  m_GameObject: {fileID: 39186610193205392}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -26.058, y: 1.9217327, z: -14.285}
+  m_LocalPosition: {x: -35.496014, y: 0.4915807, z: -9.377522}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8264004728367940370
+--- !u!114 &4463687405971931452
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8264004728367940366}
+  m_GameObject: {fileID: 39186610193205392}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d08ef575f6c07d47a8bbb3e989e2a70, type: 3}
+  m_Script: {fileID: 11500000, guid: 35620ec63a61ba1438b8ed1857bdbcc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
-  speed: 20
-  rb: {fileID: 8264004728367940368}
-  destoryTime: 10
-  hitEffect: {fileID: 4245223680510760296, guid: cb9fb975be296b547b1ad219f0203297, type: 3}
---- !u!135 &8264004728367940371
+  damage: 1
+  rb: {fileID: 6434803460010014874}
+  speed: 10
+  destoryTime: 5
+--- !u!135 &39186610193205395
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8264004728367940366}
+  m_GameObject: {fileID: 39186610193205392}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &8264004728367940368
+--- !u!54 &6434803460010014874
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8264004728367940366}
+  m_GameObject: {fileID: 39186610193205392}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -81,17 +80,17 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!96 &8264004728367940369
+--- !u!96 &4463687405971931426
 TrailRenderer:
   serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8264004728367940366}
+  m_GameObject: {fileID: 39186610193205392}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 0
+  m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 0
@@ -102,7 +101,7 @@ TrailRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -131,8 +130,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.060001373
-        value: 0.10000038
+        time: 0.035557114
+        value: 0.11956537
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -144,8 +143,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0, b: 0, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 0.39607844}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

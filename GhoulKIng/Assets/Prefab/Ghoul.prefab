@@ -1078,6 +1078,13 @@ MonoBehaviour:
   shootRate: 2
   bullet: {fileID: 1777321105042029387, guid: 8b70cae6e93c4614b9b74d171970d049, type: 3}
   shootPos: {fileID: 3797004952255742302}
+  aud: {fileID: 0}
+  enemyidle: []
+  idleAudVol: 0
+  enemyTakeDamage: []
+  damageAudVol: 0
+  deadAud: []
+  deadAudVol: 0
   playerInRange: 0
 --- !u!195 &7856361485149581333
 NavMeshAgent:
