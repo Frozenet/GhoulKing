@@ -73,7 +73,7 @@ public class gameManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         instance = this;
 
@@ -87,7 +87,7 @@ public class gameManager : MonoBehaviour
         {
             Debug.Log("this is game scene");
             //finds player components
-            player = GameObject.FindGameObjectWithTag("Player");
+            player = GameObject.Find("Player");
             playerScript = player.GetComponent<playerController>();
             playerWeaponSwap = player.GetComponentInChildren<weaponSwap>();
             unlockCursorUnpause();
