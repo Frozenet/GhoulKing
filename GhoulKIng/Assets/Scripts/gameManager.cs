@@ -70,10 +70,11 @@ public class gameManager : MonoBehaviour
     //[SerializeField] int KeysGoals;
 
     public GameObject titleScreenCam;
+    public GameObject fenceGate;
 
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         instance = this;
 
@@ -87,7 +88,7 @@ public class gameManager : MonoBehaviour
         {
             Debug.Log("this is game scene");
             //finds player components
-            player = GameObject.FindGameObjectWithTag("Player");
+            player = GameObject.Find("Player");
             playerScript = player.GetComponent<playerController>();
             playerWeaponSwap = player.GetComponentInChildren<weaponSwap>();
             unlockCursorUnpause();
@@ -176,6 +177,8 @@ public class gameManager : MonoBehaviour
         keysCollected++;
         keysHeld.text = keysCollected.ToString("F0");
         totalKeys.text = keysCollected.ToString("F0");
+        if (keysCollected >= keysGoal)
+            fenceGate.SetActive(false);
     }
 
     public void restart()
