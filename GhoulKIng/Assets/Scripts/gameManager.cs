@@ -70,6 +70,7 @@ public class gameManager : MonoBehaviour
     //[SerializeField] int KeysGoals;
 
     public GameObject titleScreenCam;
+    public GameObject fenceGate;
 
 
     // Start is called before the first frame update
@@ -176,6 +177,8 @@ public class gameManager : MonoBehaviour
         keysCollected++;
         keysHeld.text = keysCollected.ToString("F0");
         totalKeys.text = keysCollected.ToString("F0");
+        if (keysCollected >= keysGoal)
+            fenceGate.SetActive(false);
     }
 
     public void restart()
