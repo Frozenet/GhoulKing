@@ -721,7 +721,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 75
+    maxNumParticles: 150
     customEmitterVelocity: {x: 0, y: 0, z: 0}
     size3D: 0
     rotation3D: 0
@@ -1443,10 +1443,10 @@ ParticleSystem:
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
         ctime0: 0
-        ctime1: 23323
-        ctime2: 40285
-        ctime3: 65535
-        ctime4: 0
+        ctime1: 15998
+        ctime2: 36623
+        ctime3: 59174
+        ctime4: 65535
         ctime5: 0
         ctime6: 0
         ctime7: 0

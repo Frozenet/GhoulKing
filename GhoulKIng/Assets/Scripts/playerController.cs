@@ -42,7 +42,7 @@ public class playerController : MonoBehaviour, IDamageable
     [Header("-----------------")]
     [Header("weapon lerps")]
 
-    float current = 0, target = 1;
+    float current = 0, target = 0;
 
     [SerializeField] GameObject pistolOrig;
     [SerializeField] GameObject pistolRecoil;
@@ -50,6 +50,7 @@ public class playerController : MonoBehaviour, IDamageable
     [SerializeField] GameObject shotgunRecoil;
     [SerializeField] GameObject rocketLauncherOrig;
     [SerializeField] GameObject rocketLauncheRecoil;
+    [SerializeField] GameObject RPGhead;
 
 
 
@@ -121,10 +122,22 @@ public class playerController : MonoBehaviour, IDamageable
             StartCoroutine(shoot());
             if (isshooting || triggerPull)
             {
+                if (triggerPull)
+                {
+                    current = 1;
+                    triggerPull = false;
+                }
                 if (currentWeapon == pistol)
                 {
-                StartCoroutine(pistolLerp());
-
+                    StartCoroutine(pistolLerp());
+                }
+                if (currentWeapon == shotgun)
+                {
+                    StartCoroutine(shotgunLerp());
+                }
+                if (currentWeapon == RocketLancher)
+                {
+                    StartCoroutine(rocketlauncherLerp());
                 }
 
             }
@@ -233,29 +246,48 @@ public class playerController : MonoBehaviour, IDamageable
 
     IEnumerator pistolLerp()
     {
-        triggerPull = false;
         isshooting = true;
 
-        if (current == 1)
+        if (current == 0 && isshooting)
         {
-            target = 0;
+            isshooting = false; 
         }
-        float recoilTime = shootRate / 2;
-        current = Mathf.MoveTowards(current, target, (recoilTime / (recoilTime * recoilTime)) * Time.deltaTime);
-
+        float recoilTime = shootRate;
         objLerp(currentWeapon, pistolOrig, pistolRecoil, current);
-        if (current == 0)
-        {
-            target = 1;
-            isshooting = false;
-        }
-
+        current = Mathf.MoveTowards(current, target, (recoilTime / (recoilTime * recoilTime)) * Time.deltaTime);
 
         yield return new WaitForSeconds(shootRate);
     }
 
+    IEnumerator shotgunLerp()
+    {
+        isshooting = true;
 
+        if (current == 0 && isshooting)
+        {
+            isshooting = false;
+        }
+        float recoilTime = shootRate;
+        objLerp(currentWeapon, shotgunOrig, shotgunRecoil, current);
+        current = Mathf.MoveTowards(current, target, (recoilTime / (recoilTime * recoilTime)) * Time.deltaTime);
 
+        yield return new WaitForSeconds(shootRate);
+    }
+
+    IEnumerator rocketlauncherLerp()
+    {
+        isshooting = true;
+
+        if (current == 0 && isshooting)
+        {
+            isshooting = false;
+        }
+        float recoilTime = shootRate;
+        objLerp(currentWeapon, rocketLauncherOrig, rocketLauncheRecoil, current);
+        current = Mathf.MoveTowards(current, target, (recoilTime / (recoilTime * recoilTime)) * Time.deltaTime);
+
+        yield return new WaitForSeconds(shootRate);
+    }
 
     IEnumerator shoot()
     {
@@ -266,16 +298,14 @@ public class playerController : MonoBehaviour, IDamageable
 
         if (Input.GetButton("Shoot") && canShoot)
         {
-            canShoot = false;
-            triggerPull = true;
             
+
 
             if (weaponType == 0)// 0 is pistol
             {
+                canShoot = false;
+                triggerPull = true;
                 aud.PlayOneShot(PistolAud[Random.Range(0, PistolAud.Length)], PistolAudVol);//new
-
-                //lerp recoil dumbass
-
 
                 if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit, range))
                 {
@@ -299,7 +329,8 @@ public class playerController : MonoBehaviour, IDamageable
                 if (shotgunAmmo != 0)
                 {
                     shotgunAmmo--;
-
+                    canShoot = false;
+                    triggerPull = true;
                     aud.PlayOneShot(ShotgunAud[0], ShotgunAudVol);
                     for (int i = 0; i < 12; i++)
                     {
@@ -331,9 +362,18 @@ public class playerController : MonoBehaviour, IDamageable
                 if (rocketAmmo != 0)
                 {
                     rocketAmmo--;
+                    canShoot = false;
+                    triggerPull = true;
                     aud.PlayOneShot(RocketLancherAud[0], RocketLancherAudVol);//new
                     Instantiate(rocket, shootpos.transform.position, shootpos.transform.rotation);
 
+
+
+
+                    RPGhead.SetActive(false);
+                    yield return new WaitForSeconds(shootRate);
+                    RPGhead.SetActive(true);
+                    
                 }
                 else
                 {
