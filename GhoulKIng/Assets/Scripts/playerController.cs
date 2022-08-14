@@ -256,7 +256,7 @@ public class playerController : MonoBehaviour, IDamageable
         objLerp(currentWeapon, pistolOrig, pistolRecoil, current);
         current = Mathf.MoveTowards(current, target, (recoilTime / (recoilTime * recoilTime)) * Time.deltaTime);
 
-        yield return new WaitForSeconds(shootRate);
+        yield return null;
     }
 
     IEnumerator shotgunLerp()
@@ -271,7 +271,7 @@ public class playerController : MonoBehaviour, IDamageable
         objLerp(currentWeapon, shotgunOrig, shotgunRecoil, current);
         current = Mathf.MoveTowards(current, target, (recoilTime / (recoilTime * recoilTime)) * Time.deltaTime);
 
-        yield return new WaitForSeconds(shootRate);
+        yield return null;
     }
 
     IEnumerator rocketlauncherLerp()
@@ -286,7 +286,7 @@ public class playerController : MonoBehaviour, IDamageable
         objLerp(currentWeapon, rocketLauncherOrig, rocketLauncheRecoil, current);
         current = Mathf.MoveTowards(current, target, (recoilTime / (recoilTime * recoilTime)) * Time.deltaTime);
 
-        yield return new WaitForSeconds(shootRate);
+        yield return null;
     }
 
     IEnumerator shoot()
