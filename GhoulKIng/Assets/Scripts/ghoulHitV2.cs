@@ -38,7 +38,7 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
     [Range(0, 1)][SerializeField] float deadAudVol;
 
     bool canShoot = true;
-    [SerializeField] bool playerInRange;
+    [SerializeField] bool playerInRange = false;
     Vector3 playerDir;
     Vector3 startingPos;
     float StoppingDistOrig;
@@ -59,32 +59,17 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
             anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agent.velocity.normalized.magnitude, Time.deltaTime * 5));
 
             playerDir = gameManager.instance.player.transform.position - transform.position;
+            playerDir.Normalize();
             agent.SetDestination(gameManager.instance.player.transform.position);
             facePlayer();
 
-            if (playerInRange)
-            {
-                canSeePlayer();
-
-            }
-            /* else if (agent.remainingDistance < 0.1f)
-                 StartCoroutine(roam());*/
+        }
+        if (playerInRange)
+        {
+            canSeePlayer();
         }
     }
-    /* IEnumerator roam()
-     {
-         agent.stoppingDistance = 0;
-         Vector3 randomDir = Random.insideUnitSphere * roamRadius;
-         randomDir += startingPos;
 
-         NavMeshHit hit;
-         NavMesh.SamplePosition(randomDir, out hit, roamRadius, 1);
-         NavMeshPath path = new NavMeshPath();
-
-         agent.CalculatePath(hit.position, path);
-         agent.SetPath(path);
-         yield return new WaitForSeconds(3);
-     }*/
     void facePlayer()
     {
         if (agent.remainingDistance <= agent.stoppingDistance)
@@ -100,14 +85,18 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
         float angle = Vector3.Angle(playerDir, transform.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, playerDir, out hit))
+        if(HP != 0)
         {
-            Debug.DrawRay(transform.position, playerDir);
-            if (hit.collider.CompareTag("Player") && canShoot && angle <= viewAngle)
+            if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), playerDir, out hit))
             {
-                shoot();
+                Debug.DrawRay(transform.position+new Vector3(0,1,0), playerDir,Color.magenta);
+                if (hit.collider.CompareTag("Player") && canShoot && angle <= viewAngle)
+                {
+                    shoot();
+                }
             }
         }
+
     }
 
     public void OnTriggerStay(Collider other)
@@ -119,6 +108,7 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
             playerInRange = true;
             // canShoot = true;
             agent.stoppingDistance = StoppingDistOrig;
+
         }
     }
     public void OnTriggerExit(Collider other)

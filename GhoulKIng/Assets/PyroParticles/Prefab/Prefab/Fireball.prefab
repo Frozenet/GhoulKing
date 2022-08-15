@@ -314,7 +314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 245887334a601354cb1853676e37a7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AudioSource: {fileID: 0}
+  AudioSource: {fileID: 8228610}
   StartTime: 0.25
   StopTime: 1
   Duration: 3
