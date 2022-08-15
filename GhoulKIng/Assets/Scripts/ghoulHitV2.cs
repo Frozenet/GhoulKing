@@ -18,6 +18,8 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
     [SerializeField] int playerFaceSpeed;
     [SerializeField] int roamRadius;
     [SerializeField] float AttackAnimBuffer;
+    public float attackTimer;
+    public float attackTime;
 
     [Header("----------------------------------")]
     [Header("Weapon Stats")]
@@ -95,7 +97,6 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
 
     void canSeePlayer()
     {
-        canShoot = true;
         float angle = Vector3.Angle(playerDir, transform.forward);
         RaycastHit hit;
 
@@ -104,17 +105,17 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
             Debug.DrawRay(transform.position, playerDir);
             if (hit.collider.CompareTag("Player") && canShoot && angle <= viewAngle)
             {
-                StartCoroutine(shoot());
+                shoot();
             }
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             //atack
-            StartCoroutine(shoot());
+            //shoot();
             playerInRange = true;
             // canShoot = true;
             agent.stoppingDistance = StoppingDistOrig;
@@ -132,7 +133,6 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
     public void takeDamage(int dmg)
     {
         HP -= dmg;
-        playerInRange = true;
 
         anim.SetTrigger("Damage");
 
@@ -154,20 +154,23 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
     //    yield return new WaitForSeconds(0.1f);
     //    rend.material.color = Color.white;
     //}
-    IEnumerator shoot()
+
+    void shoot()
     {
         if (canShoot)
         {
             canShoot = false;
+            anim.SetTrigger("Shoot");
 
             Instantiate(bullet, shootPos.transform.position, bullet.transform.rotation);
-
-            anim.SetTrigger("Shoot");
-            //yield return new WaitForSeconds(AttackAnimBuffer);
-
-            yield return new WaitForSeconds(shootRate);
-
-            canShoot = true;
+            StartCoroutine(attackTimerDelay());
         }
+    }
+
+    IEnumerator attackTimerDelay()
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(attackTime);
+        canShoot = true;
     }
 }
