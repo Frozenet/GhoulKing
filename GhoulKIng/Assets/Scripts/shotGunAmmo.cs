@@ -10,7 +10,7 @@ public class shotGunAmmo : MonoBehaviour
     {
         gameManager.instance.playerScript.giveShots(shells);
     }
-
+    
     public void OnTriggerEnter(Collider other)
     {
         if (gameManager.instance.playerScript.shotgunAmmo < gameManager.instance.playerScript.shotgunAmmoMax)
@@ -20,6 +20,7 @@ public class shotGunAmmo : MonoBehaviour
                 gameManager.instance.playerScript.giveShots(shells);
                 Destroy(gameObject);
 
+           
             }
         }
     }
