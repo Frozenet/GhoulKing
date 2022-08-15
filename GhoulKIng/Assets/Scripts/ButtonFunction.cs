@@ -47,4 +47,8 @@ public class ButtonFunction : MonoBehaviour
     {
         gameManager.instance.startBTN();
     }
+    public void nextLevel()
+    {
+        gameManager.instance.loadNextLevel = true;
+    }
 }
