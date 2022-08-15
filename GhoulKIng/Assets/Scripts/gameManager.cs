@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Timers;
 
 public class gameManager : MonoBehaviour
 {
@@ -305,5 +306,9 @@ public class gameManager : MonoBehaviour
         menuCurrentlyOpen.SetActive(true);
         gameOver = true;
         lockCursorPause();
+        //wait for seconds
+        //Timer timer = new Timer(5000);
+        //timer.Elapsed += 
     }
 }
+
