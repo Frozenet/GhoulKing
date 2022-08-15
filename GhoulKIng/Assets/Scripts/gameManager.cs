@@ -70,36 +70,29 @@ public class gameManager : MonoBehaviour
     //[SerializeField] int KeysGoals;
 
     public GameObject titleScreenCam;
+    public GameObject fenceGate;
 
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         instance = this;
 
-        //sets the title screen to active
-        if (SceneManager.GetActiveScene().name == "Show case level")//based on first level of game
+        if (SceneManager.GetActiveScene().name == "Title Screen")
         {
+            Debug.Log("this is title scene");
             menuCurrentlyOpen = titleScreen;
-            titleScreenOn = true;
-            gameOver = true;
-        }
-
-
-        //finds player components
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerScript = player.GetComponent<playerController>();
-        playerWeaponSwap = player.GetComponentInChildren<weaponSwap>();
-
-        //makes title screen operational
-        if (SceneManager.GetActiveScene().name == "Show case level")//based on first level of game
-        {
-            titleScreenCam.SetActive(true);
-            player.SetActive(false);
             lockCursorPause();
         }
         else
+        {
+            Debug.Log("this is game scene");
+            //finds player components
+            player = GameObject.Find("Player");
+            playerScript = player.GetComponent<playerController>();
+            playerWeaponSwap = player.GetComponentInChildren<weaponSwap>();
             unlockCursorUnpause();
+        }
     }
 
     // Update is called once per frame
@@ -184,6 +177,8 @@ public class gameManager : MonoBehaviour
         keysCollected++;
         keysHeld.text = keysCollected.ToString("F0");
         totalKeys.text = keysCollected.ToString("F0");
+        if (keysCollected >= keysGoal)
+            fenceGate.SetActive(false);
     }
 
     public void restart()
@@ -202,6 +197,7 @@ public class gameManager : MonoBehaviour
         Time.timeScale = 0;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+        Debug.Log("paused");
     }
 
     public void unlockCursorUnpause()
@@ -210,6 +206,8 @@ public class gameManager : MonoBehaviour
         Time.timeScale = 1;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        Debug.Log("unpaused");
+
     }
     public void settings()
     {
@@ -241,18 +239,13 @@ public class gameManager : MonoBehaviour
         //change scene name to final game lvl
         //reloads the scene
         audi.PlayOneShot(menuClick[0], clickVol);
-        loadShowcase();
+        SceneManager.LoadScene("Title Screen");
     }
     public void startBTN()
     {
         //changes from title screen to game screen
         audi.PlayOneShot(menuClick[0], clickVol);
-        gameOver = false;
-        titleScreenOn = false;
-        titleScreen.SetActive(false);
-        titleScreenCam.SetActive(false);
-        player.SetActive(true);
-        unlockCursorUnpause();
+        SceneManager.LoadScene("Terrain level");
     }
     public void loadShowcase()
     {

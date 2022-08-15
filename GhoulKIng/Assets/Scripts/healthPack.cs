@@ -12,13 +12,15 @@ public class healthPack : MonoBehaviour
     }
     public void OnTriggerEnter(Collider other)
     {
-       
 
+        if (gameManager.instance.playerScript.HP < gameManager.instance.playerScript.HPOrig)
+        {
             if (other.CompareTag("Player"))
             {
                 gameManager.instance.playerScript.giveHP(amount);
                 Destroy(gameObject);
             }
+        }
         
     }
 }

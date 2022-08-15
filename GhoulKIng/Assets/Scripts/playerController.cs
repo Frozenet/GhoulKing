@@ -32,10 +32,27 @@ public class playerController : MonoBehaviour, IDamageable
     public GameObject pistol;
     public GameObject shotgun;
     public GameObject RocketLancher;
+    public GameObject shootpos;
+
     [SerializeField] GameObject rocket;
     public GameObject currentWeapon;
     [SerializeField] GameObject gunModel;
     public List<gunStats> gunstat = new List<gunStats>();
+
+    [Header("-----------------")]
+    [Header("weapon lerps")]
+
+    float current = 0, target = 0;
+
+    [SerializeField] GameObject pistolOrig;
+    [SerializeField] GameObject pistolRecoil;
+    [SerializeField] GameObject shotgunOrig;
+    [SerializeField] GameObject shotgunRecoil;
+    [SerializeField] GameObject rocketLauncherOrig;
+    [SerializeField] GameObject rocketLauncheRecoil;
+    [SerializeField] GameObject RPGhead;
+
+
 
     [Header("-----------------")]
     [Header("Effects")]
@@ -69,6 +86,8 @@ public class playerController : MonoBehaviour, IDamageable
     public int playerDeathCount = 0;
 
     bool canShoot = true;
+    bool triggerPull = false;
+    bool isshooting = false;
     public int HPOrig;
     Vector3 playerSpawnPos;
     bool footsetpPlaying;
@@ -79,9 +98,8 @@ public class playerController : MonoBehaviour, IDamageable
         playerSpeedOrig = playerSpeed;
         HPOrig = HP;
         playerSpawnPos = transform.position;
-        shotgunAmmo = shotgunAmmoMax;
-        rocketAmmo = rocketAmmoMax;
-        gameManager.instance.updateAmmo();
+        shotgunAmmo = 0;
+        rocketAmmo = 0;
         currentWeapon = pistol;
         weaponType = 0;
         shootRate = 0.5f;
@@ -100,8 +118,31 @@ public class playerController : MonoBehaviour, IDamageable
             {
                 weaopnChoice();
             }
+            gameManager.instance.updateAmmo();
             StartCoroutine(shoot());
+            if (isshooting || triggerPull)
+            {
+                if (triggerPull)
+                {
+                    current = 1;
+                    triggerPull = false;
+                }
+                if (currentWeapon == pistol)
+                {
+                    StartCoroutine(pistolLerp());
+                }
+                if (currentWeapon == shotgun)
+                {
+                    StartCoroutine(shotgunLerp());
+                }
+                if (currentWeapon == RocketLancher)
+                {
+                    StartCoroutine(rocketlauncherLerp());
+                }
+
+            }
             StartCoroutine(playFootsteps());//new
+            gameManager.instance.updateAmmo();
         }
     }
 
@@ -197,20 +238,75 @@ public class playerController : MonoBehaviour, IDamageable
         }
     }
 
+    public void objLerp(GameObject obj, GameObject objOrigPos, GameObject objRecoilPos, float curPos)
+    {
+        obj.transform.position = Vector3.Lerp(objOrigPos.transform.position, objRecoilPos.transform.position, curPos);
+        obj.transform.rotation = Quaternion.Lerp(objOrigPos.transform.rotation, objRecoilPos.transform.rotation, curPos);
+    }
+
+    IEnumerator pistolLerp()
+    {
+        isshooting = true;
+
+        if (current == 0 && isshooting)
+        {
+            isshooting = false; 
+        }
+        float recoilTime = shootRate;
+        objLerp(currentWeapon, pistolOrig, pistolRecoil, current);
+        current = Mathf.MoveTowards(current, target, (recoilTime / (recoilTime * recoilTime)) * Time.deltaTime);
+
+        yield return null;
+    }
+
+    IEnumerator shotgunLerp()
+    {
+        isshooting = true;
+
+        if (current == 0 && isshooting)
+        {
+            isshooting = false;
+        }
+        float recoilTime = shootRate;
+        objLerp(currentWeapon, shotgunOrig, shotgunRecoil, current);
+        current = Mathf.MoveTowards(current, target, (recoilTime / (recoilTime * recoilTime)) * Time.deltaTime);
+
+        yield return null;
+    }
+
+    IEnumerator rocketlauncherLerp()
+    {
+        isshooting = true;
+
+        if (current == 0 && isshooting)
+        {
+            isshooting = false;
+        }
+        float recoilTime = shootRate;
+        objLerp(currentWeapon, rocketLauncherOrig, rocketLauncheRecoil, current);
+        current = Mathf.MoveTowards(current, target, (recoilTime / (recoilTime * recoilTime)) * Time.deltaTime);
+
+        yield return null;
+    }
+
     IEnumerator shoot()
     {
+
         RaycastHit hit;
 
         //Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.forward * 100, Color.red);
 
         if (Input.GetButton("Shoot") && canShoot)
         {
-            canShoot = false;
+            
 
 
             if (weaponType == 0)// 0 is pistol
             {
+                canShoot = false;
+                triggerPull = true;
                 aud.PlayOneShot(PistolAud[Random.Range(0, PistolAud.Length)], PistolAudVol);//new
+
                 if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit, range))
                 {
                     Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
@@ -233,7 +329,8 @@ public class playerController : MonoBehaviour, IDamageable
                 if (shotgunAmmo != 0)
                 {
                     shotgunAmmo--;
-
+                    canShoot = false;
+                    triggerPull = true;
                     aud.PlayOneShot(ShotgunAud[0], ShotgunAudVol);
                     for (int i = 0; i < 12; i++)
                     {
@@ -264,10 +361,19 @@ public class playerController : MonoBehaviour, IDamageable
             {
                 if (rocketAmmo != 0)
                 {
-                rocketAmmo--;
-                aud.PlayOneShot(RocketLancherAud[0], RocketLancherAudVol);//new
-                Instantiate(rocket, RocketLancher.transform.position, RocketLancher.transform.rotation);
+                    rocketAmmo--;
+                    canShoot = false;
+                    triggerPull = true;
+                    aud.PlayOneShot(RocketLancherAud[0], RocketLancherAudVol);//new
+                    Instantiate(rocket, shootpos.transform.position, shootpos.transform.rotation);
 
+
+
+
+                    RPGhead.SetActive(false);
+                    yield return new WaitForSeconds(shootRate);
+                    RPGhead.SetActive(true);
+                    
                 }
                 else
                 {
@@ -276,12 +382,13 @@ public class playerController : MonoBehaviour, IDamageable
 
             }
             gameManager.instance.updateAmmo();
-            muzzleFlash.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
-            muzzleFlash.SetActive(true);
+            //muzzleFlash.transform.localRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
+            //muzzleFlash.SetActive(true);
             yield return new WaitForSeconds(0.05f);
-            muzzleFlash.SetActive(false);
+            //muzzleFlash.SetActive(false);
             yield return new WaitForSeconds(shootRate);
             canShoot = true;
+
         }
     }
     public void giveShots(int shells)
@@ -299,7 +406,7 @@ public class playerController : MonoBehaviour, IDamageable
     }
     public void updatePlayerShells()
     {
-         //shotgunAmmo = shotgunAmmoMax;
+        //shotgunAmmo = shotgunAmmoMax;
         float shellPercent = ((float)shotgunAmmo / (float)shotgunAmmoMax);
         gameManager.instance.shotgunAmmo.text = shellPercent.ToString("F0");
     }
@@ -318,7 +425,7 @@ public class playerController : MonoBehaviour, IDamageable
     }
     public void updatePlayerRounds()
     {
-         rocketAmmo = rocketAmmoMax;
+        rocketAmmo = rocketAmmoMax;
         float rocketPercent = ((float)rocketAmmo / (float)rocketAmmoMax);
         gameManager.instance.shotgunAmmo.text = rocketPercent.ToString("F0");
     }

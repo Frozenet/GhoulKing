@@ -116,16 +116,18 @@ public class sniperScript : MonoBehaviour, IDamageable
     public void takeDamage(int dmg)
     {
         HP -= dmg;
+        aud.PlayOneShot(deadAud[0], deadAudVol);
 
         anim.SetTrigger("Damage");
 
-        StartCoroutine(flashColor());
+        //StartCoroutine(flashColor());
         playerInRange = true;
 
 
-        if (deleteBody != true)
+
+        if (HP <= 0)
         {
-            if (HP <= 0)
+            if (deleteBody != true)
             {
                 gameManager.instance.checkEnemyKills();
                 agent.enabled = false;
@@ -135,11 +137,11 @@ public class sniperScript : MonoBehaviour, IDamageable
                     col.enabled = false;
                 }
             }
-        }
-        else
-        {
-            gameManager.instance.checkEnemyKills();
-            Destroy(gameObject);
+            else
+            {
+                gameManager.instance.checkEnemyKills();
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -155,6 +157,7 @@ public class sniperScript : MonoBehaviour, IDamageable
     {
         if (canShoot)
         {
+            aud.PlayOneShot(sniperShot[0], sniperAudVol);
             canShoot = false;
 
             anim.SetTrigger("Shoot");

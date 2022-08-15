@@ -12,7 +12,7 @@ public class rocket : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb.velocity = transform.up * speed;
+        rb.velocity = transform.forward * speed;
         Destroy(gameObject, destoryTime);
     }
 

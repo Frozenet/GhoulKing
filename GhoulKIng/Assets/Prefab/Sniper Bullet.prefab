@@ -51,7 +51,7 @@ MonoBehaviour:
   speed: 20
   rb: {fileID: 8264004728367940368}
   destoryTime: 10
-  hitEffect: {fileID: 4245223680510760296, guid: cb9fb975be296b547b1ad219f0203297, type: 3}
+  hitEffect: {fileID: 7105177858108400233, guid: 9b0dc058cdcf796458724b48caed7bdb, type: 3}
 --- !u!135 &8264004728367940371
 SphereCollider:
   m_ObjectHideFlags: 0
