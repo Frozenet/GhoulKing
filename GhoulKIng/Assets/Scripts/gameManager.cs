@@ -245,7 +245,7 @@ public class gameManager : MonoBehaviour
     {
         //changes from title screen to game screen
         audi.PlayOneShot(menuClick[0], clickVol);
-        loadLevelOne();
+        SceneManager.LoadScene("Terrain level");
     }
     public void loadShowcase()
     {
