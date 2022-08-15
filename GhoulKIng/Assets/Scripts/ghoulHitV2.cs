@@ -133,7 +133,9 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
     {
         HP -= dmg;
         playerInRange = true;
-        StartCoroutine(flashColor());
+
+        anim.SetTrigger("Damage");
+
         if (HP <= 0)
         {
             gameManager.instance.checkEnemyKills();
@@ -144,34 +146,28 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
                 col.enabled = false;
 
         }
+    }
 
-    }
-    IEnumerator flashColor()
-    {
-        rend.material.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        rend.material.color = Color.white;
-    }
+    //IEnumerator flashColor()
+    //{
+    //    rend.material.color = Color.red;
+    //    yield return new WaitForSeconds(0.1f);
+    //    rend.material.color = Color.white;
+    //}
     IEnumerator shoot()
     {
-        if (canShoot == true)
+        if (canShoot)
         {
             canShoot = false;
 
-            anim.SetTrigger("Shoot");// Lets us use shoot animation
-           yield return new WaitForSeconds(AttackAnimBuffer);
-           // //-------------
+            Instantiate(bullet, shootPos.transform.position, bullet.transform.rotation);
 
-            Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
-
-            // 
+            anim.SetTrigger("Shoot");
+            //yield return new WaitForSeconds(AttackAnimBuffer);
 
             yield return new WaitForSeconds(shootRate);
 
             canShoot = true;
         }
     }
-
-
-
 }
