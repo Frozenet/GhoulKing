@@ -1,6 +1,12 @@
 fileFormatVersion: 2
-guid: a537d90caebd82f48b3055a159f63c78
+<<<<<<<< HEAD:GhoulKIng/Assets/Scenes/test/NavMesh.asset.meta
+guid: 0f4ceb774e0671c45912fa573d2853de
 NativeFormatImporter:
+========
+guid: 211ccbcac3a37bf4b83d805dccf0c355
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> b602d9e797091e3b66dd375e21dfbaa16d6f64ae:GhoulKIng/Assets/PyroParticles.meta
   externalObjects: {}
   mainObjectFileID: 2100000
   userData: 

@@ -1,13 +1,8 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:GhoulKIng/Assets/Animations/Skeleton animation.meta
-guid: b71f635c1089a8c4abccf1cd3b9ece13
-folderAsset: yes
-DefaultImporter:
-========
 guid: ed400d9e533c4e14a8255df86b514205
 NativeFormatImporter:
->>>>>>>> 6c381367ae7fc59bc882667519df896959ebed01:GhoulKIng/Assets/Scenes/Terrain level/NavMesh.asset.meta
   externalObjects: {}
+  mainObjectFileID: 23800000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
