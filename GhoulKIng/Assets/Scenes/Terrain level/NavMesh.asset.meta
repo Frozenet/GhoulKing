@@ -1,24 +1,8 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-<<<<<<<< HEAD:GhoulKIng/Assets/Scenes/Terrain level/NavMesh.asset.meta
-guid: ed400d9e533c4e14a8255df86b514205
-========
-guid: ce9b241ceb8924149a7ab22529ff0371
->>>>>>>> b602d9e797091e3b66dd375e21dfbaa16d6f64ae:GhoulKIng/Assets/Scenes/MillerScene/NavMesh.asset.meta
-NativeFormatImporter:
-  externalObjects: {}
-  mainObjectFileID: 0
-=======
-<<<<<<<< HEAD:GhoulKIng/Assets/Animations/Skeleton animation.meta
-guid: a1b34f82909f1954591bd411c7dcef3a
-folderAsset: yes
-DefaultImporter:
-========
 guid: ed400d9e533c4e14a8255df86b514205
 NativeFormatImporter:
->>>>>>>> 6c381367ae7fc59bc882667519df896959ebed01:GhoulKIng/Assets/Scenes/Terrain level/NavMesh.asset.meta
   externalObjects: {}
->>>>>>> b602d9e797091e3b66dd375e21dfbaa16d6f64ae
+  mainObjectFileID: 23800000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
