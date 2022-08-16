@@ -18,6 +18,8 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
     [SerializeField] int playerFaceSpeed;
     [SerializeField] int roamRadius;
     [SerializeField] float AttackAnimBuffer;
+    public float attackTimer;
+    public float attackTime;
 
     [Header("----------------------------------")]
     [Header("Weapon Stats")]
@@ -36,7 +38,7 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
     [Range(0, 1)][SerializeField] float deadAudVol;
 
     bool canShoot = true;
-    [SerializeField] bool playerInRange;
+    [SerializeField] bool playerInRange = false;
     Vector3 playerDir;
     Vector3 startingPos;
     float StoppingDistOrig;
@@ -57,32 +59,17 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
             anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agent.velocity.normalized.magnitude, Time.deltaTime * 5));
 
             playerDir = gameManager.instance.player.transform.position - transform.position;
+            playerDir.Normalize();
             agent.SetDestination(gameManager.instance.player.transform.position);
             facePlayer();
 
-            if (playerInRange)
-            {
-                canSeePlayer();
-
-            }
-            /* else if (agent.remainingDistance < 0.1f)
-                 StartCoroutine(roam());*/
+        }
+        if (playerInRange)
+        {
+            canSeePlayer();
         }
     }
-    /* IEnumerator roam()
-     {
-         agent.stoppingDistance = 0;
-         Vector3 randomDir = Random.insideUnitSphere * roamRadius;
-         randomDir += startingPos;
 
-         NavMeshHit hit;
-         NavMesh.SamplePosition(randomDir, out hit, roamRadius, 1);
-         NavMeshPath path = new NavMeshPath();
-
-         agent.CalculatePath(hit.position, path);
-         agent.SetPath(path);
-         yield return new WaitForSeconds(3);
-     }*/
     void facePlayer()
     {
         if (agent.remainingDistance <= agent.stoppingDistance)
@@ -95,29 +82,30 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
 
     void canSeePlayer()
     {
-        canShoot = true;
         float angle = Vector3.Angle(playerDir, transform.forward);
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, playerDir, out hit))
+        if(HP != 0)
         {
-            Debug.DrawRay(transform.position, playerDir);
-            if (hit.collider.CompareTag("Player") && canShoot && angle <= viewAngle)
+            if (Physics.Raycast(transform.position + new Vector3(0, 1, 0), playerDir, out hit))
             {
-                StartCoroutine(shoot());
+                Debug.DrawRay(transform.position+new Vector3(0,1,0), playerDir,Color.magenta);
+                if (hit.collider.CompareTag("Player") && canShoot && angle <= viewAngle)
+                {
+                    shoot();
+                }
             }
         }
+
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            //atack
-            StartCoroutine(shoot());
             playerInRange = true;
-            // canShoot = true;
             agent.stoppingDistance = StoppingDistOrig;
+
         }
     }
     public void OnTriggerExit(Collider other)
@@ -132,10 +120,11 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
     public void takeDamage(int dmg)
     {
         HP -= dmg;
-        playerInRange = true;
-        //aud.PlayOneShot(playerHurt[Random.Range(0, playerHurt.Length)], playerHurtVol);\
+
         aud.PlayOneShot(enemyTakeDamage[0], damageAudVol);
-        StartCoroutine(flashColor());
+
+        anim.SetTrigger("Damage");
+
         if (HP <= 0)
         {
             gameManager.instance.checkEnemyKills();
@@ -146,34 +135,24 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
                 col.enabled = false;
 
         }
+    }
 
-    }
-    IEnumerator flashColor()
+    void shoot()
     {
-        rend.material.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        rend.material.color = Color.white;
-    }
-    IEnumerator shoot()
-    {
-        if (canShoot == true)
+        if (canShoot)
         {
             canShoot = false;
+            anim.SetTrigger("Shoot");
 
-            anim.SetTrigger("Shoot");// Lets us use shoot animation
-           yield return new WaitForSeconds(AttackAnimBuffer);
-           // //-------------
-
-            Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
-
-            // 
-
-            yield return new WaitForSeconds(shootRate);
-
-            canShoot = true;
+            Instantiate(bullet, shootPos.transform.position, bullet.transform.rotation);
+            StartCoroutine(attackTimerDelay());
         }
     }
 
-
-
+    IEnumerator attackTimerDelay()
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(attackTime);
+        canShoot = true;
+    }
 }

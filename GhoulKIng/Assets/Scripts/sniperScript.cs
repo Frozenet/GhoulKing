@@ -120,10 +120,7 @@ public class sniperScript : MonoBehaviour, IDamageable
 
         anim.SetTrigger("Damage");
 
-        //StartCoroutine(flashColor());
         playerInRange = true;
-
-
 
         if (HP <= 0)
         {

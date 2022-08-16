@@ -72,6 +72,7 @@ public class gameManager : MonoBehaviour
 
     public GameObject titleScreenCam;
     public GameObject fenceGate;
+    public bool loadNextLevel = false;
 
 
     // Start is called before the first frame update
@@ -251,14 +252,16 @@ public class gameManager : MonoBehaviour
     public void loadShowcase()
     {
         loadMenuCondition();
-        SceneManager.LoadScene("Show case level");
+        //if (loadNextLevel == true)
+            SceneManager.LoadScene("Show case level");
     }
     public void loadLevelOne()
     {
         if (keysCollected >= keysGoal)
         {
             loadMenuCondition();
-            SceneManager.LoadScene("Terrain level");
+            //if (loadNextLevel == true)
+                SceneManager.LoadScene("Terrain level");
         }
     }
     public void loadLevelTwo()
@@ -266,7 +269,8 @@ public class gameManager : MonoBehaviour
         if (keysCollected >= keysGoal)
         {
             loadMenuCondition();
-            SceneManager.LoadScene("CorridorLevelOne");
+            //if (loadNextLevel == true)
+                SceneManager.LoadScene("CorridorLevelOne");
         }
     }
     public void loadLevelThree()
@@ -306,9 +310,6 @@ public class gameManager : MonoBehaviour
         menuCurrentlyOpen.SetActive(true);
         gameOver = true;
         lockCursorPause();
-        //wait for seconds
-        //Timer timer = new Timer(5000);
-        //timer.Elapsed += 
     }
 }
 

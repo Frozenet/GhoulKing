@@ -654,7 +654,7 @@ MonoBehaviour:
   HP: 10
   viewAngle: 10000
   playerFaceSpeed: 120
-  deleteBody: 1
+  deleteBody: 0
   shootRate: 4
   bullet: {fileID: 8264004728367940366, guid: 6fad20da405e4ac42ae9ca445f166ee1, type: 3}
   shootPos: {fileID: 4216239943797064241}

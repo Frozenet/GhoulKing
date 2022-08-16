@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 0ab80decc94a4264b9056aa1c24cb974
+<<<<<<<< HEAD:GhoulKIng/Assets/SimpleSkeleton/SkeletonController.controller.meta
+guid: 7a038fd69a53ade449f7194ed5794254
+========
+guid: b27e0eb75f66a0e4980d035538812ecd
+>>>>>>>> 577f09f6d62fe23087ece8a01ad8aef8c51afa9c:GhoulKIng/Assets/Scenes/Show case level/NavMesh.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 0

@@ -1075,13 +1075,16 @@ MonoBehaviour:
   viewAngle: 100
   playerFaceSpeed: 10
   roamRadius: 0
-  AttackAnimBuffer: 0.9
-  shootRate: 2
+  AttackAnimBuffer: 3
+  attackTimer: 3
+  attackTime: 1
+  shootRate: 6
   bullet: {fileID: 1777321105042029387, guid: 8b70cae6e93c4614b9b74d171970d049, type: 3}
   shootPos: {fileID: 3797004952255742302}
-  aud: {fileID: 6402110961415168626}
-  enemyidle: []
-  idleAudVol: 0
+  aud: {fileID: 0}
+  enemyidle:
+  - {fileID: 8300000, guid: 7a2fbdb8945b51f4780c640bc2bd47e4, type: 3}
+  idleAudVol: 1
   enemyTakeDamage:
   - {fileID: 8300000, guid: 15916f3a3fc7f6240a83ef30fb99b17f, type: 3}
   damageAudVol: 0.5
@@ -1102,7 +1105,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 3
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 0
   m_AutoRepath: 1
@@ -1147,7 +1150,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.3
-  m_Height: 1.5
+  m_Height: 1.65
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!82 &6402110961415168626
@@ -1160,7 +1163,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 4360144922630638833, guid: 629b185b97c77b84193eb6bcf980f290, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 7a2fbdb8945b51f4780c640bc2bd47e4, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -1335,7 +1338,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3797004952255742302}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.046, y: 1.355, z: 0.22}
+  m_LocalPosition: {x: -0.046, y: 1.355, z: 0.132}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

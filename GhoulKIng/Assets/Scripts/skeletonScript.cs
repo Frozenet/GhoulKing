@@ -20,6 +20,9 @@ public class skeletonScript : MonoBehaviour, IDamageable
     [SerializeField] int roamRadius;
     [SerializeField] bool deleteBody;
     [SerializeField] float AttackAnimBuffer;
+    public float attackTimer;
+    public float attackTime;
+
     [Header("-----------------")]
 
     [Header("Weapon Stats")]
@@ -95,7 +98,7 @@ public class skeletonScript : MonoBehaviour, IDamageable
         if (agent.remainingDistance <= agent.stoppingDistance)
         {
             playerDir.y = 0;
-            Quaternion rotation = Quaternion.LookRotation(playerDir);
+            var rotation = Quaternion.LookRotation(playerDir);
             transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * playerFaceSpeed * 3);
         }
     }
@@ -106,17 +109,17 @@ public class skeletonScript : MonoBehaviour, IDamageable
 
         RaycastHit hit;
 
-        if (Physics.Raycast(transform.position, playerDir, out hit))
+        if (Physics.Raycast(transform.position + new Vector3(0,0.5f, 0), playerDir, out hit))
         {
             Debug.DrawRay(transform.position, playerDir);
 
             if (hit.collider.CompareTag("Player") && canShoot && angle <= viewAngle)
-                StartCoroutine(shoot());
+                shoot();
 
         }
     }
 
-    public void OnTriggerEnter(Collider other)
+    public void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -137,12 +140,10 @@ public class skeletonScript : MonoBehaviour, IDamageable
     public void takeDamage(int dmg)
     {
         HP -= dmg;
+
         aud.PlayOneShot(enemyTakeDamage[0], damageAudVol);
+
         anim.SetTrigger("Damage");
-
-        //StartCoroutine(flashColor());
-        playerInRange = true;
-
 
         if (HP <= 0)
         {
@@ -163,28 +164,22 @@ public class skeletonScript : MonoBehaviour, IDamageable
             }
         }
     }
-
-    IEnumerator flashColor()
-    {
-        rend.material.color = Color.red;
-        yield return new WaitForSeconds(0.1f);
-        rend.material.color = Color.white;
-    }
-    IEnumerator shoot()
+    void shoot()
     {
         if (canShoot)
         {
             canShoot = false;
-
             anim.SetTrigger("Shoot");
 
-            yield return new WaitForSeconds(AttackAnimBuffer);
-
             Instantiate(bullet, shootPos.transform.position, bullet.transform.rotation);
-
-            yield return new WaitForSeconds(shootRate);
-
-            canShoot = true;
+            StartCoroutine(attackTimerDelay());
         }
+    }
+
+    IEnumerator attackTimerDelay()
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(attackTime);
+        canShoot = true;
     }
 }
