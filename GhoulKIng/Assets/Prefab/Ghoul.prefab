@@ -1081,7 +1081,7 @@ MonoBehaviour:
   shootRate: 6
   bullet: {fileID: 1777321105042029387, guid: 8b70cae6e93c4614b9b74d171970d049, type: 3}
   shootPos: {fileID: 3797004952255742302}
-  aud: {fileID: 0}
+  aud: {fileID: 6402110961415168626}
   enemyidle:
   - {fileID: 8300000, guid: 7a2fbdb8945b51f4780c640bc2bd47e4, type: 3}
   idleAudVol: 1
