@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/playable levels/Title Screen.unity
     guid: 210b4285a2843b940b7fdd08f3236187
   - enabled: 1
-    path: Assets/Scenes/Show case level.unity
-    guid: 53096f154ac37fa48aadf84cd0ed0f55
-  - enabled: 1
     path: Assets/Scenes/playable levels/Terrain level.unity
     guid: a16bcb14933e31f4f8408256e429c81e
   - enabled: 1
@@ -26,10 +23,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/playable levels/FinalLevel.unity
     guid: b8d1b354cbe874b429e7e71eced4a269
-  - enabled: 0
-    path: Assets/Scenes/ChaseScene.unity
-    guid: 9ea4fdf3e1b1652479b0dc8ab8b82853
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}
