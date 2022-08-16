@@ -103,10 +103,7 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
     {
         if (other.CompareTag("Player"))
         {
-            //atack
-            //shoot();
             playerInRange = true;
-            // canShoot = true;
             agent.stoppingDistance = StoppingDistOrig;
 
         }
@@ -124,6 +121,8 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
     {
         HP -= dmg;
 
+        aud.PlayOneShot(enemyTakeDamage[0], damageAudVol);
+
         anim.SetTrigger("Damage");
 
         if (HP <= 0)
@@ -137,13 +136,6 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
 
         }
     }
-
-    //IEnumerator flashColor()
-    //{
-    //    rend.material.color = Color.red;
-    //    yield return new WaitForSeconds(0.1f);
-    //    rend.material.color = Color.white;
-    //}
 
     void shoot()
     {
