@@ -23,7 +23,7 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
 
     [Header("----------------------------------")]
     [Header("Weapon Stats")]
-    [SerializeField] float shootRate = 2f;
+    [SerializeField] float shootRate;
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject shootPos;
 
@@ -47,7 +47,7 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
     {
         startingPos = transform.position;
         StoppingDistOrig = agent.stoppingDistance;
-        gameManager.instance.updateEnemyNumber();
+        //gameManager.instance.updateEnemyNumber();
     }
 
     // Update is called once per frame

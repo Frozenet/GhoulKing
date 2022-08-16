@@ -47,7 +47,7 @@ public class sniperScript : MonoBehaviour, IDamageable
     {
         startingPos = transform.position;
         StoppingDisOrig = agent.stoppingDistance;
-        gameManager.instance.updateEnemyNumber();
+        //gameManager.instance.updateEnemyNumber();
     }
 
     // Update is called once per frame

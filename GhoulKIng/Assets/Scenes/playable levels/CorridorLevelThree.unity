@@ -6342,6 +6342,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4214298872521133619, guid: 854d43d4001924b40931fa14134a3e0c, type: 3}
+      propertyPath: keysGoal
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214298872521133619, guid: 854d43d4001924b40931fa14134a3e0c, type: 3}
       propertyPath: fenceGate
       value: 
       objectReference: {fileID: 924655217}

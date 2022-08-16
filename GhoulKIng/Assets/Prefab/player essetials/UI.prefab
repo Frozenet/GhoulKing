@@ -7627,7 +7627,7 @@ MonoBehaviour:
   HPBar: {fileID: 1899303299}
   HPpercent: {fileID: 8238131283961596543}
   keysHeld: {fileID: 1032271836}
-  KeysTotal: {fileID: 1032271836}
+  KeysTotal: {fileID: 47675632}
   totalDeaths: {fileID: 1923412367}
   totalKilled: {fileID: 176524673}
   totalKeys: {fileID: 8761053792056715237}
@@ -7646,7 +7646,7 @@ MonoBehaviour:
   titleScreenOn: 0
   enemyKillGoal: 0
   keysCollected: 0
-  keysGoal: 1
+  keysGoal: 3
   titleScreenCam: {fileID: 4512118760471432010}
   fenceGate: {fileID: 0}
   loadNextLevel: 0
