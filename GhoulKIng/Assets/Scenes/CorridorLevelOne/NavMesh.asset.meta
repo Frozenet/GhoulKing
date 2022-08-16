@@ -1,12 +1,8 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:GhoulKIng/Assets/Scenes/CorridorLevelOne/NavMesh.asset.meta
 guid: c1dac49346954b24a818a59187e5ce06
 NativeFormatImporter:
-========
-guid: 8d10ad1b15e577f4aabe30c174c7bff3
-PrefabImporter:
->>>>>>>> b602d9e797091e3b66dd375e21dfbaa16d6f64ae:GhoulKIng/Assets/Prefab/Fireball test.prefab.meta
   externalObjects: {}
+  mainObjectFileID: 23800000
   userData: 
   assetBundleName: 
   assetBundleVariant: 
