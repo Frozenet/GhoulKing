@@ -216,7 +216,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 3950724034236911723, guid: 629b185b97c77b84193eb6bcf980f290, type: 2}
   m_audioClip: {fileID: 8300000, guid: 4cf17489b497db5469325ff3927185af, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -602,14 +602,14 @@ MonoBehaviour:
   pushResolve: 5
   aud: {fileID: 1134068034879517814}
   PistolAud:
-  - {fileID: 8300000, guid: 9b4f1183cf65a4b42a8aa94b58b8fac1, type: 3}
-  PistolAudVol: 0.3
+  - {fileID: 8300000, guid: 5028ee7ea1f7e544283eaedb59bcf174, type: 3}
+  PistolAudVol: 0.1
   ShotgunAud:
-  - {fileID: 8300000, guid: 236ab3038eeb844468f161ecbff2aa54, type: 3}
+  - {fileID: 8300000, guid: 4d94329c29c6d644bba0421123179950, type: 3}
   - {fileID: 8300000, guid: d61acdd028b98eb4c8b6e9bc8e6e190e, type: 3}
-  ShotgunAudVol: 0.3
+  ShotgunAudVol: 0.5
   RocketLancherAud:
-  - {fileID: 8300000, guid: 989f582d814dff848af6780b81dd4a52, type: 3}
+  - {fileID: 8300000, guid: 1cb7d41f525cf204f8f3f222f0a39593, type: 3}
   - {fileID: 8300000, guid: d61acdd028b98eb4c8b6e9bc8e6e190e, type: 3}
   RocketLancherAudVol: 0.3
   playerHurt:
@@ -630,7 +630,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: faed18a92b59ef64ea02d0ae0cb28fb6, type: 3}
   - {fileID: 8300000, guid: b715a7c9943d6df43becc74b1690bfc9, type: 3}
   - {fileID: 8300000, guid: 0af0d5e532bbdc44fa6f94ad896e3c71, type: 3}
-  playerFootstepsVol: 0.2
+  playerFootstepsVol: 0.05
   playerDeathCount: 0
   HPOrig: 0
   weaponType: 0
