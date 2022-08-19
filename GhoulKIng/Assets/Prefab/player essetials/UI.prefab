@@ -7911,6 +7911,9 @@ MonoBehaviour:
   menuClick:
   - {fileID: 8300000, guid: 15d69934bd13a224a8c03d385c77cefd, type: 3}
   clickVol: 1
+  gateOpen:
+  - {fileID: 8300000, guid: a16d516863d23e144b88caa5a567a9ba, type: 3}
+  gateOpenVol: 0
   paused: 0
   menuCurrentlyOpen: {fileID: 0}
   prevOpenMenu: {fileID: 0}

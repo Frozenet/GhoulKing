@@ -55,6 +55,8 @@ public class gameManager : MonoBehaviour
     public AudioSource audi;
     [SerializeField] AudioClip[] menuClick;
     [Range(0, 1)] [SerializeField] float clickVol;
+    [SerializeField] AudioClip[] gateOpen;
+    [Range(0, 1)] [SerializeField] float gateOpenVol;
 
     [Header("-----------------")]
     [HideInInspector] public bool paused = false;
@@ -180,7 +182,10 @@ public class gameManager : MonoBehaviour
         keysHeld.text = keysCollected.ToString("F0");
         totalKeys.text = keysCollected.ToString("F0");
         if (keysCollected >= keysGoal)
+        {
             fenceGate.SetActive(false);
+            audi.PlayOneShot(gateOpen[0], gateOpenVol);
+        }
     }
 
     public void restart()
@@ -253,7 +258,7 @@ public class gameManager : MonoBehaviour
     {
         loadMenuCondition();
         //if (loadNextLevel == true)
-            SceneManager.LoadScene("Show case level");
+        SceneManager.LoadScene("Show case level");
     }
     public void loadLevelOne()
     {
@@ -261,7 +266,7 @@ public class gameManager : MonoBehaviour
         {
             loadMenuCondition();
             //if (loadNextLevel == true)
-                SceneManager.LoadScene("Terrain level");
+            SceneManager.LoadScene("Terrain level");
         }
     }
     public void loadLevelTwo()
@@ -270,7 +275,7 @@ public class gameManager : MonoBehaviour
         {
             loadMenuCondition();
             //if (loadNextLevel == true)
-                SceneManager.LoadScene("CorridorLevelOne");
+            SceneManager.LoadScene("CorridorLevelOne");
         }
     }
     public void loadLevelThree()
