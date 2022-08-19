@@ -39522,10 +39522,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4214298872521133619, guid: 854d43d4001924b40931fa14134a3e0c, type: 3}
-      propertyPath: keysGoal
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4214298872521133619, guid: 854d43d4001924b40931fa14134a3e0c, type: 3}
       propertyPath: fenceGate
       value: 
       objectReference: {fileID: 4485943732319663819}

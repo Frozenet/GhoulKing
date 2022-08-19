@@ -7913,7 +7913,7 @@ MonoBehaviour:
   clickVol: 1
   gateOpen:
   - {fileID: 8300000, guid: a16d516863d23e144b88caa5a567a9ba, type: 3}
-  gateOpenVol: 0
+  gateOpenVol: 0.5
   paused: 0
   menuCurrentlyOpen: {fileID: 0}
   prevOpenMenu: {fileID: 0}
