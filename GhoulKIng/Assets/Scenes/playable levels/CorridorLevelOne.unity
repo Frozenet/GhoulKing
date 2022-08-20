@@ -21719,14 +21719,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5408572529221095345, guid: 15b007703f65ca04bb9042436fa12eb6, type: 3}
-      propertyPath: m_DrawHalo
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5408572529221095345, guid: 15b007703f65ca04bb9042436fa12eb6, type: 3}
-      propertyPath: m_Intensity
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 6664380982451780910, guid: 15b007703f65ca04bb9042436fa12eb6, type: 3}
       propertyPath: m_Name
       value: Torch_2_hold
