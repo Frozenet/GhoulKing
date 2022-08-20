@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:GhoulKIng/Assets/Scenes/CorridorLevelOne/NavMesh.asset.meta
+guid: 006964d51218a954196a680f1fdc530b
+========
+guid: ddde96f429814b741843157567dfa540
+>>>>>>>> db29aece3a99a7772be76510f598d7e05478ac16:GhoulKIng/Assets/Scenes/ChaseScene/NavMesh.asset.meta
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
