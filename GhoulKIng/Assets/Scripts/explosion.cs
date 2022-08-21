@@ -6,12 +6,19 @@ public class explosion : MonoBehaviour
 {
     [SerializeField] int damage;
     [SerializeField] int pushBackAmount;
+    [SerializeField] float Damageframe;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        StartCoroutine(Nocollider());
+    }
+    IEnumerator Nocollider()
+    {
+        yield return new WaitForSeconds(Damageframe);
+        gameObject.GetComponent<SphereCollider>().enabled = false;
     }
 
     public void OnTriggerEnter(Collider other)

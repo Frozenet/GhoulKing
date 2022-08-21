@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 25
   pushBackAmount: 10
+  Damageframe: 0.05
 --- !u!54 &4245223680510760300
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -61,7 +62,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.01
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0

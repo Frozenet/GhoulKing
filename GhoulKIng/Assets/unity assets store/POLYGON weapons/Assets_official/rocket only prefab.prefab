@@ -232,7 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 60
   rb: {fileID: -80792581697209478}
-  destoryTime: 2
+  destoryTime: 20
   explosion: {fileID: 4245223680510760296, guid: cb9fb975be296b547b1ad219f0203297, type: 3}
 --- !u!54 &-80792581697209478
 Rigidbody:
