@@ -23,7 +23,7 @@ public class playerController : MonoBehaviour, IDamageable
     [Range(1, 10)][SerializeField] int weaponDamage;
     [Range(5, 100)][SerializeField] float range;
 
-    [Range(1, 10)][SerializeField] public int shotgunAmmoMax;
+    [Range(1, 30)][SerializeField] public int shotgunAmmoMax;
     [Range(1, 10)][SerializeField] public int rocketAmmoMax;
 
     public int shotgunAmmo;
@@ -119,7 +119,9 @@ public class playerController : MonoBehaviour, IDamageable
                 weaopnChoice();
             }
             gameManager.instance.updateAmmo();
+            
             StartCoroutine(shoot());
+
             if (isshooting || triggerPull)
             {
                 if (triggerPull)
@@ -354,6 +356,7 @@ public class playerController : MonoBehaviour, IDamageable
                 }
                 else
                 {
+                    canShoot = false;
                     aud.PlayOneShot(ShotgunAud[1], ShotgunAudVol);
                 }
             }
@@ -367,9 +370,6 @@ public class playerController : MonoBehaviour, IDamageable
                     aud.PlayOneShot(RocketLancherAud[0], RocketLancherAudVol);//new
                     Instantiate(rocket, shootpos.transform.position, shootpos.transform.rotation);
 
-
-
-
                     RPGhead.SetActive(false);
                     yield return new WaitForSeconds(shootRate);
                     RPGhead.SetActive(true);
@@ -377,6 +377,7 @@ public class playerController : MonoBehaviour, IDamageable
                 }
                 else
                 {
+                    canShoot = false;
                     aud.PlayOneShot(RocketLancherAud[1], RocketLancherAudVol);
                 }
 

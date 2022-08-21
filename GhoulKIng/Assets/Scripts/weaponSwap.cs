@@ -14,47 +14,51 @@ public class weaponSwap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int previousSelectedWeapon = selectedweapon;
-
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+        if (!gameManager.instance.paused)
         {
-            if (selectedweapon >= transform.childCount - 1)
+
+            int previousSelectedWeapon = selectedweapon;
+
+            if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+            {
+                if (selectedweapon >= transform.childCount - 1)
+                {
+                    selectedweapon = 0;
+                }
+                else
+                {
+                    selectedweapon++;
+                }
+            }
+            if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+            {
+                if (selectedweapon <= 0)
+                {
+                    selectedweapon = transform.childCount - 1;
+                }
+                else
+                {
+                    selectedweapon--;
+                }
+            }
+
+            if (Input.GetKeyDown("1"))
             {
                 selectedweapon = 0;
             }
-            else
+            if (Input.GetKeyDown("2"))
             {
-                selectedweapon++;
+                selectedweapon = 1;
             }
-        }
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-        {
-            if (selectedweapon <= 0)
+            if (Input.GetKeyDown("3"))
             {
-                selectedweapon = transform.childCount -1;
+                selectedweapon = 2;
             }
-            else
-            {
-                selectedweapon--;
-            }
-        }
 
-        if (Input.GetKeyDown("1"))
-        {
-            selectedweapon = 0;
-        }
-        if (Input.GetKeyDown("2"))
-        {
-            selectedweapon = 1;
-        }
-        if (Input.GetKeyDown("3"))
-        {
-            selectedweapon = 2;
-        }
-
-        if (previousSelectedWeapon != selectedweapon)
-        {
-            selectweapon();
+            if (previousSelectedWeapon != selectedweapon)
+            {
+                selectweapon();
+            }
         }
     }
 
@@ -66,7 +70,7 @@ public class weaponSwap : MonoBehaviour
             if (i == selectedweapon)
             {
                 weapon.gameObject.SetActive(true);
-                
+
             }
             else
             {

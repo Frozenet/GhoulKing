@@ -577,7 +577,7 @@ MonoBehaviour:
   shootRate: 1
   weaponDamage: 1
   range: 0
-  shotgunAmmoMax: 10
+  shotgunAmmoMax: 24
   rocketAmmoMax: 10
   shotgunAmmo: 0
   rocketAmmo: 0
