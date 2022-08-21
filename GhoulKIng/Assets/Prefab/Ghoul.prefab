@@ -1071,7 +1071,7 @@ MonoBehaviour:
   agent: {fileID: 7856361485149581333}
   rend: {fileID: 7274783696987251662}
   anim: {fileID: 7856361485149581329}
-  HP: 10
+  HP: 5
   viewAngle: 100
   playerFaceSpeed: 10
   roamRadius: 0

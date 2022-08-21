@@ -224,7 +224,7 @@ public class playerController : MonoBehaviour, IDamageable
         {
             currentWeapon.SetActive(false);
             shootRate = 1f;
-            weaponDamage = 1;
+            weaponDamage = 2;
             range = 20;
             currentWeapon = shotgun;
             currentWeapon.SetActive(true);
