@@ -23,8 +23,8 @@ public class playerController : MonoBehaviour, IDamageable
     [Range(1, 10)][SerializeField] int weaponDamage;
     [Range(5, 100)][SerializeField] float range;
 
-    [Range(1, 30)][SerializeField] public int shotgunAmmoMax;
-    [Range(1, 10)][SerializeField] public int rocketAmmoMax;
+    [Range(1, 90)][SerializeField] public int shotgunAmmoMax;
+    [Range(1, 90)][SerializeField] public int rocketAmmoMax;
 
     public int shotgunAmmo;
     public int rocketAmmo;
@@ -426,7 +426,7 @@ public class playerController : MonoBehaviour, IDamageable
     }
     public void updatePlayerRounds()
     {
-        rocketAmmo = rocketAmmoMax;
+        //rocketAmmo = rocketAmmoMax;
         float rocketPercent = ((float)rocketAmmo / (float)rocketAmmoMax);
         gameManager.instance.shotgunAmmo.text = rocketPercent.ToString("F0");
     }
