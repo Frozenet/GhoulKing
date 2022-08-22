@@ -42,6 +42,7 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
     Vector3 playerDir;
     Vector3 startingPos;
     float StoppingDistOrig;
+    float speedOrig;
     // Start is called before the first frame update
     void Start()
     {
@@ -79,7 +80,7 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
             transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * playerFaceSpeed);
         }
     }
-
+    
     void canSeePlayer()
     {
         float angle = Vector3.Angle(playerDir, transform.forward);
@@ -119,10 +120,11 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
 
     public void takeDamage(int dmg)
     {
+        speedOrig = agent.speed;
         HP -= dmg;
-
         aud.PlayOneShot(enemyTakeDamage[0], damageAudVol);
 
+        agent.speed = 0;
         anim.SetTrigger("Damage");
 
         if (HP <= 0)
@@ -134,6 +136,7 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
             foreach (Collider col in GetComponents<Collider>())
                 col.enabled = false;
 
+            canShoot = false;
         }
     }
 
@@ -144,9 +147,13 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
             canShoot = false;
             anim.SetTrigger("Shoot");
 
-            Instantiate(bullet, shootPos.transform.position, bullet.transform.rotation);
             StartCoroutine(attackTimerDelay());
         }
+    }
+
+    void fireProjectile()
+    {
+        Instantiate(bullet, shootPos.transform.position, bullet.transform.rotation);
     }
 
     IEnumerator attackTimerDelay()
@@ -154,5 +161,15 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
         canShoot = false;
         yield return new WaitForSeconds(attackTime);
         canShoot = true;
+    }
+
+    void noSpeed()
+    {
+        agent.speed = 0;
+    }
+
+    void haveSpeed()
+    {
+        agent.speed = speedOrig;
     }
 }

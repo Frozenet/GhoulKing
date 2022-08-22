@@ -62,7 +62,14 @@ public class skeletonScript : MonoBehaviour, IDamageable
     {
         if (agent.isActiveAndEnabled)
         {
-            anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agent.velocity.normalized.magnitude, Time.deltaTime * 5));
+            //anim.SetFloat("Speed", Mathf.Lerp(anim.GetFloat("Speed"), agent.velocity.normalized.magnitude, Time.deltaTime * 2));
+
+            anim.SetFloat("SpeedX", agent.velocity.x);
+            anim.SetFloat("SpeedY", agent.velocity.y);
+            if (agent.velocity.magnitude <= .01)
+                anim.SetBool("Idle", true);
+            else
+                anim.SetBool("Idle", false);
 
             playerDir = gameManager.instance.player.transform.position - transform.position;
 
@@ -171,9 +178,13 @@ public class skeletonScript : MonoBehaviour, IDamageable
             canShoot = false;
             anim.SetTrigger("Shoot");
 
-            Instantiate(bullet, shootPos.transform.position, bullet.transform.rotation);
             StartCoroutine(attackTimerDelay());
         }
+    }
+
+    void FireProjectile()
+    {
+        Instantiate(bullet, shootPos.transform.position, bullet.transform.rotation);
     }
 
     IEnumerator attackTimerDelay()
