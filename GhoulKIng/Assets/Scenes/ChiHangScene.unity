@@ -296,6 +296,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sniper
       objectReference: {fileID: 0}
+    - target: {fileID: 3267814681006241220, guid: 30ccd2027d967a746bede6f604b82082, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30ccd2027d967a746bede6f604b82082, type: 3}
 --- !u!1 &1036837572

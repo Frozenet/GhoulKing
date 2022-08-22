@@ -42,6 +42,7 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
     Vector3 playerDir;
     Vector3 startingPos;
     float StoppingDistOrig;
+    float speedOrig;
     // Start is called before the first frame update
     void Start()
     {
@@ -119,9 +120,11 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
 
     public void takeDamage(int dmg)
     {
+        speedOrig = agent.speed;
         HP -= dmg;
         aud.PlayOneShot(enemyTakeDamage[0], damageAudVol);
 
+        agent.speed = 0;
         anim.SetTrigger("Damage");
 
         if (HP <= 0)
@@ -158,5 +161,15 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
         canShoot = false;
         yield return new WaitForSeconds(attackTime);
         canShoot = true;
+    }
+
+    void noSpeed()
+    {
+        agent.speed = 0;
+    }
+
+    void haveSpeed()
+    {
+        agent.speed = speedOrig;
     }
 }
