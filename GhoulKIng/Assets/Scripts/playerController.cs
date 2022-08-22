@@ -63,6 +63,7 @@ public class playerController : MonoBehaviour, IDamageable
     [Header("Physics")]
     public Vector3 pushback = Vector3.zero;
     [SerializeField] int pushResolve;
+    [SerializeField] LayerMask layermask;
 
     [Header("-----------------")]
     [Header("Audio")]
@@ -309,7 +310,7 @@ public class playerController : MonoBehaviour, IDamageable
                 triggerPull = true;
                 aud.PlayOneShot(PistolAud[Random.Range(0, PistolAud.Length)], PistolAudVol);//new
 
-                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit, range))
+                if (Physics.Raycast(Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)), out hit, range, layermask))
                 {
                     Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
                     if (hit.collider.GetComponent<IDamageable>() != null)
@@ -336,7 +337,7 @@ public class playerController : MonoBehaviour, IDamageable
                     aud.PlayOneShot(ShotgunAud[0], ShotgunAudVol);
                     for (int i = 0; i < 12; i++)
                     {
-                        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), out hit, range))
+                        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward + new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f)), out hit, range, layermask))
                         {
                             Instantiate(hitEffectSpark, hit.point, hitEffectSpark.transform.rotation);
                             if (hit.collider.GetComponent<IDamageable>() != null)
