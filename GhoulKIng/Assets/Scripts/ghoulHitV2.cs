@@ -79,7 +79,7 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
             transform.rotation = Quaternion.Lerp(transform.rotation, rotation, Time.deltaTime * playerFaceSpeed);
         }
     }
-
+    
     void canSeePlayer()
     {
         float angle = Vector3.Angle(playerDir, transform.forward);
@@ -120,7 +120,6 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
     public void takeDamage(int dmg)
     {
         HP -= dmg;
-
         aud.PlayOneShot(enemyTakeDamage[0], damageAudVol);
 
         anim.SetTrigger("Damage");
@@ -134,6 +133,7 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
             foreach (Collider col in GetComponents<Collider>())
                 col.enabled = false;
 
+            canShoot = false;
         }
     }
 
@@ -144,9 +144,13 @@ public class ghoulHitV2 : MonoBehaviour, IDamageable
             canShoot = false;
             anim.SetTrigger("Shoot");
 
-            Instantiate(bullet, shootPos.transform.position, bullet.transform.rotation);
             StartCoroutine(attackTimerDelay());
         }
+    }
+
+    void fireProjectile()
+    {
+        Instantiate(bullet, shootPos.transform.position, bullet.transform.rotation);
     }
 
     IEnumerator attackTimerDelay()

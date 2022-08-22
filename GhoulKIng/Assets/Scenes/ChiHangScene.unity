@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 1288f44a33e49c049b201c0e48f571c7, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: a040d87c6d46ef846b719cb9199d4fe9, type: 2}
 --- !u!1001 &555774886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -194,10 +194,6 @@ PrefabInstance:
     - target: {fileID: 3507349034667552977, guid: 6fb3e86f341cc834eae49516508e347c, type: 3}
       propertyPath: m_Name
       value: Ghoul
-      objectReference: {fileID: 0}
-    - target: {fileID: 3507349034667552977, guid: 6fb3e86f341cc834eae49516508e347c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4316502269942786667, guid: 6fb3e86f341cc834eae49516508e347c, type: 3}
       propertyPath: m_RootOrder
@@ -299,10 +295,6 @@ PrefabInstance:
     - target: {fileID: 3267814681006241220, guid: 30ccd2027d967a746bede6f604b82082, type: 3}
       propertyPath: m_Name
       value: Sniper
-      objectReference: {fileID: 0}
-    - target: {fileID: 3267814681006241220, guid: 30ccd2027d967a746bede6f604b82082, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30ccd2027d967a746bede6f604b82082, type: 3}
@@ -561,69 +553,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7736946942948300360, guid: a83d1191011625c40b110d6d9bdaf1fa, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 7a038fd69a53ade449f7194ed5794254, type: 2}
-    - target: {fileID: 7736946942948300362, guid: a83d1191011625c40b110d6d9bdaf1fa, type: 3}
-      propertyPath: m_Speed
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7736946942948300362, guid: a83d1191011625c40b110d6d9bdaf1fa, type: 3}
-      propertyPath: m_AngularSpeed
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 7736946942948300362, guid: a83d1191011625c40b110d6d9bdaf1fa, type: 3}
-      propertyPath: m_StoppingDistance
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 7736946942948300363, guid: a83d1191011625c40b110d6d9bdaf1fa, type: 3}
-      propertyPath: bullet
-      value: 
-      objectReference: {fileID: 8192246948766381553, guid: a4752b4b69279ec4d9d78621f421b4b8, type: 3}
-    - target: {fileID: 7736946942948300363, guid: a83d1191011625c40b110d6d9bdaf1fa, type: 3}
-      propertyPath: shootRate
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7736946942948300363, guid: a83d1191011625c40b110d6d9bdaf1fa, type: 3}
-      propertyPath: attackTime
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7736946942948300363, guid: a83d1191011625c40b110d6d9bdaf1fa, type: 3}
-      propertyPath: deleteBody
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7736946942948300363, guid: a83d1191011625c40b110d6d9bdaf1fa, type: 3}
-      propertyPath: attackTimer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7736946942948300363, guid: a83d1191011625c40b110d6d9bdaf1fa, type: 3}
-      propertyPath: AttackAnimBuffer
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7736946942948300366, guid: a83d1191011625c40b110d6d9bdaf1fa, type: 3}
-      propertyPath: m_Radius
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 7736946942948300371, guid: a83d1191011625c40b110d6d9bdaf1fa, type: 3}
       propertyPath: m_Name
       value: SimpleSkeleton
       objectReference: {fileID: 0}
     - target: {fileID: 7736946942948300371, guid: a83d1191011625c40b110d6d9bdaf1fa, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7736946942948527027, guid: a83d1191011625c40b110d6d9bdaf1fa, type: 3}
       propertyPath: m_RootOrder
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7736946942948527027, guid: a83d1191011625c40b110d6d9bdaf1fa, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7736946942948527027, guid: a83d1191011625c40b110d6d9bdaf1fa, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7736946942948527027, guid: a83d1191011625c40b110d6d9bdaf1fa, type: 3}
       propertyPath: m_LocalPosition.x
